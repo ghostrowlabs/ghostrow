@@ -1,0 +1,73 @@
+{
+  "name": "ghostrow",
+  "version": "1.0.0",
+  "description": "Realistic, consistent test data from your database schema. Offline, seeded, no real personal data.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "bin": {
+    "ghostrow": "./dist/bin/ghostrow.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "dev": "tsx src/bin/ghostrow.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run typecheck && npm test",
+    "build:local": "node esbuild.config.mjs --local",
+    "build:standalone": "node build-standalone.mjs"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "mssql": "^11.0.3",
+    "mysql2": "^3.24.6",
+    "pg": "^8.23.1",
+    "sql.js": "^1.17.0",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.16",
+    "@electric-sql/pglite-socket": "^0.0.22",
+    "@types/mssql": "^12.3.1",
+    "@types/node": "^24.1.0",
+    "@types/pg": "^8.23.1",
+    "@types/sql.js": "^1.16.1",
+    "esbuild": "^0.28.0",
+    "mysql-memory-server": "^1.18.0",
+    "postject": "^1.0.0-alpha.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.1.1"
+  },
+  "keywords": [
+    "test-data",
+    "synthetic-data",
+    "database",
+    "seed",
+    "fixtures",
+    "postgres",
+    "mysql",
+    "sqlite",
+    "sql-server",
+    "faker",
+    "cli"
+  ],
+  "homepage": "https://ghostrow.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghostrowlabs/ghostrow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ghostrowlabs/ghostrow/issues"
+  },
+  "author": "Ghostrow Labs LLC"
+}

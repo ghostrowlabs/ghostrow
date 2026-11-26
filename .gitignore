@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+test/fixtures/generated/
+*.tgz
+*.whl
+ghostrow.rules.yaml
+haunt-report*.json
+ghostrow-haunt/
+.env*

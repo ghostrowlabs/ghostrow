@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Ghostrow MSI (WiX Toolset v5). Build with build-msi.ps1, or directly:
+    wix build -arch x64 -d Version=1.0.0 -d Binary=path\to\ghostrow.exe -o ghostrow.msi ghostrow.wxs
+  The UpgradeCode is fixed forever; do not change it, or upgrades stop replacing older installs.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+    Name="Ghostrow"
+    Manufacturer="Ghostrow Labs LLC"
+    Version="$(Version)"
+    UpgradeCode="7CC5A25C-D1C5-4434-B201-5D3F45801DD0"
+    Scope="perMachine"
+    InstallerVersion="500"
+    Compressed="yes">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Ghostrow is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Ghostrow">
+        <Component Id="GhostrowExecutable" Bitness="always64">
+          <File Id="GhostrowExe" Name="ghostrow.exe" Source="$(Binary)" KeyPath="yes" />
+          <Environment
+            Id="GhostrowPath"
+            Name="PATH"
+            Value="[INSTALLFOLDER]"
+            Action="set"
+            Part="last"
+            Permanent="no"
+            System="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <Feature Id="Main" Title="Ghostrow" Level="1">
+      <ComponentRef Id="GhostrowExecutable" />
+    </Feature>
+  </Package>
+</Wix>

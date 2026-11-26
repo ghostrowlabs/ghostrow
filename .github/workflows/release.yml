@@ -1,0 +1,309 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  # A manual run builds and tests every platform; only a v* tag publishes.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  build:
+    name: build ${{ matrix.os_name }} ${{ matrix.arch }}
+    needs: test
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - { runner: macos-14, os_name: macos, arch: arm64, deb_arch: '', wheel_tag: macosx_13_0_arm64 }
+          # macos-13 has been retired by GitHub; macos-15-intel is its Intel replacement.
+          - { runner: macos-15-intel, os_name: macos, arch: x64, deb_arch: '', wheel_tag: macosx_13_0_x86_64 }
+          - { runner: ubuntu-24.04, os_name: linux, arch: x64, deb_arch: amd64, wheel_tag: manylinux_2_28_x86_64 }
+          - { runner: ubuntu-24.04-arm, os_name: linux, arch: arm64, deb_arch: arm64, wheel_tag: manylinux_2_28_aarch64 }
+          - { runner: windows-latest, os_name: windows, arch: x64, deb_arch: '', wheel_tag: win_amd64 }
+          - { runner: windows-11-arm, os_name: windows, arch: arm64, deb_arch: '', wheel_tag: win_arm64 }
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+
+      - name: Read version and release date
+        id: meta
+        run: |
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          echo "date=$(git log -1 --format=%cd --date=format:%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Build standalone executable
+        run: npm run build:standalone
+        env:
+          LICENSE_PUBLIC_KEYS: ${{ vars.LICENSE_PUBLIC_KEYS }}
+          GHOSTROW_RELEASE_DATE: ${{ steps.meta.outputs.date }}
+
+      - name: Smoke test
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          OS_NAME: ${{ matrix.os_name }}
+        run: |
+          if [ "$OS_NAME" = windows ]; then bin=dist/standalone/ghostrow.exe; else bin=dist/standalone/ghostrow; fi
+          out="$("$bin" --version)"
+          echo "ghostrow --version printed: $out"
+          case "$out" in
+            *"$VERSION"*) ;;
+            *) echo "version mismatch: expected $VERSION" >&2; exit 1 ;;
+          esac
+
+      - name: Archive
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          OS_NAME: ${{ matrix.os_name }}
+          ARCH: ${{ matrix.arch }}
+        run: |
+          if [ "$OS_NAME" = windows ]; then bin=dist/standalone/ghostrow.exe; else bin=dist/standalone/ghostrow; fi
+          node packaging/archive.mjs "$VERSION" "$OS_NAME" "$ARCH" "$bin" out/assets
+
+      - name: macOS package
+        if: matrix.os_name == 'macos'
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          ARCH: ${{ matrix.arch }}
+        run: sh packaging/macos/build-pkg.sh "$VERSION" "$ARCH" dist/standalone/ghostrow out/assets
+
+      - name: Debian package
+        if: matrix.os_name == 'linux'
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          DEB_ARCH: ${{ matrix.deb_arch }}
+        run: sh packaging/deb/build-deb.sh "$VERSION" "$DEB_ARCH" dist/standalone/ghostrow out/assets
+
+      - name: Set up .NET (for WiX)
+        if: matrix.os_name == 'windows'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Install WiX
+        if: matrix.os_name == 'windows'
+        shell: pwsh
+        run: dotnet tool install --global wix --version 5.0.2
+
+      - name: Windows installer
+        if: matrix.os_name == 'windows'
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          ARCH: ${{ matrix.arch }}
+        run: ./packaging/windows/build-msi.ps1 -Version $env:VERSION -Arch $env:ARCH -Binary dist/standalone/ghostrow.exe -OutDir out/assets
+
+      - name: Python wheel
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          OS_NAME: ${{ matrix.os_name }}
+          WHEEL_TAG: ${{ matrix.wheel_tag }}
+        run: |
+          if [ "$OS_NAME" = windows ]; then bin=dist/standalone/ghostrow.exe; else bin=dist/standalone/ghostrow; fi
+          python packaging/pypi/build_wheels.py --version "$VERSION" --binary "$bin" --platform "$WHEEL_TAG" --out out/wheels
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: assets-${{ matrix.os_name }}-${{ matrix.arch }}
+          path: out/assets/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os_name }}-${{ matrix.arch }}
+          path: out/wheels/*
+          if-no-files-found: error
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Read version
+        id: meta
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Check the tag matches package.json
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          if [ "$GITHUB_REF_NAME" != "v$VERSION" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package.json version $VERSION" >&2
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: assets-*
+          merge-multiple: true
+          path: release
+
+      - name: Checksums
+        run: |
+          node packaging/checksums.mjs release
+          cat release/SHA256SUMS
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          cat > notes.md <<NOTES
+          Ghostrow $VERSION.
+
+          Changes: https://ghostrow.com/changelog
+
+          Install options and quickstart: https://ghostrow.com/download
+
+          Verify downloads against SHA256SUMS: sha256sum -c SHA256SUMS --ignore-missing
+          NOTES
+          gh release create "v$VERSION" release/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Ghostrow $VERSION" \
+            --notes-file notes.md
+
+  npm:
+    needs: release
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Release date
+        id: meta
+        run: echo "date=$(git log -1 --format=%cd --date=format:%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+      - run: npm ci
+      - run: npm run build
+        env:
+          LICENSE_PUBLIC_KEYS: ${{ vars.LICENSE_PUBLIC_KEYS }}
+          GHOSTROW_RELEASE_DATE: ${{ steps.meta.outputs.date }}
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  pypi:
+    needs: release
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          merge-multiple: true
+          path: dist
+      - run: ls -l dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  homebrew:
+    needs: release
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Update the Homebrew tap
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAP_TOKEN: ${{ secrets.TAP_TOKEN }}
+        run: |
+          if [ -z "$TAP_TOKEN" ]; then
+            echo "::notice::TAP_TOKEN is not set, so the Homebrew formula was not pushed."
+            exit 0
+          fi
+          version="$(node -p "require('./package.json').version")"
+          gh release download "v$version" --repo "$GITHUB_REPOSITORY" --pattern SHA256SUMS --dir sums
+          node packaging/homebrew/render-formula.mjs "$version" sums/SHA256SUMS > ghostrow.rb
+          git clone "https://x-access-token:${TAP_TOKEN}@github.com/ghostrowlabs/homebrew-tap.git" tap
+          mkdir -p tap/Formula
+          cp ghostrow.rb tap/Formula/ghostrow.rb
+          cd tap
+          git config user.name "Ghostrow Labs"
+          git config user.email "ghostrowlabs@gmail.com"
+          git add Formula/ghostrow.rb
+          if git diff --cached --quiet; then
+            echo "Formula already up to date."
+            exit 0
+          fi
+          git commit -m "ghostrow $version"
+          git push
+
+  winget:
+    needs: release
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Render manifests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          gh release download "v$version" --repo "$GITHUB_REPOSITORY" --pattern SHA256SUMS --dir sums
+          node packaging/winget/render-manifests.mjs "$version" sums/SHA256SUMS winget-manifests
+          {
+            echo "### winget manifests"
+            echo
+            echo "Manifests for Ghostrow.Ghostrow $version are attached as the \`winget-manifests\` artifact."
+            echo "Submitting them to microsoft/winget-pkgs is a manual step: copy them into"
+            echo "\`manifests/g/Ghostrow/Ghostrow/$version/\` and open a pull request."
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: winget-manifests
+          path: winget-manifests/*
+          if-no-files-found: error
