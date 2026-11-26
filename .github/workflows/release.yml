@@ -61,10 +61,27 @@ jobs:
           echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
           echo "date=$(git log -1 --format=%cd --date=format:%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
+      - name: License public keys
+        shell: bash
+        env:
+          KEYS: ${{ vars.LICENSE_PUBLIC_KEYS }}
+          IS_TAG: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          # A release must embed the production public key (repo variable LICENSE_PUBLIC_KEYS).
+          # A manual run without it builds with a throwaway key: fine for testing, never published.
+          if [ -n "$KEYS" ]; then
+            echo "LICENSE_PUBLIC_KEYS=$KEYS" >> "$GITHUB_ENV"
+          elif [ "$IS_TAG" = true ]; then
+            echo "::error::Set the repository variable LICENSE_PUBLIC_KEYS (the production public key) before tagging a release."
+            exit 1
+          else
+            echo "::warning::LICENSE_PUBLIC_KEYS is not set: building with a throwaway key (test build, not publishable)."
+            echo "LICENSE_PUBLIC_KEYS=$(node -e "const {generateKeyPairSync}=require('crypto');const {publicKey}=generateKeyPairSync('ed25519');console.log(JSON.stringify({throwaway:publicKey.export({format:'der',type:'spki'}).toString('base64')}))")" >> "$GITHUB_ENV"
+          fi
+
       - name: Build standalone executable
         run: npm run build:standalone
         env:
-          LICENSE_PUBLIC_KEYS: ${{ vars.LICENSE_PUBLIC_KEYS }}
           GHOSTROW_RELEASE_DATE: ${{ steps.meta.outputs.date }}
 
       - name: Smoke test
