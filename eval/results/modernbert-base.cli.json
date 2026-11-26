@@ -1,0 +1,62 @@
+{
+ "held_out_columns": 505,
+ "rule_engine": {
+  "correct": 427,
+  "accuracy": 0.8455
+ },
+ "cli_with_model": {
+  "correct": 460,
+  "accuracy": 0.9109,
+  "accept_threshold": 0.5
+ },
+ "changed_by_model": 68,
+ "changes_that_fixed_a_label": 46,
+ "changes_that_broke_a_label": 13,
+ "by_source": {
+  "chinook": {
+   "total": 53,
+   "rule_engine": 51,
+   "cli_with_model": 51,
+   "model_ms": 1275
+  },
+  "sakila": {
+   "total": 64,
+   "rule_engine": 59,
+   "cli_with_model": 61,
+   "model_ms": 1397
+  },
+  "umami": {
+   "total": 229,
+   "rule_engine": 194,
+   "cli_with_model": 210,
+   "model_ms": 2824
+  },
+  "healthchecks": {
+   "total": 140,
+   "rule_engine": 112,
+   "cli_with_model": 122,
+   "model_ms": 2267
+  },
+  "koel": {
+   "total": 19,
+   "rule_engine": 11,
+   "cli_with_model": 16,
+   "model_ms": 1152
+  }
+ },
+ "latency_node": {
+  "columns_asked": 505,
+  "total_ms_including_model_load": 8915,
+  "note": "per schema: open the int8 model, tokenize, run every column in batches of 32, on CPU with onnxruntime-node"
+ },
+ "tokenizer_parity": {
+  "checked": 200,
+  "mismatches": 0
+ },
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700K",
+  "logical_cpus": 24,
+  "os": "win32 10.0.26200",
+  "node": "v24.22.1"
+ }
+}

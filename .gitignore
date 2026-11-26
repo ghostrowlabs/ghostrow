@@ -8,3 +8,11 @@ ghostrow.rules.yaml
 haunt-report*.json
 ghostrow-haunt/
 .env*
+
+# model training
+training/.venv/
+training/data/
+training/runs/
+training/artifacts/
+training/runs-*.log
+training/release/

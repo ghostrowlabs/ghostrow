@@ -13,6 +13,7 @@ import {
   statusHandler,
   twinHandler,
 } from "./handlers.js";
+import { runModelPull, runModelRemove, runModelStatus } from "../model/cli.js";
 
 export interface ProgramResult {
   code: number;
@@ -32,6 +33,7 @@ export function buildProgram(): Command {
     .option("--code <dir>", "Also read application code for validation rules (Pro and Max)")
     .option("--rules <file>", "Rules file to read and update", "ghostrow.rules.yaml")
     .option("--seed <n>", "Random seed. The same seed gives the same output")
+    .option("--no-model", "Don't use the installed schema model for this run (rule engine only)")
     .option("-q, --quiet", "Less output")
     .option("--json", "Machine-readable output");
 
@@ -69,6 +71,20 @@ export function buildProgram(): Command {
     return twinHandler(resolveContext(globals), buildTwinOptions(globals));
   });
 
+  const model = program.command("model").description("Download and manage the on-device schema model (all plans)");
+  model
+    .command("pull")
+    .description("Download the schema model and verify its signature")
+    .action((_o: object, cmd: Command) => runModelPull(resolveContext(cmd.optsWithGlobals())));
+  model
+    .command("status")
+    .description("Show the installed model")
+    .action((_o: object, cmd: Command) => runModelStatus(resolveContext(cmd.optsWithGlobals())));
+  model
+    .command("remove")
+    .description("Delete the installed model")
+    .action((_o: object, cmd: Command) => runModelRemove(resolveContext(cmd.optsWithGlobals())));
+
   program
     .command("activate <key>")
     .description("Activate this machine for your license")
@@ -102,6 +118,7 @@ function resolveContext(globals: Record<string, unknown>): RunContext {
     seed: seedValue,
     quiet: Boolean(globals.quiet),
     json: Boolean(globals.json),
+    noModel: globals.model === false,
   };
 }
 

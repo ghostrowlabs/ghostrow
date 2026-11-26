@@ -49,6 +49,21 @@ ghostrow seed --db postgres://localhost/app_test --seed 42 --rows 5000
 | `ghostrow activate <key>` | Activate this machine for your license. |
 | `ghostrow deactivate` | Free this machine so you can use the seat elsewhere. |
 | `ghostrow status` | Show the plan, seat, machines used and updates end date. |
+| `ghostrow model pull` | Download the on-device schema model (`gr-col-1`, all plans) and verify its signature. |
+| `ghostrow model status` / `model remove` | Show or delete the installed model. |
+
+## The schema model
+
+`ghostrow model pull` downloads `gr-col-1`, a 32 MB int8 encoder fine-tuned to read a column's
+schema text (names, types, keys, nearby columns; never values) and propose what it holds. The
+manifest is signed (Ed25519) and every file is checked against its SHA-256 before it is installed
+in `~/.ghostrow/models`. After that it runs offline on the CPU.
+
+The model only proposes: a proposal is used when the model is at least 50% sure and the meaning
+fits the column's declared type; otherwise the rule engine's meaning stands. Rows still come from
+the seeded generator and are validated against your constraints. `--no-model` turns it off for a
+run. Without a model, Ghostrow uses the rule engine exactly as before. Results, method and data:
+[`eval/RESULTS.md`](eval/RESULTS.md); training: [`training/README.md`](training/README.md).
 
 ## Plans
 

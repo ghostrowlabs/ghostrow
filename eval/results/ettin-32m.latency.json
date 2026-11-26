@@ -1,0 +1,32 @@
+{
+ "variant": "ettin-32m",
+ "model": "gr-col-1",
+ "runs": {
+  "chinook": {
+   "columns": 53,
+   "median_ms_including_model_load": 373,
+   "ms_per_column": 7.04,
+   "runs": [
+    341,
+    373,
+    435
+   ]
+  },
+  "gitlab": {
+   "columns": 12878,
+   "median_ms_including_model_load": 20209,
+   "ms_per_column": 1.57,
+   "runs": [
+    19665,
+    20209,
+    21094
+   ]
+  }
+ },
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700K",
+  "logical_cpus": 24,
+  "os": "win32 10.0.26200",
+  "node": "v24.22.1"
+ }
+}

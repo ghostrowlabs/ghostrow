@@ -9,6 +9,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSyn
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { build } from "esbuild";
+import { ortPlugin } from "./scripts/ort-plugin.mjs";
 
 const local = process.argv.includes("--local");
 const require = createRequire(import.meta.url);
@@ -29,12 +30,14 @@ await build({
   format: "cjs",
   outfile: join(out, "ghostrow.cjs"),
   external: ["pg-native", "cloudflare:sockets"],
+  plugins: [ortPlugin],
   legalComments: "none",
   define: {
     __GHOSTROW_VERSION__: JSON.stringify(pkg.version),
     __GHOSTROW_RELEASE_DATE__: JSON.stringify(process.env.GHOSTROW_RELEASE_DATE ?? new Date().toISOString().slice(0, 10)),
     __GHOSTROW_PUBLIC_KEYS__: JSON.stringify(keys),
     __GHOSTROW_API_URL__: JSON.stringify(process.env.GHOSTROW_BUILD_API_URL ?? (local ? "http://localhost:3100" : "https://ghostrow.com")),
+    __GHOSTROW_BUNDLED__: "true",
     "import.meta.url": "__importMetaUrl",
   },
   inject: [join("scripts", "import-meta-url.js")],

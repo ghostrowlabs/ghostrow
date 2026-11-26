@@ -1,0 +1,1101 @@
+{
+ "held_out_columns": 505,
+ "unseen_name_columns": 151,
+ "systems": {
+  "rule_engine": {
+   "all": {
+    "correct": 427,
+    "total": 505,
+    "accuracy": 0.8455
+   },
+   "unseen_names": {
+    "correct": 117,
+    "total": 151,
+    "accuracy": 0.7748
+   },
+   "by_source": {
+    "chinook": {
+     "correct": 51,
+     "total": 53,
+     "accuracy": 0.9623
+    },
+    "healthchecks": {
+     "correct": 112,
+     "total": 140,
+     "accuracy": 0.8
+    },
+    "koel": {
+     "correct": 11,
+     "total": 19,
+     "accuracy": 0.5789
+    },
+    "sakila": {
+     "correct": 59,
+     "total": 64,
+     "accuracy": 0.9219
+    },
+    "umami": {
+     "correct": 194,
+     "total": 229,
+     "accuracy": 0.8472
+    }
+   }
+  },
+  "model_fp32": {
+   "all": {
+    "correct": 459,
+    "total": 505,
+    "accuracy": 0.9089
+   },
+   "unseen_names": {
+    "correct": 117,
+    "total": 151,
+    "accuracy": 0.7748
+   },
+   "by_source": {
+    "chinook": {
+     "correct": 52,
+     "total": 53,
+     "accuracy": 0.9811
+    },
+    "healthchecks": {
+     "correct": 117,
+     "total": 140,
+     "accuracy": 0.8357
+    },
+    "koel": {
+     "correct": 18,
+     "total": 19,
+     "accuracy": 0.9474
+    },
+    "sakila": {
+     "correct": 61,
+     "total": 64,
+     "accuracy": 0.9531
+    },
+    "umami": {
+     "correct": 211,
+     "total": 229,
+     "accuracy": 0.9214
+    }
+   }
+  },
+  "model_int8": {
+   "all": {
+    "correct": 462,
+    "total": 505,
+    "accuracy": 0.9149
+   },
+   "unseen_names": {
+    "correct": 121,
+    "total": 151,
+    "accuracy": 0.8013
+   },
+   "by_source": {
+    "chinook": {
+     "correct": 52,
+     "total": 53,
+     "accuracy": 0.9811
+    },
+    "healthchecks": {
+     "correct": 120,
+     "total": 140,
+     "accuracy": 0.8571
+    },
+    "koel": {
+     "correct": 18,
+     "total": 19,
+     "accuracy": 0.9474
+    },
+    "sakila": {
+     "correct": 61,
+     "total": 64,
+     "accuracy": 0.9531
+    },
+    "umami": {
+     "correct": 211,
+     "total": 229,
+     "accuracy": 0.9214
+    }
+   }
+  }
+ },
+ "per_meaning": {
+  "datetime": {
+   "support": 99,
+   "rule_engine": 88,
+   "model_int8": 93
+  },
+  "id": {
+   "support": 52,
+   "rule_engine": 52,
+   "model_int8": 52
+  },
+  "uuid": {
+   "support": 52,
+   "rule_engine": 49,
+   "model_int8": 52
+  },
+  "status": {
+   "support": 44,
+   "rule_engine": 26,
+   "model_int8": 39
+  },
+  "title": {
+   "support": 28,
+   "rule_engine": 24,
+   "model_int8": 28
+  },
+  "text": {
+   "support": 26,
+   "rule_engine": 24,
+   "model_int8": 18
+  },
+  "integer": {
+   "support": 25,
+   "rule_engine": 25,
+   "model_int8": 25
+  },
+  "boolean": {
+   "support": 20,
+   "rule_engine": 19,
+   "model_int8": 20
+  },
+  "token": {
+   "support": 17,
+   "rule_engine": 4,
+   "model_int8": 8
+  },
+  "code": {
+   "support": 13,
+   "rule_engine": 1,
+   "model_int8": 9
+  },
+  "json": {
+   "support": 12,
+   "rule_engine": 7,
+   "model_int8": 11
+  },
+  "description": {
+   "support": 8,
+   "rule_engine": 8,
+   "model_int8": 8
+  },
+  "number": {
+   "support": 8,
+   "rule_engine": 6,
+   "model_int8": 4
+  },
+  "date": {
+   "support": 7,
+   "rule_engine": 7,
+   "model_int8": 6
+  },
+  "money": {
+   "support": 7,
+   "rule_engine": 6,
+   "model_int8": 6
+  },
+  "count": {
+   "support": 6,
+   "rule_engine": 3,
+   "model_int8": 3
+  },
+  "first_name": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "last_name": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "street": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "city": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "region": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "phone": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "email": {
+   "support": 5,
+   "rule_engine": 5,
+   "model_int8": 5
+  },
+  "country": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "postal_code": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "bytes": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "domain": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "file_path": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "slug": {
+   "support": 4,
+   "rule_engine": 4,
+   "model_int8": 4
+  },
+  "url": {
+   "support": 3,
+   "rule_engine": 3,
+   "model_int8": 3
+  },
+  "company": {
+   "support": 2,
+   "rule_engine": 2,
+   "model_int8": 2
+  },
+  "full_name": {
+   "support": 2,
+   "rule_engine": 1,
+   "model_int8": 2
+  },
+  "username": {
+   "support": 2,
+   "rule_engine": 2,
+   "model_int8": 2
+  },
+  "password_hash": {
+   "support": 2,
+   "rule_engine": 2,
+   "model_int8": 2
+  },
+  "timezone": {
+   "support": 2,
+   "rule_engine": 2,
+   "model_int8": 1
+  },
+  "job_title": {
+   "support": 1,
+   "rule_engine": 0,
+   "model_int8": 1
+  },
+  "birth_date": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "quantity": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "year": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "language_code": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "country_code": {
+   "support": 1,
+   "rule_engine": 0,
+   "model_int8": 1
+  },
+  "currency_code": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "percent": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  },
+  "ip_address": {
+   "support": 1,
+   "rule_engine": 1,
+   "model_int8": 1
+  }
+ },
+ "disagreements": [
+  {
+   "source": "chinook",
+   "table": "employee",
+   "column": "title",
+   "label": "job_title",
+   "rule_engine": "title",
+   "model_int8": "job_title"
+  },
+  {
+   "source": "chinook",
+   "table": "invoice",
+   "column": "invoice_date",
+   "label": "date",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "chinook",
+   "table": "track",
+   "column": "composer",
+   "label": "full_name",
+   "rule_engine": "text",
+   "model_int8": "full_name"
+  },
+  {
+   "source": "sakila",
+   "table": "film",
+   "column": "rental_rate",
+   "label": "money",
+   "rule_engine": "percent",
+   "model_int8": "percent"
+  },
+  {
+   "source": "sakila",
+   "table": "film",
+   "column": "rating",
+   "label": "status",
+   "rule_engine": "status",
+   "model_int8": "rating"
+  },
+  {
+   "source": "sakila",
+   "table": "film",
+   "column": "special_features",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "json"
+  },
+  {
+   "source": "sakila",
+   "table": "customer",
+   "column": "active",
+   "label": "boolean",
+   "rule_engine": "integer",
+   "model_int8": "boolean"
+  },
+  {
+   "source": "sakila",
+   "table": "payment",
+   "column": "payment_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "sakila",
+   "table": "rental",
+   "column": "rental_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "sakila",
+   "table": "rental",
+   "column": "return_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "umami",
+   "table": "api_key",
+   "column": "key_hash",
+   "label": "token",
+   "rule_engine": "file_path",
+   "model_int8": "file_path"
+  },
+  {
+   "source": "umami",
+   "table": "api_key",
+   "column": "key_prefix",
+   "label": "code",
+   "rule_engine": "file_path",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "browser",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "os",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "device",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "screen",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "username"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "country",
+   "label": "country_code",
+   "rule_engine": "country",
+   "model_int8": "country_code"
+  },
+  {
+   "source": "umami",
+   "table": "session",
+   "column": "distinct_id",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "session_link",
+   "column": "distinct_id",
+   "label": "code",
+   "rule_engine": "id",
+   "model_int8": "id"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "url_query",
+   "label": "text",
+   "rule_engine": "url",
+   "model_int8": "text"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "utm_medium",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "utm_campaign",
+   "label": "title",
+   "rule_engine": "text",
+   "model_int8": "title"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "utm_content",
+   "label": "text",
+   "rule_engine": "description",
+   "model_int8": "description"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "utm_term",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "id"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "gclid",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "fbclid",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "msclkid",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "ttclid",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "li_fat_id",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "twclid",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "event_name",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "tag",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "lcp",
+   "label": "number",
+   "rule_engine": "number",
+   "model_int8": "money"
+  },
+  {
+   "source": "umami",
+   "table": "website_event",
+   "column": "inp",
+   "label": "number",
+   "rule_engine": "number",
+   "model_int8": "money"
+  },
+  {
+   "source": "umami",
+   "table": "event_data",
+   "column": "data_key",
+   "label": "status",
+   "rule_engine": "file_path",
+   "model_int8": "file_path"
+  },
+  {
+   "source": "umami",
+   "table": "event_data",
+   "column": "number_value",
+   "label": "number",
+   "rule_engine": "money",
+   "model_int8": "money"
+  },
+  {
+   "source": "umami",
+   "table": "session_data",
+   "column": "data_key",
+   "label": "status",
+   "rule_engine": "file_path",
+   "model_int8": "file_path"
+  },
+  {
+   "source": "umami",
+   "table": "session_data",
+   "column": "number_value",
+   "label": "number",
+   "rule_engine": "money",
+   "model_int8": "number"
+  },
+  {
+   "source": "umami",
+   "table": "session_data",
+   "column": "distinct_id",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "revenue",
+   "column": "event_name",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "two_factor_otp_used",
+   "column": "otp",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "app_setting",
+   "column": "key",
+   "label": "code",
+   "rule_engine": "file_path",
+   "model_int8": "file_path"
+  },
+  {
+   "source": "umami",
+   "table": "error_issue",
+   "column": "fingerprint",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "token"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "release",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "environment",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "browser",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "os",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "device",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "next_report_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "nag_period",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "next_nag_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "last_sms_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "sms_sent",
+   "label": "count",
+   "rule_engine": "datetime",
+   "model_int8": "integer"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "last_call_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "calls_sent",
+   "label": "count",
+   "rule_engine": "datetime",
+   "model_int8": "integer"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "sort",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "deletion_notice_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "over_limit_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "last_active_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "theme",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_profile",
+   "column": "totp",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "money"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_project",
+   "column": "name",
+   "label": "title",
+   "rule_engine": "full_name",
+   "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_project",
+   "column": "api_key",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "token"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_project",
+   "column": "api_key_readonly",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "token"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_project",
+   "column": "badge_key",
+   "label": "token",
+   "rule_engine": "file_path",
+   "model_int8": "file_path"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_project",
+   "column": "ping_key",
+   "label": "token",
+   "rule_engine": "file_path",
+   "model_int8": "token"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_member",
+   "column": "transfer_request_date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "datetime"
+  },
+  {
+   "source": "healthchecks",
+   "table": "accounts_credential",
+   "column": "name",
+   "label": "title",
+   "rule_engine": "full_name",
+   "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "tags",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "json"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "tz",
+   "label": "timezone",
+   "rule_engine": "timezone",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "start_kw",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "success_kw",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "failure_kw",
+   "label": "text",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "methods",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_check",
+   "column": "n_pings",
+   "label": "count",
+   "rule_engine": "integer",
+   "model_int8": "integer"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_ping",
+   "column": "scheme",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_tokenbucket",
+   "column": "tokens",
+   "label": "number",
+   "rule_engine": "number",
+   "model_int8": "token"
+  },
+  {
+   "source": "healthchecks",
+   "table": "logs_record",
+   "column": "name",
+   "label": "code",
+   "rule_engine": "title",
+   "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "payments_subscription",
+   "column": "customer_id",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "healthchecks",
+   "table": "payments_subscription",
+   "column": "subscription_id",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "healthchecks",
+   "table": "payments_subscription",
+   "column": "plan_id",
+   "label": "code",
+   "rule_engine": "text",
+   "model_int8": "code"
+  },
+  {
+   "source": "healthchecks",
+   "table": "payments_subscription",
+   "column": "plan_name",
+   "label": "title",
+   "rule_engine": "text",
+   "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "payments_subscription",
+   "column": "address_id",
+   "label": "code",
+   "rule_engine": "address",
+   "model_int8": "code"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversations",
+   "column": "id",
+   "label": "uuid",
+   "rule_engine": "id",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "id",
+   "label": "uuid",
+   "rule_engine": "id",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "conversation_id",
+   "label": "uuid",
+   "rule_engine": "text",
+   "model_int8": "uuid"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "attachments",
+   "label": "json",
+   "rule_engine": "text",
+   "model_int8": "json"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "tool_calls",
+   "label": "json",
+   "rule_engine": "text",
+   "model_int8": "json"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "tool_results",
+   "label": "json",
+   "rule_engine": "text",
+   "model_int8": "json"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "usage",
+   "label": "json",
+   "rule_engine": "text",
+   "model_int8": "status"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
+   "column": "meta",
+   "label": "json",
+   "rule_engine": "text",
+   "model_int8": "json"
+  }
+ ],
+ "cpu_latency_python_ort": {
+  "1_thread": {
+   "single_column_ms_p50": 4.2,
+   "single_column_ms_p95": 5.51,
+   "batched_64_ms_per_column": 5.84
+  },
+  "all_threads": {
+   "single_column_ms_p50": 2.91,
+   "single_column_ms_p95": 4.5,
+   "batched_64_ms_per_column": 1.39
+  }
+ },
+ "machine": {
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_cpus": 24,
+  "os": "Windows-11-10.0.26200-SP0",
+  "onnxruntime": "1.32.0"
+ },
+ "model": {
+  "name": "gr-col-1",
+  "base": "jhu-clsp/ettin-encoder-32m",
+  "quantization": "dynamic int8 weights (onnxruntime)",
+  "feature_version": 1,
+  "variant": "ettin-32m",
+  "onnx_int8_mb": 32.5
+ }
+}

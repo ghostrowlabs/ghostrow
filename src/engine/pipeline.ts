@@ -10,6 +10,8 @@ import { requireCodeAware, requireDatabase, type Entitlements } from "../entitle
 import { byokConfig, refineWithByok } from "./byok.js";
 import { infer, type Plan } from "./infer.js";
 import { mergeRules, readRulesFile } from "./rulesfile.js";
+import { refineWithModel } from "../model/classify.js";
+import { installedModel } from "../model/store.js";
 
 export interface Prepared {
   schema: SchemaModel;
@@ -17,6 +19,8 @@ export interface Prepared {
   connector: Connector | null;
   codeRules: number;
   byok: { provider: string; changed: number } | null;
+  /** The schema model's part in this run, when one is installed and not turned off. */
+  model: { name: string; changed: number; asked: number } | null;
 }
 
 const SAMPLE_ROWS = 50;
@@ -62,6 +66,24 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
   }
 
   const plan = infer(schema, samples);
+  // The on-device model (all plans) proposes meanings; the rule engine's checks decide. Any failure
+  // falls back to the rule engine: a missing or broken model never stops a run.
+  let model: Prepared["model"] = null;
+  if (!ctx.noModel) {
+    const inst = installedModel();
+    if (inst && !inst.runtime) note(ctx, "model         installed, but this release has no runtime for this platform; using the rule engine");
+    else if (inst) {
+      try {
+        const r = await refineWithModel(plan, schema, inst);
+        if (r) {
+          model = { name: r.model, changed: r.changed, asked: r.asked };
+          note(ctx, `model         ${r.model} relabelled ${r.changed} of ${r.asked} column(s) in ${r.ms} ms, on this machine`);
+        }
+      } catch (e) {
+        warn(`model         skipped: ${e instanceof Error ? e.message : String(e)}. Using the rule engine only.`);
+      }
+    }
+  }
   let codeRules = 0;
   if (ctx.codeDir) {
     requireCodeAware(ent);
@@ -98,5 +120,5 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
     throw invalidInput(e instanceof Error ? e.message : String(e));
   }
   for (const n of merged.notes) note(ctx, `rules file    ${n}`);
-  return { schema, plan: merged.plan, connector, codeRules, byok };
+  return { schema, plan: merged.plan, connector, codeRules, byok, model };
 }

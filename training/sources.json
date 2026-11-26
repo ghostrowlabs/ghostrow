@@ -1,0 +1,29 @@
+{
+  "note": "Public schemas used to build the column-meaning dataset. Every repository is pinned to a commit. Only files whose licence permits reuse are listed; ee/ (proprietary) directories are never included. split=eval sources are held out: they are hand-labelled and never seen in training. pagila is a port of sakila, so it is excluded from training too (split=excluded).",
+  "sources": [
+    { "id": "chinook", "repo": "lerocha/chinook-database", "sha": "7f67772503d71ba90f19283c38e93923addb43fa", "license": "MIT", "split": "eval", "include": ["^ChinookDatabase/DataSources/Chinook_PostgreSql\\.sql$"] },
+    { "id": "sakila", "repo": "jOOQ/sakila", "sha": "e089a5b1ec9af0df7a9c6a5d47d49fa1736a4e84", "license": "BSD-2-Clause", "split": "eval", "include": ["^postgres-sakila-db/postgres-sakila-schema\\.sql$"] },
+    { "id": "umami", "repo": "umami-software/umami", "sha": "dbb8d606fbd4e99220fb83bcb4abad3e0f97f42a", "license": "MIT", "split": "eval", "include": ["^prisma/schema\\.prisma$"] },
+    { "id": "healthchecks", "repo": "healthchecks/healthchecks", "sha": "c1039ad23395162c5e2f17d324d8ccdaa60a1d14", "license": "BSD-3-Clause", "split": "eval", "include": ["^hc/[a-z]+/models\\.py$"] },
+    { "id": "koel", "repo": "koel/koel", "sha": "87938e91cd13a00dcfeb4d9bbdca9c889cfee376", "license": "MIT", "split": "eval", "include": ["^database/migrations/.*\\.php$"] },
+
+    { "id": "pagila", "repo": "devrimgunduz/pagila", "sha": "6ea53f812254c91a602f61c0ef62beca3fa676b1", "license": "PostgreSQL", "split": "excluded", "include": [] },
+
+    { "id": "mssql-samples", "repo": "microsoft/sql-server-samples", "sha": "26dc1258b431470f515775b8c98ae77e1d66e39a", "license": "MIT", "split": "train", "include": ["^samples/databases/adventure-works/oltp-install-script/instawdb\\.sql$", "^samples/databases/northwind-pubs/inst(nwnd|pubs)\\.sql$"] },
+    { "id": "gitlab", "repo": "gitlabhq/gitlabhq", "sha": "d7b9a6176ab4e279465ba3ee09922cde2b74de47", "license": "MIT", "split": "train", "include": ["^db/structure\\.sql$"] },
+    { "id": "saleor", "repo": "saleor/saleor", "sha": "e1ccf4d580025b06c2ff01441a1e798dc4635f24", "license": "BSD-3-Clause", "split": "train", "include": ["^saleor/[a-z_]+/models\\.py$", "^saleor/[a-z_]+/models/[a-z_]+\\.py$"] },
+    { "id": "zulip", "repo": "zulip/zulip", "sha": "55eba7b19022c83dfcd9771f89d7b966b1a3e415", "license": "Apache-2.0", "split": "train", "include": ["^zerver/models/[a-z_]+\\.py$", "^analytics/models\\.py$", "^corporate/models/[a-z_]+\\.py$", "^corporate/models\\.py$"] },
+    { "id": "superset", "repo": "apache/superset", "sha": "3758941b250d5c6f05e3ab2b114283932692167e", "license": "Apache-2.0", "split": "train", "include": ["^superset/models/[a-z_]+\\.py$", "^superset/connectors/sqla/models\\.py$"] },
+    { "id": "airflow", "repo": "apache/airflow", "sha": "9af4bbdd14104b2a8a257b886409281f1183fb0c", "license": "Apache-2.0", "split": "train", "include": ["^airflow-core/src/airflow/models/[a-z_]+\\.py$"] },
+    { "id": "hoppscotch", "repo": "hoppscotch/hoppscotch", "sha": "6177eae1875ea4cc8fc46604d65bf85478912d85", "license": "MIT", "split": "train", "include": ["^packages/hoppscotch-backend/prisma/schema\\.prisma$"] },
+    { "id": "langfuse", "repo": "langfuse/langfuse", "sha": "a2cd4753f7d7b3a2b74b458e305bc1a469ecb51a", "license": "MIT", "split": "train", "include": ["^packages/shared/prisma/schema\\.prisma$"] },
+    { "id": "triggerdev", "repo": "triggerdotdev/trigger.dev", "sha": "e0e60ff6ca5e4214f91fef2b231dc14d937bdba3", "license": "Apache-2.0", "split": "train", "include": ["^internal-packages/database/prisma/schema\\.prisma$"] },
+    { "id": "calcom", "repo": "calcom/cal.com", "sha": "ae027bb70e694e2d2c44569f398d6cbcee0389b1", "license": "MIT", "split": "train", "include": ["^packages/prisma/schema\\.prisma$"] },
+    { "id": "bookstack", "repo": "BookStackApp/BookStack", "sha": "e7d2f6bfe71d2bc4ad39c786e509777f578ba5f8", "license": "MIT", "split": "train", "include": ["^database/migrations/.*\\.php$"] },
+    { "id": "netbox", "repo": "netbox-community/netbox", "sha": "04bdbf464c380d2b4d1dc8d4f9c96fcc26f04981", "license": "Apache-2.0", "split": "train", "include": ["^netbox/[a-z_]+/models/[a-z_]+\\.py$", "^netbox/[a-z_]+/models\\.py$"] },
+    { "id": "redash", "repo": "getredash/redash", "sha": "f561a53dc55eeb3f20615be951560dc78bb23f4c", "license": "BSD-2-Clause", "split": "train", "include": ["^redash/models/[a-z_]+\\.py$"] },
+    { "id": "oscar", "repo": "django-oscar/django-oscar", "sha": "a5ed3c9c17d4cf6ee18aa9795b493172416ab68b", "license": "BSD-3-Clause", "split": "train", "include": ["^src/oscar/apps/[a-z_]+/abstract_models\\.py$"] },
+    { "id": "wagtail", "repo": "wagtail/wagtail", "sha": "da32ecb1c1beaadac682248b3878d01f9e6f93e5", "license": "BSD-3-Clause", "split": "train", "include": ["^wagtail/[a-z_]+/models\\.py$", "^wagtail/models/[a-z_]+\\.py$", "^wagtail/contrib/[a-z_]+/models\\.py$"] },
+    { "id": "posthog", "repo": "PostHog/posthog", "sha": "d81386d2ade690b48b34b315b9bc9613a271a05a", "license": "MIT", "split": "train", "include": ["^posthog/models/[a-z_]+\\.py$", "^posthog/models/[a-z_]+/[a-z_]+\\.py$"], "exclude": ["test"] }
+  ]
+}

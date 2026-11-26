@@ -12,6 +12,8 @@ export interface RunContext {
   seed?: number;
   quiet: boolean;
   json: boolean;
+  /** `--no-model`: use the rule engine only, even when a model is installed. */
+  noModel?: boolean;
 }
 
 export function parseSeed(value: string, argLabel: string): number {

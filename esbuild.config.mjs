@@ -10,6 +10,7 @@
 //   node esbuild.config.mjs --local    local build: keys from ../.env.local, API http://localhost:3100
 import { existsSync, readFileSync } from "node:fs";
 import { build } from "esbuild";
+import { ortPlugin } from "./scripts/ort-plugin.mjs";
 
 const local = process.argv.includes("--local");
 const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf8"));
@@ -32,7 +33,11 @@ const result = await build({
   format: "esm",
   outdir: "dist",
   outbase: "src",
-  packages: "external",
+  // npm dependencies stay external; onnxruntime-node (a dev dependency) is bundled without its native library.
+  external: Object.keys(pkg.dependencies ?? {}).flatMap((d) => [d, `${d}/*`]),
+  plugins: [ortPlugin],
+  // onnxruntime-node is CommonJS and requires Node built-ins; give the ESM bundle a real `require`.
+  banner: { js: 'import { createRequire as __ghostrowCreateRequire } from "node:module"; const require = __ghostrowCreateRequire(import.meta.url);' },
   sourcemap: false,
   legalComments: "none",
   define: {
@@ -40,6 +45,7 @@ const result = await build({
     __GHOSTROW_RELEASE_DATE__: JSON.stringify(releaseDate),
     __GHOSTROW_PUBLIC_KEYS__: JSON.stringify(keys),
     __GHOSTROW_API_URL__: JSON.stringify(apiUrl),
+    __GHOSTROW_BUNDLED__: "true",
   },
   logLevel: "warning",
 });

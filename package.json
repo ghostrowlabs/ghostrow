@@ -43,6 +43,7 @@
     "@types/sql.js": "^1.16.1",
     "esbuild": "^0.28.0",
     "mysql-memory-server": "^1.18.0",
+    "onnxruntime-node": "^1.31.1",
     "postject": "^1.0.0-alpha.6",
     "tsx": "^4.23.15",
     "typescript": "^5",
