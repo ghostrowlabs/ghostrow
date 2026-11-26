@@ -148,6 +148,10 @@ jobs:
           if [ "$OS_NAME" = windows ]; then bin=dist/standalone/ghostrow.exe; else bin=dist/standalone/ghostrow; fi
           python packaging/pypi/build_wheels.py --version "$VERSION" --binary "$bin" --platform "$WHEEL_TAG" --out out/wheels
 
+      - name: Drop build-only files
+        shell: bash
+        run: rm -f out/assets/*.wixpdb
+
       - uses: actions/upload-artifact@v4
         with:
           name: assets-${{ matrix.os_name }}-${{ matrix.arch }}
