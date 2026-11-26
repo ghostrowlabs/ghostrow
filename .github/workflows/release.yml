@@ -31,7 +31,7 @@ jobs:
     permissions:
       contents: read
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         include:
           - { runner: macos-14, os_name: macos, arch: arm64, deb_arch: '', wheel_tag: macosx_13_0_arm64 }
