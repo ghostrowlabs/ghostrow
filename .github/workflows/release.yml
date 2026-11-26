@@ -241,9 +241,10 @@ jobs:
         env:
           LICENSE_PUBLIC_KEYS: ${{ vars.LICENSE_PUBLIC_KEYS }}
           GHOSTROW_RELEASE_DATE: ${{ steps.meta.outputs.date }}
+      # Trusted publishing (OIDC): npmjs.com trusts ghostrowlabs/ghostrow release.yml, no token.
+      # Needs npm 11.5.1 or later.
+      - run: npm install -g npm@11
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   pypi:
     needs: release
