@@ -108,6 +108,11 @@ function resolveContext(globals: Record<string, unknown>): RunContext {
 export async function run(argv: string[]): Promise<ProgramResult> {
   const program = buildProgram();
   program.exitOverride();
+  // Bare `ghostrow` (no command, no flags): help on stdout, exit 0. Package validators (winget) run it this way.
+  if (argv.slice(2).length === 0) {
+    process.stdout.write(program.helpInformation());
+    return { code: 0 };
+  }
   let code = 0;
   try {
     await program.parseAsync(argv, { from: "node" });

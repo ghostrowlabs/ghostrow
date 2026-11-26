@@ -88,3 +88,20 @@ describe("command surface", () => {
     expect(code).toBe(1);
   });
 });
+
+describe("bare invocation", () => {
+  it("prints help to stdout and exits 0 with no arguments; unknown commands and flags still fail", async () => {
+    let out = "";
+    const o = vi.spyOn(process.stdout, "write").mockImplementation((c) => ((out += String(c)), true));
+    const e = vi.spyOn(process.stderr, "write").mockReturnValue(true);
+    try {
+      expect((await run(["node", "ghostrow"])).code).toBe(0);
+      expect(out).toContain("Usage: ghostrow");
+      expect((await run(["node", "ghostrow", "nonsense"])).code).not.toBe(0);
+      expect((await run(["node", "ghostrow", "--no-such-flag"])).code).not.toBe(0);
+    } finally {
+      o.mockRestore();
+      e.mockRestore();
+    }
+  });
+});
