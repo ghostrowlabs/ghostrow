@@ -4,7 +4,7 @@ import { join, resolve } from "node:path";
 import type { RunContext } from "../cli/context.js";
 import { hauntFoundFailures, invalidInput } from "../cli/errors.js";
 import type { HauntOptions } from "../cli/handlers.js";
-import { fmt, note, out } from "../cli/output.js";
+import { fmt, note, out, warn } from "../cli/output.js";
 import { openConnector, type Connector } from "../connect/registry.js";
 import type { SchemaModel } from "../connect/types.js";
 import { violationsError } from "../engine/index.js";
@@ -45,7 +45,7 @@ interface TestRun {
 
 export async function runHaunt(ctx: RunContext, opts: HauntOptions): Promise<void> {
   const ent = await resolveEntitlements();
-  for (const n of ent.notices) note(ctx, `note: ${n}`);
+  for (const n of ent.notices) warn(`note: ${n}`);
   requireMode(ent, "haunt");
   const prep = await prepare(ctx, ent);
   const { schema, plan, connector } = prep;

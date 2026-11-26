@@ -86,3 +86,40 @@ describe("failedTests", () => {
     expect(failedTests("FAILED tests/a.py::t1\n", 1)).toEqual(["tests/a.py::t1"]);
   });
 });
+
+describe("failedTests: JUnit", () => {
+  it("parses JUnit XML printed to the output", () => {
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<testsuites><testsuite name="orders" tests="3" failures="1" errors="1">
+  <testcase classname="OrdersTest" name="rejects negative totals" time="0.01"><failure message="expected">stack</failure></testcase>
+  <testcase classname="OrdersTest" name="accepts &quot;zero&quot;" time="0.01"/>
+  <testcase classname="UsersTest" name="requires email" time="0.02">
+    <error type="NullPointerException">boom</error>
+  </testcase>
+  <testcase classname="UsersTest" name="skipped one"><skipped/></testcase>
+</testsuite></testsuites>`;
+    expect(failedTests(xml, 1)).toEqual(["OrdersTest > rejects negative totals", "UsersTest > requires email"]);
+  });
+
+  it("unescapes XML entities in names", () => {
+    const xml = `<testcase classname="a.B" name="x &lt; y &amp;&amp; z"><failure/></testcase>`;
+    expect(failedTests(xml, 1)).toEqual(["a.B > x < y && z"]);
+  });
+
+  it("parses Maven Surefire console failures", () => {
+    const out = [
+      "[ERROR] Tests run: 3, Failures: 1, Errors: 1, Skipped: 0",
+      "[ERROR] Failures: ",
+      "[ERROR]   com.shop.OrdersTest.rejectsNegative:42 expected: <1> but was: <2>",
+      "[ERROR] Errors: ",
+      "[ERROR]   com.shop.UsersTest.requiresEmail » NullPointer",
+      "[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test",
+    ].join("\n");
+    expect(failedTests(out, 1)).toEqual(["com.shop.OrdersTest.rejectsNegative", "com.shop.UsersTest.requiresEmail"]);
+  });
+
+  it("parses Gradle test failures", () => {
+    const out = "OrdersTest > rejectsNegative() FAILED\n    org.opentest4j.AssertionFailedError at OrdersTest.java:42\n";
+    expect(failedTests(out, 1)).toEqual(["OrdersTest > rejectsNegative()"]);
+  });
+});

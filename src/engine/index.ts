@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import type { RunContext } from "../cli/context.js";
 import { constraintUnsatisfied, invalidInput } from "../cli/errors.js";
 import type { SeedOptions } from "../cli/handlers.js";
-import { fmt, note, out } from "../cli/output.js";
+import { fmt, note, out, warn } from "../cli/output.js";
 import { insertAll, type Connector, type Row } from "../connect/registry.js";
 import type { SchemaModel } from "../connect/types.js";
 import { enforceSeedLimit, type Entitlements } from "../entitlements.js";
@@ -21,7 +21,7 @@ import { writeRulesFile } from "./rulesfile.js";
  */
 export async function runSeed(ctx: RunContext, opts: SeedOptions): Promise<void> {
   const ent = await resolveEntitlements();
-  for (const n of ent.notices) note(ctx, `note: ${n}`);
+  for (const n of ent.notices) warn(`note: ${n}`);
   if (!opts.dryRun && !opts.out && !ctx.db) throw invalidInput("Say where the rows go: --out <dir> to write files, or --db <url> to insert into a database.");
   const prep = await prepare(ctx, ent);
   const { schema, plan, connector } = prep;
@@ -58,7 +58,8 @@ export async function runSeed(ctx: RunContext, opts: SeedOptions): Promise<void>
 
     let where: string;
     let files: string[] = [];
-    if (connector) {
+    // --out wins over --db: the database is only read (schema, samples, next ids), never written.
+    if (connector && !opts.out) {
       await insertAll(connector, output);
       where = `inserted into ${connector.label}`;
     } else {

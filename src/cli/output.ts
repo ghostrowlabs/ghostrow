@@ -12,3 +12,8 @@ export function note(ctx: RunContext, msg: string): void {
 }
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
+
+/** Notices that change what a run does (a plan fallback, a skipped feature): printed to stderr even with --quiet. */
+export function warn(msg: string): void {
+  process.stderr.write(`${msg}\n`);
+}

@@ -257,13 +257,28 @@ export function rawValue(meaning: MeaningId, ctx: ValueContext): unknown {
 }
 
 /**
+ * The values a column may take. Values from the rules file (or sampled) win, narrowed to
+ * what the column's CHECK (... IN (...)), NOT IN and enum type allow so rows stay valid.
+ * If nothing is left after narrowing, the CHECK list is used.
+ */
+export function allowedValues(col: ColumnModel, limits: ColumnLimits | undefined, values: (string | number)[] | undefined): (string | number)[] | undefined {
+  if (!values?.length) return limits?.values;
+  const same = (a: string | number, b: string | number) => String(a) === String(b);
+  let pick = values;
+  if (limits?.values?.length) pick = pick.filter((v) => limits.values!.some((a) => same(a, v)));
+  if (limits?.notValues?.length) pick = pick.filter((v) => !limits.notValues!.some((a) => same(a, v)));
+  if (col.type === "enum" && col.enumValues?.length) pick = pick.filter((v) => col.enumValues!.includes(String(v)));
+  return pick.length ? pick : (limits?.values ?? (col.type === "enum" ? col.enumValues : undefined));
+}
+
+/**
  * Bring a value inside the column's limits: allowed values, lengths, numeric ranges,
  * type width and precision. Returns the adjusted value.
  */
 export function fitValue(v: unknown, ctx: ValueContext): unknown {
   const { col, limits, rng } = ctx;
   if (v === null || v === undefined) return v;
-  const allowed = limits?.values ?? ctx.values;
+  const allowed = allowedValues(col, limits, ctx.values);
   if (allowed && allowed.length) {
     if (allowed.some((a) => String(a) === String(v))) return v;
     return coerce(rng.skewed(allowed, 1.3), col);

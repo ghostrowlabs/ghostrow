@@ -3,7 +3,7 @@ import { join, resolve } from "node:path";
 import type { RunContext } from "../cli/context.js";
 import { invalidInput } from "../cli/errors.js";
 import type { TwinOptions } from "../cli/handlers.js";
-import { fmt, note, out } from "../cli/output.js";
+import { fmt, note, out, warn } from "../cli/output.js";
 import { insertAll, openConnector, type Connector } from "../connect/registry.js";
 import { parseDbUrl } from "../connect/types.js";
 import { prepare } from "../engine/pipeline.js";
@@ -23,7 +23,7 @@ import { resolveEntitlements } from "../license/gate.js";
  */
 export async function runTwin(ctx: RunContext, opts: TwinOptions): Promise<void> {
   const ent = await resolveEntitlements();
-  for (const n of ent.notices) note(ctx, `note: ${n}`);
+  for (const n of ent.notices) warn(`note: ${n}`);
   requireMode(ent, "twin");
   if (opts.to) requireDatabase(ent, parseDbUrl(opts.to).kind);
 

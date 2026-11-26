@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import type { RunContext } from "../cli/context.js";
 import { invalidInput } from "../cli/errors.js";
-import { note } from "../cli/output.js";
+import { note, warn } from "../cli/output.js";
 import { applyCodeRules, scanCode } from "../code/index.js";
 import { loadSchema } from "../connect/load.js";
 import { openConnector, type Connector } from "../connect/registry.js";
@@ -71,7 +71,13 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
     note(ctx, `read code     ${found.length} validator rule(s) in ${ctx.codeDir}; ${applied.applied.length} applied${applied.unmatched ? `, ${applied.unmatched} didn't match a table` : ""}`);
   }
   let byok: Prepared["byok"] = null;
-  const cfg = byokConfig();
+  // A misconfigured provider (unknown name, missing key) never stops a run: warn and use the built-in engine.
+  let cfg: ReturnType<typeof byokConfig> = null;
+  try {
+    cfg = byokConfig();
+  } catch (e) {
+    warn(`ai provider   skipped: ${e instanceof Error ? e.message : String(e)} Using the built-in engine only.`);
+  }
   if (cfg) {
     if (!ent.byok) note(ctx, "GHOSTROW_AI_PROVIDER is set, but bring-your-own-key needs Pro or Max. Using the built-in engine only.");
     else {
