@@ -1,6 +1,6 @@
 {
   "name": "ghostrow",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Realistic, consistent test data from your database schema. Offline, seeded, no real personal data.",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",

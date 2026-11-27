@@ -65,6 +65,26 @@ the seeded generator and are validated against your constraints. `--no-model` tu
 run. Without a model, Ghostrow uses the rule engine exactly as before. Results, method and data:
 [`eval/RESULTS.md`](eval/RESULTS.md); training: [`training/README.md`](training/README.md).
 
+## Your own AI provider (Pro, Max)
+
+Optional and off unless `GHOSTROW_AI_PROVIDER` is set. For the columns the built-in engine is
+least sure about, Ghostrow sends schema text only (table names, column names and types; never
+rows, samples or code) to the provider you choose, checks each answer against the column type and
+marks every change in `ghostrow.rules.yaml`. A misconfigured provider only prints a warning.
+
+| `GHOSTROW_AI_PROVIDER` | Settings | Default model |
+| --- | --- | --- |
+| `anthropic` | `ANTHROPIC_API_KEY` | `claude-haiku-5-5` |
+| `openai` | `OPENAI_API_KEY` | `gpt-5-mini` |
+| `gemini` | `GEMINI_API_KEY` | `gemini-2.5-flash` |
+| `bedrock` | `AWS_REGION` (or the profile's region). Credentials from the usual AWS chain: `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_SESSION_TOKEN`, `AWS_PROFILE` (static keys, `credential_process`, IAM Identity Center after `aws sso login`), web identity, ECS/EKS container credentials, EC2 instance role. Or a Bedrock API key in `AWS_BEARER_TOKEN_BEDROCK`. Uses the Converse API. | Amazon Nova Lite via the region's cross-Region inference profile, e.g. `us.amazon.nova-lite-v1:0` |
+| `vertex` | `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_LOCATION` (default `global`). Credentials: `GOOGLE_APPLICATION_CREDENTIALS` (service account key), `gcloud auth application-default login`, the metadata server on Google Cloud, or a token in `GOOGLE_OAUTH_ACCESS_TOKEN`. | `gemini-2.5-flash` |
+| `azure` | `AZURE_OPENAI_ENDPOINT` (`https://<resource>.openai.azure.com`), `AZURE_OPENAI_DEPLOYMENT`, `AZURE_OPENAI_API_KEY` or a Microsoft Entra token in `AZURE_OPENAI_AD_TOKEN`, `AZURE_OPENAI_API_VERSION` (default `2024-10-21`). | your deployment |
+
+`GHOSTROW_AI_MODEL` overrides the model (on Azure, the deployment). Role-assuming AWS profiles
+aren't resolved by Ghostrow itself: run `eval "$(aws configure export-credentials --format env)"`
+first, or point the profile at a `credential_process`.
+
 ## Plans
 
 Free works without a key: up to 5 tables and 10,000 rows, on Postgres and SQLite. Plus, Pro and

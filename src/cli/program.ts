@@ -25,7 +25,21 @@ export function buildProgram(): Command {
   program
     .name("ghostrow")
     .description("Real-looking data. Zero real data.")
-    .version(VERSION, "-v, --version", "Print the version.");
+    .version(VERSION, "-v, --version", "Print the version.")
+    .addHelpText(
+      "after",
+      [
+        "",
+        "Your own AI provider (Pro, Max; off unless set; sends schema text only, never rows):",
+        "  GHOSTROW_AI_PROVIDER  anthropic | openai | gemini | bedrock | vertex | azure",
+        "  GHOSTROW_AI_MODEL     model to use (on Azure: the deployment name)",
+        "  anthropic  ANTHROPIC_API_KEY      openai  OPENAI_API_KEY      gemini  GEMINI_API_KEY",
+        "  bedrock    AWS_REGION; AWS credentials (env, AWS_PROFILE, SSO, instance role) or AWS_BEARER_TOKEN_BEDROCK",
+        "  vertex     GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_LOCATION (default global); gcloud ADC or GOOGLE_OAUTH_ACCESS_TOKEN",
+        "  azure      AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_DEPLOYMENT, AZURE_OPENAI_API_KEY (or AZURE_OPENAI_AD_TOKEN)",
+        "  Details: https://ghostrow.com/docs/ai-providers",
+      ].join("\n"),
+    );
 
   program
     .option("--db <url>", "Connect to a database (Postgres, MySQL, SQLite or SQL Server URL)")
