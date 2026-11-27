@@ -6,6 +6,9 @@ Every non-foreign-key column of the eval sources (see training/sources.json) was
 against eval/LABELING.md. LABELS lists each column whose correct meaning differs from the
 rule engine's proposal; every other column was checked and the rule engine's meaning kept.
 `agrees_with_rule` in the CSV shows which is which, for review.
+
+A second pass over all 505 labels changed six that broke the guide (marked below). It was made
+after the first results were seen, so eval/RESULTS.md reports the figures before and after it.
 """
 
 from __future__ import annotations
@@ -103,6 +106,13 @@ LABELS: dict[tuple[str, str, str], str] = {
     ("koel", "agent_conversation_messages", "tool_results"): "json",
     ("koel", "agent_conversation_messages", "usage"): "json",
     ("koel", "agent_conversation_messages", "meta"): "json",
+    # Second review pass (2026-11-27), against LABELING.md, after the first results were seen:
+    ("koel", "agent_conversation_messages", "agent"): "status",
+    ("healthchecks", "api_tokenbucket", "value"): "token",
+    ("umami", "annotation", "date"): "datetime",
+    ("umami", "error_event", "message"): "text",
+    ("umami", "error_event", "name"): "status",
+    ("healthchecks", "logs_record", "message"): "text",
 }
 
 

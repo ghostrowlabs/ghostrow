@@ -1,0 +1,74 @@
+{
+ "variant": "modernbert-base",
+ "note": "three runs of eval/model_eval.py, alternating the two models, on a shared Intel Core i7-13700K (other processes running). Python onnxruntime, int8, 200 single columns and all 505 in batches of 64.",
+ "runs": [
+  {
+   "1_thread": {
+    "single_column_ms_p50": 99.43,
+    "single_column_ms_p95": 176.49,
+    "batched_64_ms_per_column": 106.28
+   },
+   "all_threads": {
+    "single_column_ms_p50": 221.11,
+    "single_column_ms_p95": 319.72,
+    "batched_64_ms_per_column": 105.14
+   }
+  },
+  {
+   "1_thread": {
+    "single_column_ms_p50": 24.48,
+    "single_column_ms_p95": 29.88,
+    "batched_64_ms_per_column": 73.74
+   },
+   "all_threads": {
+    "single_column_ms_p50": 12.4,
+    "single_column_ms_p95": 19.07,
+    "batched_64_ms_per_column": 8.93
+   }
+  },
+  {
+   "1_thread": {
+    "single_column_ms_p50": 25.6,
+    "single_column_ms_p95": 122.44,
+    "batched_64_ms_per_column": 147.32
+   },
+   "all_threads": {
+    "single_column_ms_p50": 233.41,
+    "single_column_ms_p95": 335.46,
+    "batched_64_ms_per_column": 96.69
+   }
+  }
+ ],
+ "summary_ms": {
+  "1_thread.single_column_ms_p50": {
+   "min": 24.48,
+   "median": 25.6,
+   "max": 99.43
+  },
+  "1_thread.single_column_ms_p95": {
+   "min": 29.88,
+   "median": 122.44,
+   "max": 176.49
+  },
+  "1_thread.batched_64_ms_per_column": {
+   "min": 73.74,
+   "median": 106.28,
+   "max": 147.32
+  },
+  "all_threads.single_column_ms_p50": {
+   "min": 12.4,
+   "median": 221.11,
+   "max": 233.41
+  },
+  "all_threads.single_column_ms_p95": {
+   "min": 19.07,
+   "median": 319.72,
+   "max": 335.46
+  },
+  "all_threads.batched_64_ms_per_column": {
+   "min": 8.93,
+   "median": 96.69,
+   "max": 105.14
+  }
+ }
+}

@@ -4,14 +4,14 @@
  "systems": {
   "rule_engine": {
    "all": {
-    "correct": 427,
+    "correct": 421,
     "total": 505,
-    "accuracy": 0.8455
+    "accuracy": 0.8337
    },
    "unseen_names": {
-    "correct": 117,
+    "correct": 116,
     "total": 151,
-    "accuracy": 0.7748
+    "accuracy": 0.7682
    },
    "by_source": {
     "chinook": {
@@ -20,14 +20,14 @@
      "accuracy": 0.9623
     },
     "healthchecks": {
-     "correct": 112,
+     "correct": 110,
      "total": 140,
-     "accuracy": 0.8
+     "accuracy": 0.7857
     },
     "koel": {
-     "correct": 11,
+     "correct": 10,
      "total": 19,
-     "accuracy": 0.5789
+     "accuracy": 0.5263
     },
     "sakila": {
      "correct": 59,
@@ -35,22 +35,22 @@
      "accuracy": 0.9219
     },
     "umami": {
-     "correct": 194,
+     "correct": 191,
      "total": 229,
-     "accuracy": 0.8472
+     "accuracy": 0.8341
     }
    }
   },
   "model_fp32": {
    "all": {
-    "correct": 459,
+    "correct": 453,
     "total": 505,
-    "accuracy": 0.9089
+    "accuracy": 0.897
    },
    "unseen_names": {
-    "correct": 117,
+    "correct": 116,
     "total": 151,
-    "accuracy": 0.7748
+    "accuracy": 0.7682
    },
    "by_source": {
     "chinook": {
@@ -59,14 +59,14 @@
      "accuracy": 0.9811
     },
     "healthchecks": {
-     "correct": 117,
+     "correct": 115,
      "total": 140,
-     "accuracy": 0.8357
+     "accuracy": 0.8214
     },
     "koel": {
-     "correct": 18,
+     "correct": 17,
      "total": 19,
-     "accuracy": 0.9474
+     "accuracy": 0.8947
     },
     "sakila": {
      "correct": 61,
@@ -74,22 +74,22 @@
      "accuracy": 0.9531
     },
     "umami": {
-     "correct": 211,
+     "correct": 208,
      "total": 229,
-     "accuracy": 0.9214
+     "accuracy": 0.9083
     }
    }
   },
   "model_int8": {
    "all": {
-    "correct": 462,
+    "correct": 456,
     "total": 505,
-    "accuracy": 0.9149
+    "accuracy": 0.903
    },
    "unseen_names": {
-    "correct": 121,
+    "correct": 120,
     "total": 151,
-    "accuracy": 0.8013
+    "accuracy": 0.7947
    },
    "by_source": {
     "chinook": {
@@ -98,14 +98,14 @@
      "accuracy": 0.9811
     },
     "healthchecks": {
-     "correct": 120,
+     "correct": 118,
      "total": 140,
-     "accuracy": 0.8571
+     "accuracy": 0.8429
     },
     "koel": {
-     "correct": 18,
+     "correct": 17,
      "total": 19,
-     "accuracy": 0.9474
+     "accuracy": 0.8947
     },
     "sakila": {
      "correct": 61,
@@ -113,16 +113,16 @@
      "accuracy": 0.9531
     },
     "umami": {
-     "correct": 211,
+     "correct": 208,
      "total": 229,
-     "accuracy": 0.9214
+     "accuracy": 0.9083
     }
    }
   }
  },
  "per_meaning": {
   "datetime": {
-   "support": 99,
+   "support": 100,
    "rule_engine": 88,
    "model_int8": 93
   },
@@ -137,19 +137,19 @@
    "model_int8": 52
   },
   "status": {
-   "support": 44,
+   "support": 46,
    "rule_engine": 26,
    "model_int8": 39
   },
   "title": {
-   "support": 28,
-   "rule_engine": 24,
-   "model_int8": 28
+   "support": 27,
+   "rule_engine": 23,
+   "model_int8": 27
   },
   "text": {
    "support": 26,
-   "rule_engine": 24,
-   "model_int8": 18
+   "rule_engine": 22,
+   "model_int8": 16
   },
   "integer": {
    "support": 25,
@@ -162,7 +162,7 @@
    "model_int8": 20
   },
   "token": {
-   "support": 17,
+   "support": 18,
    "rule_engine": 4,
    "model_int8": 8
   },
@@ -176,23 +176,23 @@
    "rule_engine": 7,
    "model_int8": 11
   },
-  "description": {
-   "support": 8,
-   "rule_engine": 8,
-   "model_int8": 8
-  },
   "number": {
    "support": 8,
    "rule_engine": 6,
    "model_int8": 4
   },
-  "date": {
-   "support": 7,
-   "rule_engine": 7,
-   "model_int8": 6
-  },
   "money": {
    "support": 7,
+   "rule_engine": 6,
+   "model_int8": 6
+  },
+  "date": {
+   "support": 6,
+   "rule_engine": 6,
+   "model_int8": 5
+  },
+  "description": {
+   "support": 6,
    "rule_engine": 6,
    "model_int8": 6
   },
@@ -657,6 +657,14 @@
   },
   {
    "source": "umami",
+   "table": "annotation",
+   "column": "date",
+   "label": "datetime",
+   "rule_engine": "date",
+   "model_int8": "date"
+  },
+  {
+   "source": "umami",
    "table": "revenue",
    "column": "event_name",
    "label": "status",
@@ -686,6 +694,22 @@
    "label": "token",
    "rule_engine": "text",
    "model_int8": "token"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "name",
+   "label": "status",
+   "rule_engine": "title",
+   "model_int8": "title"
+  },
+  {
+   "source": "umami",
+   "table": "error_event",
+   "column": "message",
+   "label": "text",
+   "rule_engine": "description",
+   "model_int8": "description"
   },
   {
    "source": "umami",
@@ -954,6 +978,14 @@
   {
    "source": "healthchecks",
    "table": "api_tokenbucket",
+   "column": "value",
+   "label": "token",
+   "rule_engine": "text",
+   "model_int8": "text"
+  },
+  {
+   "source": "healthchecks",
+   "table": "api_tokenbucket",
    "column": "tokens",
    "label": "number",
    "rule_engine": "number",
@@ -966,6 +998,14 @@
    "label": "code",
    "rule_engine": "title",
    "model_int8": "title"
+  },
+  {
+   "source": "healthchecks",
+   "table": "logs_record",
+   "column": "message",
+   "label": "text",
+   "rule_engine": "description",
+   "model_int8": "description"
   },
   {
    "source": "healthchecks",
@@ -1034,6 +1074,14 @@
   {
    "source": "koel",
    "table": "agent_conversation_messages",
+   "column": "agent",
+   "label": "status",
+   "rule_engine": "text",
+   "model_int8": "text"
+  },
+  {
+   "source": "koel",
+   "table": "agent_conversation_messages",
    "column": "attachments",
    "label": "json",
    "rule_engine": "text",
@@ -1074,14 +1122,14 @@
  ],
  "cpu_latency_python_ort": {
   "1_thread": {
-   "single_column_ms_p50": 4.2,
-   "single_column_ms_p95": 5.51,
-   "batched_64_ms_per_column": 5.84
+   "single_column_ms_p50": 4.26,
+   "single_column_ms_p95": 6.14,
+   "batched_64_ms_per_column": 6.04
   },
   "all_threads": {
-   "single_column_ms_p50": 2.91,
-   "single_column_ms_p95": 4.5,
-   "batched_64_ms_per_column": 1.39
+   "single_column_ms_p50": 3.26,
+   "single_column_ms_p95": 4.97,
+   "batched_64_ms_per_column": 1.51
   }
  },
  "machine": {

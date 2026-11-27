@@ -2,17 +2,17 @@
  "model": "gr-col-1",
  "variant": "modernbert-base",
  "base": "answerdotai/ModernBERT-base",
- "measured_at": "2026-11-26T23:23:37.841Z",
+ "measured_at": "2026-11-27T00:01:14.801Z",
  "held_out": "eval/heldout.csv (eval/LABELING.md)",
  "cli_pipeline": {
   "held_out_columns": 505,
   "rule_engine": {
-   "correct": 427,
-   "accuracy": 0.8455
+   "correct": 421,
+   "accuracy": 0.8337
   },
   "cli_with_model": {
-   "correct": 460,
-   "accuracy": 0.9109,
+   "correct": 454,
+   "accuracy": 0.899,
    "accept_threshold": 0.5
   },
   "changed_by_model": 68,
@@ -23,36 +23,36 @@
     "total": 53,
     "rule_engine": 51,
     "cli_with_model": 51,
-    "model_ms": 1275
+    "model_ms": 1200
    },
    "sakila": {
     "total": 64,
     "rule_engine": 59,
     "cli_with_model": 61,
-    "model_ms": 1397
+    "model_ms": 1308
    },
    "umami": {
     "total": 229,
-    "rule_engine": 194,
-    "cli_with_model": 210,
-    "model_ms": 2824
+    "rule_engine": 191,
+    "cli_with_model": 207,
+    "model_ms": 23165
    },
    "healthchecks": {
     "total": 140,
-    "rule_engine": 112,
-    "cli_with_model": 122,
-    "model_ms": 2267
+    "rule_engine": 110,
+    "cli_with_model": 120,
+    "model_ms": 16784
    },
    "koel": {
     "total": 19,
-    "rule_engine": 11,
-    "cli_with_model": 16,
-    "model_ms": 1152
+    "rule_engine": 10,
+    "cli_with_model": 15,
+    "model_ms": 4111
    }
   },
   "latency_node": {
    "columns_asked": 505,
-   "total_ms_including_model_load": 8915,
+   "total_ms_including_model_load": 46568,
    "note": "per schema: open the int8 model, tokenize, run every column in batches of 32, on CPU with onnxruntime-node"
   },
   "tokenizer_parity": {
@@ -72,14 +72,14 @@
   "systems": {
    "rule_engine": {
     "all": {
-     "correct": 427,
+     "correct": 421,
      "total": 505,
-     "accuracy": 0.8455
+     "accuracy": 0.8337
     },
     "unseen_names": {
-     "correct": 117,
+     "correct": 116,
      "total": 151,
-     "accuracy": 0.7748
+     "accuracy": 0.7682
     },
     "by_source": {
      "chinook": {
@@ -88,14 +88,14 @@
       "accuracy": 0.9623
      },
      "healthchecks": {
-      "correct": 112,
+      "correct": 110,
       "total": 140,
-      "accuracy": 0.8
+      "accuracy": 0.7857
      },
      "koel": {
-      "correct": 11,
+      "correct": 10,
       "total": 19,
-      "accuracy": 0.5789
+      "accuracy": 0.5263
      },
      "sakila": {
       "correct": 59,
@@ -103,17 +103,56 @@
       "accuracy": 0.9219
      },
      "umami": {
-      "correct": 194,
+      "correct": 191,
       "total": 229,
-      "accuracy": 0.8472
+      "accuracy": 0.8341
      }
     }
    },
    "model_fp32": {
     "all": {
-     "correct": 458,
+     "correct": 452,
      "total": 505,
-     "accuracy": 0.9069
+     "accuracy": 0.895
+    },
+    "unseen_names": {
+     "correct": 118,
+     "total": 151,
+     "accuracy": 0.7815
+    },
+    "by_source": {
+     "chinook": {
+      "correct": 51,
+      "total": 53,
+      "accuracy": 0.9623
+     },
+     "healthchecks": {
+      "correct": 117,
+      "total": 140,
+      "accuracy": 0.8357
+     },
+     "koel": {
+      "correct": 16,
+      "total": 19,
+      "accuracy": 0.8421
+     },
+     "sakila": {
+      "correct": 60,
+      "total": 64,
+      "accuracy": 0.9375
+     },
+     "umami": {
+      "correct": 208,
+      "total": 229,
+      "accuracy": 0.9083
+     }
+    }
+   },
+   "model_int8": {
+    "all": {
+     "correct": 456,
+     "total": 505,
+     "accuracy": 0.903
     },
     "unseen_names": {
      "correct": 119,
@@ -132,48 +171,9 @@
       "accuracy": 0.85
      },
      "koel": {
-      "correct": 17,
+      "correct": 15,
       "total": 19,
-      "accuracy": 0.8947
-     },
-     "sakila": {
-      "correct": 60,
-      "total": 64,
-      "accuracy": 0.9375
-     },
-     "umami": {
-      "correct": 211,
-      "total": 229,
-      "accuracy": 0.9214
-     }
-    }
-   },
-   "model_int8": {
-    "all": {
-     "correct": 462,
-     "total": 505,
-     "accuracy": 0.9149
-    },
-    "unseen_names": {
-     "correct": 120,
-     "total": 151,
-     "accuracy": 0.7947
-    },
-    "by_source": {
-     "chinook": {
-      "correct": 51,
-      "total": 53,
-      "accuracy": 0.9623
-     },
-     "healthchecks": {
-      "correct": 121,
-      "total": 140,
-      "accuracy": 0.8643
-     },
-     "koel": {
-      "correct": 16,
-      "total": 19,
-      "accuracy": 0.8421
+      "accuracy": 0.7895
      },
      "sakila": {
       "correct": 61,
@@ -181,16 +181,16 @@
       "accuracy": 0.9531
      },
      "umami": {
-      "correct": 213,
+      "correct": 210,
       "total": 229,
-      "accuracy": 0.9301
+      "accuracy": 0.917
      }
     }
    }
   },
   "per_meaning": {
    "datetime": {
-    "support": 99,
+    "support": 100,
     "rule_engine": 88,
     "model_int8": 88
    },
@@ -205,19 +205,19 @@
     "model_int8": 52
    },
    "status": {
-    "support": 44,
+    "support": 46,
     "rule_engine": 26,
     "model_int8": 40
    },
    "title": {
-    "support": 28,
-    "rule_engine": 24,
-    "model_int8": 27
+    "support": 27,
+    "rule_engine": 23,
+    "model_int8": 26
    },
    "text": {
     "support": 26,
-    "rule_engine": 24,
-    "model_int8": 19
+    "rule_engine": 22,
+    "model_int8": 17
    },
    "integer": {
     "support": 25,
@@ -230,7 +230,7 @@
     "model_int8": 20
    },
    "token": {
-    "support": 17,
+    "support": 18,
     "rule_engine": 4,
     "model_int8": 13
    },
@@ -244,23 +244,23 @@
     "rule_engine": 7,
     "model_int8": 9
    },
-   "description": {
-    "support": 8,
-    "rule_engine": 8,
-    "model_int8": 8
-   },
    "number": {
     "support": 8,
     "rule_engine": 6,
     "model_int8": 3
    },
-   "date": {
-    "support": 7,
-    "rule_engine": 7,
-    "model_int8": 6
-   },
    "money": {
     "support": 7,
+    "rule_engine": 6,
+    "model_int8": 6
+   },
+   "date": {
+    "support": 6,
+    "rule_engine": 6,
+    "model_int8": 5
+   },
+   "description": {
+    "support": 6,
     "rule_engine": 6,
     "model_int8": 6
    },
@@ -749,6 +749,14 @@
    },
    {
     "source": "umami",
+    "table": "annotation",
+    "column": "date",
+    "label": "datetime",
+    "rule_engine": "date",
+    "model_int8": "date"
+   },
+   {
+    "source": "umami",
     "table": "revenue",
     "column": "event_name",
     "label": "status",
@@ -778,6 +786,22 @@
     "label": "token",
     "rule_engine": "text",
     "model_int8": "token"
+   },
+   {
+    "source": "umami",
+    "table": "error_event",
+    "column": "name",
+    "label": "status",
+    "rule_engine": "title",
+    "model_int8": "title"
+   },
+   {
+    "source": "umami",
+    "table": "error_event",
+    "column": "message",
+    "label": "text",
+    "rule_engine": "description",
+    "model_int8": "description"
    },
    {
     "source": "umami",
@@ -1038,6 +1062,14 @@
    {
     "source": "healthchecks",
     "table": "api_tokenbucket",
+    "column": "value",
+    "label": "token",
+    "rule_engine": "text",
+    "model_int8": "text"
+   },
+   {
+    "source": "healthchecks",
+    "table": "api_tokenbucket",
     "column": "tokens",
     "label": "number",
     "rule_engine": "number",
@@ -1050,6 +1082,14 @@
     "label": "code",
     "rule_engine": "title",
     "model_int8": "title"
+   },
+   {
+    "source": "healthchecks",
+    "table": "logs_record",
+    "column": "message",
+    "label": "text",
+    "rule_engine": "description",
+    "model_int8": "description"
    },
    {
     "source": "healthchecks",
@@ -1118,6 +1158,14 @@
    {
     "source": "koel",
     "table": "agent_conversation_messages",
+    "column": "agent",
+    "label": "status",
+    "rule_engine": "text",
+    "model_int8": "text"
+   },
+   {
+    "source": "koel",
+    "table": "agent_conversation_messages",
     "column": "attachments",
     "label": "json",
     "rule_engine": "text",
@@ -1158,14 +1206,14 @@
   ],
   "cpu_latency_python_ort": {
    "1_thread": {
-    "single_column_ms_p50": 96.06,
-    "single_column_ms_p95": 126.09,
-    "batched_64_ms_per_column": 146.28
+    "single_column_ms_p50": 25.6,
+    "single_column_ms_p95": 122.44,
+    "batched_64_ms_per_column": 147.32
    },
    "all_threads": {
-    "single_column_ms_p50": 224.18,
-    "single_column_ms_p95": 307.56,
-    "batched_64_ms_per_column": 90.75
+    "single_column_ms_p50": 233.41,
+    "single_column_ms_p95": 335.46,
+    "batched_64_ms_per_column": 96.69
    }
   },
   "machine": {
@@ -1179,6 +1227,7 @@
    "base": "answerdotai/ModernBERT-base",
    "quantization": "dynamic int8 weights (onnxruntime)",
    "feature_version": 1,
+   "variant": "modernbert-base",
    "onnx_int8_mb": 150.6
   }
  },

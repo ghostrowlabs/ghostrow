@@ -1,12 +1,12 @@
 {
  "held_out_columns": 505,
  "rule_engine": {
-  "correct": 427,
-  "accuracy": 0.8455
+  "correct": 421,
+  "accuracy": 0.8337
  },
  "cli_with_model": {
-  "correct": 460,
-  "accuracy": 0.9109,
+  "correct": 454,
+  "accuracy": 0.899,
   "accept_threshold": 0.5
  },
  "changed_by_model": 68,
@@ -17,36 +17,36 @@
    "total": 53,
    "rule_engine": 51,
    "cli_with_model": 51,
-   "model_ms": 1275
+   "model_ms": 1200
   },
   "sakila": {
    "total": 64,
    "rule_engine": 59,
    "cli_with_model": 61,
-   "model_ms": 1397
+   "model_ms": 1308
   },
   "umami": {
    "total": 229,
-   "rule_engine": 194,
-   "cli_with_model": 210,
-   "model_ms": 2824
+   "rule_engine": 191,
+   "cli_with_model": 207,
+   "model_ms": 23165
   },
   "healthchecks": {
    "total": 140,
-   "rule_engine": 112,
-   "cli_with_model": 122,
-   "model_ms": 2267
+   "rule_engine": 110,
+   "cli_with_model": 120,
+   "model_ms": 16784
   },
   "koel": {
    "total": 19,
-   "rule_engine": 11,
-   "cli_with_model": 16,
-   "model_ms": 1152
+   "rule_engine": 10,
+   "cli_with_model": 15,
+   "model_ms": 4111
   }
  },
  "latency_node": {
   "columns_asked": 505,
-  "total_ms_including_model_load": 8915,
+  "total_ms_including_model_load": 46568,
   "note": "per schema: open the int8 model, tokenize, run every column in batches of 32, on CPU with onnxruntime-node"
  },
  "tokenizer_parity": {

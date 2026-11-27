@@ -30,6 +30,8 @@ realistic values for the column. When two fit, pick by what the real column hold
 - `money` for amounts of money, including rental rates; `percent` for shares out of 100.
 - Postgres `interval` columns have no matching meaning and are `text`.
 
-Labels were written by reviewing every column with the rule engine's proposal visible, so
-any bias favours the rule engine baseline, not the model. Rows where the label differs from
+Labels were written by one labeller (an AI assistant, Claude, working with the Ghostrow team)
+reviewing every column with the rule engine's proposal visible, so any bias favours the rule
+engine baseline. A second pass over all 505 columns changed six labels that broke this guide;
+the first-pass labels are kept in `heldout-first-pass.csv`. No independent human review yet. Rows where the label differs from
 the rule engine are marked in `heldout.csv` for review.

@@ -223,7 +223,7 @@ umami,report,created_at,datetime,Timestamptz(6),datetime,datetime,yes
 umami,report,updated_at,datetime,Timestamptz(6),datetime,datetime,yes
 umami,annotation,annotation_id,uuid,Uuid,uuid,uuid,yes
 umami,annotation,user_id,uuid,Uuid,uuid,uuid,yes
-umami,annotation,date,datetime,Timestamptz(6),date,date,yes
+umami,annotation,date,datetime,Timestamptz(6),datetime,date,no
 umami,annotation,all_day,boolean,Boolean,boolean,boolean,yes
 umami,annotation,note,text,VarChar(500),description,description,yes
 umami,annotation,created_at,datetime,Timestamptz(6),datetime,datetime,yes
@@ -330,8 +330,8 @@ umami,error_event,session_id,uuid,Uuid,uuid,uuid,yes
 umami,error_event,visit_id,uuid,Uuid,uuid,uuid,yes
 umami,error_event,created_at,datetime,Timestamptz(6),datetime,datetime,yes
 umami,error_event,received_at,datetime,Timestamptz(6),datetime,datetime,yes
-umami,error_event,name,text,VarChar(200),title,title,yes
-umami,error_event,message,text,VarChar(2000),description,description,yes
+umami,error_event,name,text,VarChar(200),status,title,no
+umami,error_event,message,text,VarChar(2000),text,description,no
 umami,error_event,stack,text,Text,text,text,yes
 umami,error_event,frames,json,Json,json,json,yes
 umami,error_event,tags,json,Json,json,json,yes
@@ -463,7 +463,7 @@ healthchecks,api_flip,old_status,enum,varchar(8),status,status,yes
 healthchecks,api_flip,new_status,enum,varchar(8),status,status,yes
 healthchecks,api_flip,reason,enum,varchar(8),status,status,yes
 healthchecks,api_tokenbucket,id,integer,bigint,id,id,yes
-healthchecks,api_tokenbucket,value,text,varchar(80),text,text,yes
+healthchecks,api_tokenbucket,value,text,varchar(80),token,text,no
 healthchecks,api_tokenbucket,tokens,real,double precision,number,number,yes
 healthchecks,api_tokenbucket,updated,datetime,timestamp,datetime,datetime,yes
 healthchecks,logs_record,id,integer,bigint,id,id,yes
@@ -471,7 +471,7 @@ healthchecks,logs_record,created,datetime,timestamp,datetime,datetime,yes
 healthchecks,logs_record,host,text,varchar(50),domain,domain,yes
 healthchecks,logs_record,name,text,varchar(100),code,title,no
 healthchecks,logs_record,level,integer,smallint,status,status,yes
-healthchecks,logs_record,message,text,text,description,description,yes
+healthchecks,logs_record,message,text,text,text,description,no
 healthchecks,logs_record,traceback,text,text,text,text,yes
 healthchecks,payments_subscription,id,integer,bigint,id,id,yes
 healthchecks,payments_subscription,customer_id,text,varchar(36),code,text,no
@@ -493,7 +493,7 @@ koel,agent_conversations,updated_at,datetime,timestamp,datetime,datetime,yes
 koel,agent_conversation_messages,id,text,varchar(36),uuid,id,no
 koel,agent_conversation_messages,conversation_id,text,varchar(36),uuid,text,no
 koel,agent_conversation_messages,user_id,integer,bigint unsigned,integer,integer,yes
-koel,agent_conversation_messages,agent,text,varchar(255),text,text,yes
+koel,agent_conversation_messages,agent,text,varchar(255),status,text,no
 koel,agent_conversation_messages,role,text,varchar(25),status,status,yes
 koel,agent_conversation_messages,content,text,text,description,description,yes
 koel,agent_conversation_messages,attachments,text,text,json,text,no

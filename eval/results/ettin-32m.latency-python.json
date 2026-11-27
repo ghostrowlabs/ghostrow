@@ -1,0 +1,74 @@
+{
+ "variant": "ettin-32m",
+ "note": "three runs of eval/model_eval.py, alternating the two models, on a shared Intel Core i7-13700K (other processes running). Python onnxruntime, int8, 200 single columns and all 505 in batches of 64.",
+ "runs": [
+  {
+   "1_thread": {
+    "single_column_ms_p50": 3.64,
+    "single_column_ms_p95": 4.51,
+    "batched_64_ms_per_column": 4.93
+   },
+   "all_threads": {
+    "single_column_ms_p50": 2.94,
+    "single_column_ms_p95": 3.76,
+    "batched_64_ms_per_column": 1.71
+   }
+  },
+  {
+   "1_thread": {
+    "single_column_ms_p50": 4.07,
+    "single_column_ms_p95": 5.12,
+    "batched_64_ms_per_column": 5.53
+   },
+   "all_threads": {
+    "single_column_ms_p50": 3.22,
+    "single_column_ms_p95": 5.13,
+    "batched_64_ms_per_column": 1.54
+   }
+  },
+  {
+   "1_thread": {
+    "single_column_ms_p50": 4.26,
+    "single_column_ms_p95": 6.14,
+    "batched_64_ms_per_column": 6.04
+   },
+   "all_threads": {
+    "single_column_ms_p50": 3.26,
+    "single_column_ms_p95": 4.97,
+    "batched_64_ms_per_column": 1.51
+   }
+  }
+ ],
+ "summary_ms": {
+  "1_thread.single_column_ms_p50": {
+   "min": 3.64,
+   "median": 4.07,
+   "max": 4.26
+  },
+  "1_thread.single_column_ms_p95": {
+   "min": 4.51,
+   "median": 5.12,
+   "max": 6.14
+  },
+  "1_thread.batched_64_ms_per_column": {
+   "min": 4.93,
+   "median": 5.53,
+   "max": 6.04
+  },
+  "all_threads.single_column_ms_p50": {
+   "min": 2.94,
+   "median": 3.22,
+   "max": 3.26
+  },
+  "all_threads.single_column_ms_p95": {
+   "min": 3.76,
+   "median": 4.97,
+   "max": 5.13
+  },
+  "all_threads.batched_64_ms_per_column": {
+   "min": 1.51,
+   "median": 1.54,
+   "max": 1.71
+  }
+ }
+}
