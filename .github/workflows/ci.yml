@@ -28,3 +28,32 @@ jobs:
       - run: npm test
         env:
           MYSQL_TESTS: ${{ runner.os == 'Linux' && '1' || '' }}
+
+  # SQL Server 2022 in a container, so the live connector test (test/integration/sqlserver.test.ts)
+  # runs on every push instead of only when someone sets MSSQL_TEST_URL by hand.
+  sqlserver:
+    name: SQL Server 2022 (live)
+    runs-on: ubuntu-latest
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: Ghostrow-CI-1
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Ghostrow-CI-1 -Q 'SELECT 1' -b"
+          --health-interval 10s --health-timeout 5s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Create the test database
+        run: docker exec ${{ job.services.mssql.id }} /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Ghostrow-CI-1 -Q "CREATE DATABASE ghostrow_test" -b
+      - run: npx vitest run test/integration/sqlserver.test.ts
+        env:
+          MSSQL_TEST_URL: mssql://sa:Ghostrow-CI-1@localhost:1433/ghostrow_test
