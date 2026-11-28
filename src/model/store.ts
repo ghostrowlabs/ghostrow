@@ -5,6 +5,10 @@ import { filesFor, MODEL_KEYS, platformId, verifyManifest, type Manifest } from 
 
 /** The model Ghostrow uses by default, and where its releases live. */
 export const DEFAULT_MODEL = "gr-col-1";
+/** The optional rule-proposal model (cross-column and code-derived rules). */
+export const RULE_MODEL = "gr-rules-1";
+export const MODELS = [DEFAULT_MODEL, RULE_MODEL] as const;
+const TASK: Record<string, Manifest["task"]> = { [DEFAULT_MODEL]: "column-meaning", [RULE_MODEL]: "rule-proposal" };
 export const MODEL_RELEASE_BASE = "https://github.com/ghostrowlabs/ghostrow/releases/download";
 
 /** `GHOSTROW_MODEL_URL` points pulls at another folder of release files (a test server, a mirror). */
@@ -41,7 +45,7 @@ export function installedModel(name = DEFAULT_MODEL, keys: Record<string, string
   const mf = join(dir, "manifest.grm");
   if (!existsSync(mf)) return null;
   const v = verifyManifest(readFileSync(mf, "utf8"), keys);
-  if (!v.ok) return null;
+  if (!v.ok || v.manifest.name !== name || (TASK[name] && v.manifest.task !== TASK[name])) return null;
   const files = filesFor(v.manifest);
   const present = (f: (typeof files)[number]) => existsSync(f.role === "runtime" ? join(runtimeDir(name), f.install_as ?? f.name) : join(dir, f.name));
   if (!files.filter((f) => f.role !== "runtime").every(present)) return null;

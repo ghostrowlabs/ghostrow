@@ -1,0 +1,1746 @@
+{"id": "s0.receipts_applied", "output": "order creation_date <= changed_at"}
+{"id": "s0.shop_bills", "output": "order bill_date <= due_date\norder bill_date <= settled_at\norder date_created <= deleted_at\nsum items_total = bill_items.line_value"}
+{"id": "s0.bill_items", "output": "order created_on <= last_modified"}
+{"id": "s1.Customers", "output": "order DateCreated <= Updated"}
+{"id": "s1.Cart", "output": "order CreatedAt <= LastModified\nsum ItemsTotal = CartItems.TotalAmount"}
+{"id": "s1.CartItems", "output": "order CreationDate <= UpdatedAt"}
+{"id": "s1.PurchaseOrders", "output": "sum Subtotal = PurchaseOrderLines.LinePrice"}
+{"id": "s1.PurchaseOrderLines", "output": "product LinePrice = QuantityOrdered * PriceEach"}
+{"id": "s2.batches", "output": "order creationDate <= dateModified\norder openingBalance <= closingBalance\norder startTime <= endTime\norder startedAt <= finishedAt"}
+{"id": "s2.properties", "output": "order createdOn <= lastModified"}
+{"id": "s2.Member", "output": "order birthDate <= deathDate\norder bornOn <= diedOn"}
+{"id": "s2.customers", "output": "order createdAt <= deletedAt\norder createdAt <= updatedAt"}
+{"id": "s2.Campaigns", "output": "order createdOn <= dateModified\norder startsAt <= endsAt\norder validFrom <= validTo"}
+{"id": "s3.service", "output": "order created_at <= date_modified"}
+{"id": "s3.allocations", "output": "order inserted_at <= deleted_at\norder inserted_at <= updated_at"}
+{"id": "s3.tbl_credit_notes", "output": "order created_at <= confirmed_at\norder credit_date <= due_at\norder credit_date <= paid_on\nsum lines_total = credit_note_lines.ext_price"}
+{"id": "s3.credit_note_lines", "output": "order created_at <= date_modified\ncopy item_price = service.list_price"}
+{"id": "s4.Members", "output": "none"}
+{"id": "s4.absences", "output": "order checkoutDate <= dueDate\norder salaryMin <= salaryMax"}
+{"id": "s5.variants", "output": "order insertedAt <= dateModified"}
+{"id": "s5.Allocations", "output": "none"}
+{"id": "s5.crm_bills", "output": "order billDate <= dueAt\norder billDate <= settledAt\norder insertedAt <= removedAt\norder insertedAt <= updatedAt\nsum amountPaid = Allocations.amountPaid\nsum netTotal = bill_lines.subtotal"}
+{"id": "s5.bill_lines", "output": "order createdAt <= updatedAt\ncopy pricePerUnit = variants.price"}
+{"id": "s5.order", "output": "order createdOn <= deletedAt\norder createdOn <= lastModified\norder dispatchedAt <= deliveryDate\norder paymentDate <= dispatchedAt\norder submittedAt <= paymentDate\nsum netAmount = OrderProducts.itemTotal"}
+{"id": "s5.OrderProducts", "output": "product itemTotal = units * unitPrice"}
+{"id": "s5.MenuItems", "output": "order createdAt <= updatedAt"}
+{"id": "s5.WorkOrders", "output": "none"}
+{"id": "s5.work_order_parts", "output": "none"}
+{"id": "s6.rentals", "output": "order creation_date <= archived_at\norder creation_date <= date_modified\norder start_date <= end_date"}
+{"id": "s6.staff", "output": "none"}
+{"id": "s6.deposits_batches", "output": "order created_at <= changed_at\norder created_at <= deleted_at\norder period_start <= to_date\nsum net_amount = settlement_item.gross_amount"}
+{"id": "s6.settlement_item", "output": "none"}
+{"id": "s6.crm_expense_report", "output": "order created_at <= changed_at\nsum total = expense_items.cost"}
+{"id": "s6.expense_items", "output": "none"}
+{"id": "s7.reviews", "output": "order created_at <= date_modified"}
+{"id": "s7.addres", "output": "order creation_date <= changed_at"}
+{"id": "s8.patients", "output": "order birth_date <= date_of_birth\norder created <= deleted_at\norder created <= updated\norder date_of_birth <= date_of_death\norder low <= high\norder death_date <= date_of_death"}
+{"id": "s8.crm_timesheets", "output": "sum total_hours = timesheet_lines.hours"}
+{"id": "s8.timesheet_lines", "output": "order created_at <= updated"}
+{"id": "s8.enrollment", "output": "order admitted_at <= discharged_at\norder term_start <= term_end\nproduct charge = duration_hours * nightly_rate"}
+{"id": "s9.Variants", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s9.CreditNotes", "output": "order createdAt <= confirmedAt\norder createdAt <= modifiedAt\norder creditDate <= settledAt\nsum subtotal = CreditNoteItems.subtotal\nsum totalQuantity = CreditNoteItems.orderQty"}
+{"id": "s9.CreditNoteItems", "output": "product subtotal = orderQty * unitRate\ncopy unitRate = Variants.unitPrice"}
+{"id": "s10.account", "output": "none"}
+{"id": "s10.salary_slips", "output": "sum gross_pay = payroll_lines.value"}
+{"id": "s10.payroll_lines", "output": "none"}
+{"id": "s10.customers", "output": "order inserted_at <= updated_at"}
+{"id": "s10.tbl_credit_note", "output": "order issued_at <= due_on\norder issued_at <= paid_at\nsum items_total = credit_note_lines.subtotal"}
+{"id": "s10.credit_note_lines", "output": "copy currency = tbl_credit_note.currency\nmin qty 1\nmax qty 999"}
+{"id": "s11.merchants", "output": "none"}
+{"id": "s11.expense_claim", "output": "order sent_at <= processed_at\norder start_date <= end_date"}
+{"id": "s11.expense_item", "output": "none"}
+{"id": "s12.reviews", "output": "order start_date <= end_date\nmin rating 1\nmin seats 1\nmin stars 1\nmin weight_kg 0\nmax rating 10\nmax seats 8\nmax stars 5\nminlen sku 8\nmaxlen email 320\nmaxlen sku 16\nvalues status active|inactive|suspended"}
+{"id": "s13.Licenses", "output": "order CreatedAt <= RemovedAt\norder CreatedAt <= Updated\norder CurrentPeriodStart <= CurrentPeriodEnd\norder StartDate <= EndDate"}
+{"id": "s14.venues", "output": "none"}
+{"id": "s14.assignments", "output": "order joined_at <= left_at"}
+{"id": "s14.product_variants", "output": "none"}
+{"id": "s14.payment", "output": "order creation_date <= changed_at"}
+{"id": "s14.quotes", "output": "order created_on <= date_modified\nsum net_total = estimate_lines.line_amount"}
+{"id": "s14.estimate_lines", "output": "product line_amount = order_qty * unit_rate\ncopy unit_rate = product_variants.standard_cost\nmin order_qty 1\nmax order_qty 10000"}
+{"id": "s15.Job", "output": "order CreatedAt <= LastModified\nmin Year 2000\nmax Year 2099\nvalues Role user|admin\nvalues Status active|inactive|suspended"}
+{"id": "s15.Users", "output": "order CreatedAt <= DateModified"}
+{"id": "s15.Shifts", "output": "order RegistrationOpensAt <= RegistrationClosesAt\norder StartsAt <= EndsAt\nproduct Amount = Days * HourlyRate"}
+{"id": "s16.PayStubs", "output": "order submittedAt <= processedAt\nsum totalEarnings = payslip_lines.amount"}
+{"id": "s16.payslip_lines", "output": "product pay = amount * rate"}
+{"id": "s17.Tags", "output": "order CreatedAt <= UpdatedAt"}
+{"id": "s17.Clients", "output": "order CreatedAt <= ChangedAt"}
+{"id": "s17.MenuItems", "output": "none"}
+{"id": "s17.Reversal", "output": "order RequestedAt <= RefundedAt"}
+{"id": "s17.Allocation", "output": "order InsertedAt <= UpdatedAt"}
+{"id": "s17.Bill", "output": "order BillDate <= DueAt\norder BillDate <= PaidAt\norder CreatedAt <= LastModified\nsum AmountPaid = Allocation.AmountPaid\nsum NetTotal = BillLines.Subtotal\nsum UnitsTotal = BillLines.OrderQty"}
+{"id": "s17.BillLines", "output": "product Subtotal = OrderQty * EachPrice\ncopy EachPrice = MenuItems.ListPrice\nmax OrderQty 10000"}
+{"id": "s18.accounts", "output": "order created_at <= updated_at"}
+{"id": "s18.borrowing", "output": "order created_at <= last_modified\norder rented_at <= returned_at"}
+{"id": "s19.clients", "output": "order created_on <= last_modified"}
+{"id": "s19.skus", "output": "none"}
+{"id": "s19.quotes", "output": "order quote_date <= settled_at\norder quote_date <= valid_until\nsum total_due = tbl_quote_lines.total"}
+{"id": "s19.tbl_quote_lines", "output": "product total = num_units * unit_rate\ncopy unit_rate = skus.default_price"}
+{"id": "s20.issues", "output": "order createdAt <= firstResponseAt\norder created <= changedAt\norder resolvedAt <= closedAt\nproduct totalCost = nights * rate"}
+{"id": "s21.venues", "output": "none"}
+{"id": "s21.policies", "output": "order start_date <= end_date"}
+{"id": "s22.incidents", "output": "order created_at <= first_response_at\norder created_at <= updated_at\norder opened_on <= closed_on"}
+{"id": "s23.listings", "output": "order creation_date <= updated_at\nmin duration_minutes 1\nmin seats 1\nmin weight_kg 0\nmax duration_minutes 1440\nmax seats 50\nmaxlen bio 1000\nmaxlen postal_code 10\nvalues size small|medium|large"}
+{"id": "s23.cour", "output": "min capacity 1\nmin stars 0\nmax capacity 1000\nmax stars 5\nminlen password 8\nminlen postal_code 4\nvalues status pending|paid|failed|refunded"}
+{"id": "s24.Variant", "output": "none"}
+{"id": "s24.transactions", "output": "none"}
+{"id": "s24.Bills", "output": "order billDate <= paymentDue\norder insertedAt <= confirmedAt\nsum netAmount = bill_lines.amount\nsum paidTotal = transactions.value"}
+{"id": "s24.bill_lines", "output": "copy rate = Variant.priceAmount"}
+{"id": "s25.core_services", "output": "order created_at <= date_modified\norder min_order_quantity <= max_order_quantity"}
+{"id": "s25.payment", "output": "order date_created <= archived_at"}
+{"id": "s25.invoice", "output": "order inserted_at <= confirmed_at\norder issued_at <= due_on\norder issued_at <= settled_at\nsum sub_total = line_items.line_total"}
+{"id": "s25.line_items", "output": "order creation_date <= updated_at\nproduct line_total = quantity * unit_cost\nmin quantity 1"}
+{"id": "s26.deposits_batches", "output": "order created_on <= changed_at\norder sent_at <= approved_at\nsum total_amount = deposit_items.gross_amount"}
+{"id": "s26.deposit_items", "output": "order creation_date <= archived_at\norder creation_date <= modified_at"}
+{"id": "s26.inventory_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s26.carts", "output": "sum amount_total = cart_item.total_price"}
+{"id": "s26.cart_item", "output": "order date_created <= archived_at\norder date_created <= changed_at\ncopy currency_code = carts.currency_code\ncopy item_price = inventory_items.default_price\nmin count 1"}
+{"id": "s26.listings", "output": "order date_created <= modified_at\norder date_created <= removed_at\norder min_price <= max_price\nmin seats 1\nmax seats 50\nminlen display_name 1\nminlen password 12\nmaxlen phone 15\nlen country 2"}
+{"id": "s27.credit_notes", "output": "order created_at <= modified_at\norder issued_at <= payment_due"}
+{"id": "s27.core_credit_note_items", "output": "order inserted_at <= archived_at\norder inserted_at <= modified_at"}
+{"id": "s28.goods", "output": "none"}
+{"id": "s28.transactions", "output": "order inserted_at <= updated"}
+{"id": "s28.purchase_order", "output": "order created_at <= confirmed_at\norder created_at <= updated\norder raised_at <= paid_at\nsum total_quantity = core_po_items.unit_count"}
+{"id": "s28.core_po_items", "output": "copy price_per_unit = goods.sale_price\nmin unit_count 1\nmax unit_count 1000"}
+{"id": "s28.invoices", "output": "order created_at <= modified_at\norder created_at <= removed_at\norder issued_on <= due_at"}
+{"id": "s28.invoice_lines", "output": "none"}
+{"id": "s28.accounts", "output": "none"}
+{"id": "s28.weekly_timesheet", "output": "order from_date <= end_date\norder inserted_at <= last_modified\nsum total_hours = time_entries.worked_hours"}
+{"id": "s28.time_entries", "output": "order created <= updated_at\nproduct pay = worked_hours * unit_rate"}
+{"id": "s29.customer", "output": "order created_on <= updated_at"}
+{"id": "s29.bills", "output": "order bill_date <= settled_at\nsum lines_total = bill_items.extended_price"}
+{"id": "s29.bill_items", "output": "product extended_price = order_qty * price_per_unit"}
+{"id": "s29.variants", "output": "none"}
+{"id": "s29.erp_invoice", "output": "order issued_on <= due_at\norder issued_on <= paid_at\nsum items_total = invoice_details.ext_price\nsum num_items = invoice_details.qty"}
+{"id": "s29.invoice_details", "output": "min qty 1\nmax qty 999"}
+{"id": "s30.players", "output": "order created_at <= date_modified\norder min_age <= max_age\nmin priority 1\nmin weight_kg 0\nmax priority 10\nminlen postal_code 4\nmaxlen postal_code 10"}
+{"id": "s30.plans_user", "output": "order activated_at <= expires_at\norder start_date <= end_date"}
+{"id": "s31.variant", "output": "none"}
+{"id": "s31.chargebacks", "output": "order requested_at <= completed_at"}
+{"id": "s31.transactions", "output": "none"}
+{"id": "s31.carts", "output": "sum items_total = cart_lines.subtotal\nsum paid_amount = transactions.paid_amount\nsum total_quantity = cart_lines.unit_count"}
+{"id": "s31.cart_lines", "output": "min unit_count 1\nmax unit_count 99"}
+{"id": "s31.members", "output": "none"}
+{"id": "s31.app_ledger_batches", "output": "order week_start <= to_date\nsum debit_total = postings.debit"}
+{"id": "s31.postings", "output": "order inserted_at <= updated_at"}
+{"id": "s32.vehicle", "output": "order date_created <= modified_at\nmin year 2000\nmax year 2100\nminlen postal_code 5\nminlen sku 6\nmaxlen postal_code 10\nmaxlen sku 16\nvalues gender M|F|X\nvalues size XS|S|M|L|XL\nvalues status pending|approved|rejected"}
+{"id": "s32.support_requests", "output": "order created_at <= last_modified\norder low <= high\norder resolved_at <= closed_at"}
+{"id": "s32.member", "output": "order date_created <= modified_at"}
+{"id": "s32.leave_request", "output": "order from_date <= to_date"}
+{"id": "s33.shipments", "output": "order inserted_at <= last_modified\norder sent_at <= processed_at\nsum gross_weight = packages.weight_kg"}
+{"id": "s33.packages", "output": "none"}
+{"id": "s33.classes", "output": "order created_at <= updated_at\norder opening_balance <= closing_balance\norder start_at <= end_at"}
+{"id": "s33.inventory_items", "output": "none"}
+{"id": "s33.invoices", "output": "order created_at <= archived_at\norder created_at <= confirmed_at\norder created_at <= date_modified\norder invoice_date <= due_on\nsum subtotal = invoice_details.line_price"}
+{"id": "s33.invoice_details", "output": "none"}
+{"id": "s34.Rooms", "output": "none"}
+{"id": "s34.Voyage", "output": "order MinPrice <= MaxPrice\norder PickupAt <= DropoffAt\norder StartedAt <= EndedAt"}
+{"id": "s34.CorePolicy", "output": "order CoverageStart <= CoverageEnd\norder LeaseStart <= LeaseEnd"}
+{"id": "s34.User", "output": "order Created <= DeletedAt\norder Created <= LastModified"}
+{"id": "s34.Goods", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s34.Bill", "output": "order BilledAt <= PaymentDue"}
+{"id": "s34.BillItems", "output": "copy UnitPrice = Goods.SalePrice"}
+{"id": "s35.attachments", "output": "none"}
+{"id": "s35.erp_parts", "output": "none"}
+{"id": "s35.carts", "output": "order created <= changed_at"}
+{"id": "s35.cart_items", "output": "none"}
+{"id": "s36.shop_stays", "output": "order arrival_date <= departure_date\norder checkin_at <= checkout_at\norder creation_date <= date_modified\norder creation_date <= removed_at\norder lower_bound <= upper_bound"}
+{"id": "s36.packages_batches", "output": "order period_start <= period_end\nsum weight_total = shipment_item.weight"}
+{"id": "s36.shipment_item", "output": "none"}
+{"id": "s36.core_invoices", "output": "sum total_quantity = invoice_details.units"}
+{"id": "s36.invoice_details", "output": "min units 1"}
+{"id": "s37.notification", "output": "order created_at <= modified_at"}
+{"id": "s37.applications", "output": "order starts_at <= ends_at\nmin discount_percent 0\nmin price 0\nmax discount_percent 100\nminlen slug 3\nmaxlen display_name 64\nmaxlen phone 20\nmaxlen slug 100\nvalues status active|inactive|suspended"}
+{"id": "s38.good", "output": "none"}
+{"id": "s38.work_orders", "output": "none"}
+{"id": "s38.work_order_lines", "output": "none"}
+{"id": "s38.venue", "output": "order creation_date <= last_modified"}
+{"id": "s38.app_survey", "output": "order opens_at <= closes_at\norder published_at <= unpublished_at"}
+{"id": "s38.services", "output": "none"}
+{"id": "s38.quotes", "output": "order quote_date <= expires_on"}
+{"id": "s38.quote_lines", "output": "copy each_price = services.standard_cost"}
+{"id": "s39.posts", "output": "order creation_date <= modified_at"}
+{"id": "s40.reviews", "output": "order created_on <= changed_at"}
+{"id": "s40.article", "output": "none"}
+{"id": "s40.carts", "output": "sum num_items = cart_items.unit_count"}
+{"id": "s40.cart_items", "output": "product subtotal = unit_count * each_price\ncopy each_price = article.standard_cost\nmin unit_count 1"}
+{"id": "s40.accounts", "output": "order min_age <= max_age\nmin quantity 0\nmin weight_kg 0\nmax quantity 100\nmaxlen display_name 64\nmaxlen email 254"}
+{"id": "s41.Properties", "output": "order CreatedAt <= ChangedAt"}
+{"id": "s41.Lea", "output": "order InsertedAt <= UpdatedAt\norder EffectiveDate <= ExpirationDate\norder SignedOn <= EffectiveDate"}
+{"id": "s41.PositionsHeld", "output": "order DateCreated <= Updated\norder HiredOn <= LeftOn\norder StartDate <= EndDate\nproduct Total = Days * RatePerDay"}
+{"id": "s41.CrmInventoryItems", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s41.Cart", "output": "order CreationDate <= ConfirmedAt\norder CreationDate <= LastModified\nsum TotalItems = TblCartLine.Units"}
+{"id": "s41.TblCartLine", "output": "order CreatedAt <= LastModified"}
+{"id": "s42.Buyers", "output": "order createdOn <= modifiedAt"}
+{"id": "s42.crm_variant", "output": "order created <= changedAt"}
+{"id": "s42.ReceiptsApplied", "output": "order createdAt <= updatedAt"}
+{"id": "s42.sales", "output": "sum amountPaid = ReceiptsApplied.amountPaid\nsum numItems = sales_details.unitCount\nsum itemsTotal = sales_details.netAmount"}
+{"id": "s42.sales_details", "output": "product netAmount = unitCount * priceEach\ncopy priceEach = crm_variant.basePrice"}
+{"id": "s42.ShopCustomers", "output": "order createdAt <= updatedAt"}
+{"id": "s42.Goods", "output": "none"}
+{"id": "s42.allocations", "output": "order dateCreated <= lastModified"}
+{"id": "s42.sale", "output": "sum totalDue = sale_lines.totalAmount"}
+{"id": "s42.sale_lines", "output": "copy eachPrice = Goods.priceAmount\nmin count 1\nmax count 10000"}
+{"id": "s43.Merchant", "output": "none"}
+{"id": "s43.expense_reports", "output": "order weekStart <= endDate\nsum total = claim_items.amount"}
+{"id": "s43.claim_items", "output": "none"}
+{"id": "s44.audit_logs", "output": "none"}
+{"id": "s44.artists", "output": "order bornOn <= diedOn\norder dateOfBirth <= dateOfDeath"}
+{"id": "s44.CrmPet", "output": "min capacity 1\nmin discountPercent 0\nmin price 0\nmin rating 1\nmin seats 1\nmin weightKg 0\nmax capacity 1000\nmax discountPercent 100\nmax rating 5\nmax seats 8\nvalues status pending|paid|failed|refunded"}
+{"id": "s45.clients", "output": "none"}
+{"id": "s45.variant", "output": "none"}
+{"id": "s45.reversal", "output": "order requested_at <= completed_at"}
+{"id": "s45.transactions", "output": "order created_at <= updated_at"}
+{"id": "s45.invoices", "output": "order created_on <= changed_at\norder invoice_date <= due_on\nsum paid_total = transactions.amount_paid"}
+{"id": "s45.invoice_lines", "output": "copy currency = invoices.currency"}
+{"id": "s45.accounts", "output": "order date_created <= last_modified"}
+{"id": "s45.parts", "output": "none"}
+{"id": "s45.payments", "output": "none"}
+{"id": "s45.quote", "output": "order quoted_at <= expiry_date\norder quoted_at <= paid_on\nsum total_amount = quote_items.subtotal\nsum units_total = quote_items.num_units"}
+{"id": "s45.quote_items", "output": "copy item_price = parts.unit_price\nmin num_units 1\nmax num_units 10000"}
+{"id": "s45.app_customers", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "s45.tbl_listings", "output": "order min_length <= max_length\norder published_at <= unpublished_at"}
+{"id": "s46.shop_catalog_items", "output": "order inserted_at <= last_modified\norder min_order_quantity <= max_order_quantity"}
+{"id": "s46.bills", "output": "order billed_at <= due_on\norder created_at <= last_modified\nsum net_total = bill_lines.total_price"}
+{"id": "s46.bill_lines", "output": "product total_price = count * unit_price\ncopy unit_price = shop_catalog_items.default_price"}
+{"id": "s46.customers", "output": "order creation_date <= updated_at"}
+{"id": "s46.items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s46.purchase_order", "output": "order ordered_on <= canceled_at\norder ordered_on <= payment_date\norder payment_date <= shipped_at\norder shipped_at <= delivered_at\nsum net_total = purchase_order_items.line_value"}
+{"id": "s46.purchase_order_items", "output": "order date_created <= modified_at"}
+{"id": "s46.subscriptions", "output": "order trial_start <= trial_end"}
+{"id": "s47.clients", "output": "order created_at <= date_modified"}
+{"id": "s47.item", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s47.orders", "output": "order created <= date_modified"}
+{"id": "s47.order_products", "output": "order inserted_at <= modified_at\nproduct subtotal = units * unit_cost\ncopy currency = orders.currency\ncopy unit_cost = item.price_amount\nmin units 1\nmax units 100"}
+{"id": "s47.timesheets", "output": "sum total_hours = timesheet_lines.worked_hours"}
+{"id": "s47.timesheet_lines", "output": "none"}
+{"id": "s48.carts", "output": "sum subTotal = tbl_cart_line.amountTotal"}
+{"id": "s48.tbl_cart_line", "output": "none"}
+{"id": "s49.packages_batches", "output": "order creation_date <= modified_at\nsum gross_weight = shipment_items.weight_kg"}
+{"id": "s49.shipment_items", "output": "none"}
+{"id": "s50.inventory_items", "output": "order inserted_at <= last_modified"}
+{"id": "s50.invoices", "output": "order invoice_date <= due_date\norder invoice_date <= paid_on\nsum sub_total = invoice_items.ext_price"}
+{"id": "s50.invoice_items", "output": "copy unit_price = inventory_items.retail_price"}
+{"id": "s50.bill", "output": "order bill_date <= due_date\norder created_at <= changed_at\nsum subtotal = bill_items.total_amount"}
+{"id": "s50.bill_items", "output": "product total_amount = units * each_price\nmin units 1\nmax units 999"}
+{"id": "s50.members", "output": "order inserted_at <= modified_at"}
+{"id": "s50.catalog_items", "output": "none"}
+{"id": "s50.orders", "output": "order created_at <= confirmed_at\norder created_at <= updated_at\norder submitted_at <= paid_at\nsum sub_total = order_line.item_total"}
+{"id": "s50.order_line", "output": "copy each_price = catalog_items.price_amount"}
+{"id": "s51.vehicles", "output": "none"}
+{"id": "s51.issues", "output": "order min_length <= max_length\norder reported_at <= acknowledged_at"}
+{"id": "s51.services", "output": "order inserted_at <= date_modified"}
+{"id": "s51.work_orders", "output": "order inserted_at <= confirmed_at\norder inserted_at <= last_modified\nsum items_total = work_order_lines.total_price"}
+{"id": "s51.work_order_lines", "output": "copy currency_code = work_orders.currency_code\ncopy unit_cost = services.price_amount"}
+{"id": "s51.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s51.allocation", "output": "none"}
+{"id": "s51.carts", "output": "order inserted_at <= updated_at"}
+{"id": "s51.cart_lines", "output": "none"}
+{"id": "s52.applications", "output": "order opens_at <= closes_at\nmin seats 1\nmax seats 50\nmaxlen slug 100\nlen currency 3"}
+{"id": "s52.customers", "output": "none"}
+{"id": "s52.product", "output": "order created_at <= updated_at"}
+{"id": "s52.receipts", "output": "order date_created <= confirmed_at\norder date_created <= removed_at"}
+{"id": "s52.receipt_items", "output": "order created_at <= updated_at\ncopy currency_code = receipts.currency_code\ncopy price_per_unit = product.default_price"}
+{"id": "s52.countries", "output": "order inserted_at <= date_modified"}
+{"id": "s53.Favorites", "output": "none"}
+{"id": "s53.jobs", "output": "min discountPercent 0\nmax discountPercent 100\nminlen displayName 1\nmaxlen displayName 50\nmaxlen title 200"}
+{"id": "s54.quotes", "output": "order quote_date <= paid_on\nsum items_total = estimate_lines.extended_price"}
+{"id": "s54.estimate_lines", "output": "order creation_date <= date_modified"}
+{"id": "s54.properties", "output": "none"}
+{"id": "s54.erp_promotions", "output": "order launch_date <= sunset_date\norder min_stay_nights <= max_stay_nights\norder starts_at <= ends_at"}
+{"id": "s55.courses", "output": "order enrolled_at <= graduated_at\norder term_start <= term_end"}
+{"id": "s56.members", "output": "none"}
+{"id": "s56.patient", "output": "order born_on <= died_on\norder creation_date <= updated\norder min_stay_nights <= max_stay_nights\nproduct total = days * nightly_rate\ncopy nightly_rate = members.rate"}
+{"id": "s56.tickets", "output": "order creation_date <= changed_at\nmin age 0\nmin rating 1\nmin weight_kg 0\nmax age 130\nmax rating 5\nminlen phone 8\nmaxlen phone 15"}
+{"id": "s56.audit_logs", "output": "order inserted_at <= changed_at"}
+{"id": "s57.goods", "output": "order createdAt <= changedAt"}
+{"id": "s57.app_work_orders", "output": "order insertedAt <= updatedAt\nsum total = work_order_part.lineTotal"}
+{"id": "s57.work_order_part", "output": "order dateCreated <= archivedAt\nproduct lineTotal = qtyOrdered * unitPrice\ncopy unitPrice = goods.unitPrice"}
+{"id": "s58.shop_expense_claims", "output": "order created_at <= modified_at\nsum total_amount = claim_item.amount"}
+{"id": "s58.claim_item", "output": "none"}
+{"id": "s59.skus", "output": "none"}
+{"id": "s59.goods_receipts", "output": "product amount = quantity * landed_cost"}
+{"id": "s59.vehicles", "output": "order date_created <= changed_at\nmin capacity 1\nmin duration_minutes 1\nmax capacity 1000\nmax duration_minutes 480\nminlen password 8"}
+{"id": "s59.order", "output": "order created_at <= confirmed_at\norder created_at <= modified_at\norder purchased_at <= required_date\norder purchased_at <= shipped_at\norder shipped_at <= payment_date"}
+{"id": "s59.order_product", "output": "order creation_date <= date_modified\nmin units 1\nmax units 999"}
+{"id": "s60.Room", "output": "order Created <= ModifiedAt"}
+{"id": "s60.Incidents", "output": "order CreatedAt <= RemovedAt\norder MinScore <= MaxScore\norder OpenedAt <= ResolvedAt"}
+{"id": "s60.Timesheets", "output": "sum TotalHours = TimeEntry.WorkedHours"}
+{"id": "s60.TimeEntry", "output": "order CreatedOn <= DeletedAt\norder CreatedOn <= UpdatedAt\nproduct Total = WorkedHours * UnitRate"}
+{"id": "s61.TblCases", "output": "order OpenedOn <= ClosedOn\norder Low <= High\norder ResolvedAt <= ClosedAt"}
+{"id": "s61.User", "output": "none"}
+{"id": "s61.CostCenters", "output": "order CreatedAt <= Updated\norder SentAt <= ProcessedAt\norder StartDate <= EndDate\nsum Total = Allocations.BudgetedAmount"}
+{"id": "s61.Allocations", "output": "none"}
+{"id": "s62.services", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s62.chargebacks", "output": "order requested_at <= refunded_at"}
+{"id": "s62.transactions", "output": "order created_at <= updated"}
+{"id": "s62.work_order", "output": "sum net_total = work_order_lines.ext_price\nsum paid_total = transactions.amount"}
+{"id": "s62.work_order_lines", "output": "order created_at <= updated_at\nproduct ext_price = quantity * price_each\ncopy price_each = services.retail_price\nmax quantity 100"}
+{"id": "s62.appointments", "output": "order created_at <= last_modified\norder start_time <= end_time\norder starts_at <= ends_at"}
+{"id": "s62.client", "output": "none"}
+{"id": "s62.credit_notes", "output": "order issued_at <= payment_due\norder issued_at <= settled_at"}
+{"id": "s62.shop_credit_note_items", "output": "copy currency_code = credit_notes.currency_code"}
+{"id": "s63.merchants", "output": "none"}
+{"id": "s63.journal_entries", "output": "order creation_date <= last_modified\norder creation_date <= removed_at\norder submitted_at <= approved_at\nsum debit_total = postings.debit"}
+{"id": "s63.postings", "output": "order created_at <= changed_at"}
+{"id": "s64.reversals", "output": "order requested_at <= completed_at"}
+{"id": "s64.receipts_applied", "output": "none"}
+{"id": "s64.credit_note", "output": "order created_at <= last_modified\norder issued_at <= due_at\nsum sub_total = credit_note_item.total"}
+{"id": "s64.credit_note_item", "output": "copy currency_code = credit_note.currency_code"}
+{"id": "s64.packages_batch", "output": "sum gross_weight = packages.weight_kg"}
+{"id": "s64.packages", "output": "order date_created <= updated_at"}
+{"id": "s65.tasks", "output": "order created_at <= updated\norder queued_at <= started_at\norder scheduled_for <= started_at"}
+{"id": "s65.inventory_items", "output": "order created_at <= updated"}
+{"id": "s65.quote", "output": "order date_created <= changed_at\norder date_created <= deleted_at\norder issued_on <= valid_until"}
+{"id": "s65.quote_items", "output": "none"}
+{"id": "s66.api_key", "output": "none"}
+{"id": "s67.Sales", "output": "order dateCreated <= dateModified\norder shippedOn <= receivedAt\norder soldAt <= shippedOn\nsum subTotal = SaleLine.lineAmount"}
+{"id": "s67.SaleLine", "output": "order createdAt <= lastModified"}
+{"id": "s67.vacations", "output": "order checkoutDate <= dueDate\norder startDate <= endDate"}
+{"id": "s67.Tickets", "output": "min discountPercent 0\nmin price 0\nmax discountPercent 100\nmax price 1000000\nlen code 20\nlen currency 3"}
+{"id": "s68.cour", "output": "order created_at <= updated_at\nmin rating 1\nmax rating 10\nminlen password 10\nvalues gender female|male|nonbinary|unspecified\nvalues role admin|member|viewer\nvalues size small|medium|large"}
+{"id": "s69.job", "output": "order created_on <= modified_at\nmin age 16\nmin capacity 1\nmin priority 0\nmin stars 1\nmax age 150\nmax capacity 500\nmax priority 5\nmax stars 5\nmaxlen code 20"}
+{"id": "s69.trips", "output": "order departure_time <= arrival_time\norder scheduled_departure <= scheduled_arrival"}
+{"id": "s70.voyages", "output": "order departs_at <= arrives_at\norder departure_time <= arrival_time"}
+{"id": "s71.buyers", "output": "order created_at <= archived_at\norder created_at <= updated_at"}
+{"id": "s71.catalog_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s71.quote", "output": "order date_created <= confirmed_at\norder issued_on <= paid_on\nsum subtotal = quote_item.line_amount"}
+{"id": "s71.quote_item", "output": "none"}
+{"id": "s72.products", "output": "order created_at <= date_modified\norder min_stock <= stock_capacity\nmin min_stock 0\nmax min_stock 100000"}
+{"id": "s72.goods_receipts", "output": "product total_cost = quantity * unit_value\ncopy unit_value = products.average_cost"}
+{"id": "s72.catalog_items", "output": "order inserted_at <= updated_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s72.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s72.payment", "output": "none"}
+{"id": "s72.work_orders", "output": "sum items_total = work_order_lines.total_price\nsum paid_total = payment.amount"}
+{"id": "s72.work_order_lines", "output": "order created_on <= changed_at\ncopy price_each = catalog_items.list_price\nmin pieces 1\nmax pieces 1000"}
+{"id": "s72.venues", "output": "none"}
+{"id": "s72.incident", "output": "order creation_date <= first_response_at\norder creation_date <= updated"}
+{"id": "s73.Comments", "output": "order Created <= DateModified"}
+{"id": "s73.Articles", "output": "none"}
+{"id": "s73.PurchaseOrders", "output": "order OrderedOn <= ShippedOn\norder OrderedOn <= PaidAt\nsum NumItems = PoItems.QuantityOrdered\nsum Subtotal = PoItems.ExtendedPrice"}
+{"id": "s73.PoItems", "output": "order CreationDate <= LastModified\ncopy Currency = PurchaseOrders.Currency"}
+{"id": "s74.Favorites", "output": "none"}
+{"id": "s75.reviews", "output": "order created_at <= updated_at\nmin capacity 1\nmin priority 1\nmax capacity 1000\nmax priority 10\nlen code 6"}
+{"id": "s76.Skus", "output": "order safetyStock <= maximumStock\nmin safetyStock 0"}
+{"id": "s76.stock_moves", "output": "none"}
+{"id": "s76.Users", "output": "none"}
+{"id": "s76.deposits_batches", "output": "order weekStart <= toDate\nsum amount = deposit_items.netAmount"}
+{"id": "s76.deposit_items", "output": "none"}
+{"id": "s76.recipes", "output": "order createdOn <= updatedAt\nmin priority 0\nmax priority 10\nminlen displayName 1\nmaxlen bio 1000\nvalues status pending|paid|failed|refunded"}
+{"id": "s77.Donations", "output": "order CreatedOn <= LastModified\nmin DiscountPercent 0\nmin Year 2000\nmax DiscountPercent 100\nmax Year 2099\nmaxlen Phone 15\nvalues Level beginner|intermediate|advanced"}
+{"id": "s77.Items", "output": "none"}
+{"id": "s77.Allocations", "output": "none"}
+{"id": "s77.CreditNote", "output": "order InsertedAt <= ConfirmedAt\norder InsertedAt <= DateModified\nsum PaidTotal = Allocations.AmountPaid\nsum Subtotal = CreditNoteItems.ExtendedPrice"}
+{"id": "s77.CreditNoteItems", "output": "none"}
+{"id": "s78.cost_centers", "output": "order created <= archivedAt\norder created <= updatedAt\norder submittedAt <= processedAt\nsum totalBudget = budget_item.amount"}
+{"id": "s78.budget_item", "output": "none"}
+{"id": "s78.WorkOrders", "output": "sum unitsTotal = work_order_parts.qty"}
+{"id": "s78.work_order_parts", "output": "product extPrice = qty * itemPrice\ncopy currencyCode = WorkOrders.currencyCode"}
+{"id": "s78.variants", "output": "none"}
+{"id": "s78.Orders", "output": "order created <= confirmedAt\norder created <= updated\norder orderDate <= paidAt\nsum subTotal = ErpOrderItems.lineTotal"}
+{"id": "s78.ErpOrderItems", "output": "order creationDate <= lastModified\ncopy eachPrice = variants.listPrice"}
+{"id": "s79.post", "output": "order createdOn <= updatedAt"}
+{"id": "s80.services", "output": "order created_at <= changed_at"}
+{"id": "s80.quotes", "output": "order created <= confirmed_at\norder created <= updated_at\nsum lines_total = estimate_line.ext_price"}
+{"id": "s80.estimate_line", "output": "copy unit_price = services.base_price\nmin num_units 1"}
+{"id": "s80.buyer", "output": "none"}
+{"id": "s80.good", "output": "none"}
+{"id": "s80.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s80.receipts_applied", "output": "order created_at <= date_modified"}
+{"id": "s80.order", "output": "order submitted_at <= due_date\nsum paid_amount = receipts_applied.value\nsum subtotal = line_items.subtotal"}
+{"id": "s80.line_items", "output": "product subtotal = unit_count * unit_amount\ncopy unit_amount = good.default_price\nmin unit_count 1"}
+{"id": "s81.files", "output": "order created_at <= archived_at"}
+{"id": "s81.accounts", "output": "none"}
+{"id": "s81.expense_reports", "output": "order created_at <= date_modified\norder period_start <= week_end\nsum total = claim_items.amount"}
+{"id": "s81.claim_items", "output": "none"}
+{"id": "s82.addresses", "output": "none"}
+{"id": "s83.tickets", "output": "order createdAt <= modifiedAt\nmin age 0\nmax age 130\nvalues size XS|S|M|L|XL"}
+{"id": "s83.TimeReport", "output": "order creationDate <= lastModified\nsum hoursTotal = TimesheetLines.hours"}
+{"id": "s83.TimesheetLines", "output": "product amount = hours * rate"}
+{"id": "s83.tbl_customers", "output": "none"}
+{"id": "s83.reservations", "output": "order createdOn <= updatedAt\norder startDate <= endDate"}
+{"id": "s84.Accounts", "output": "min DurationMinutes 1\nmin Seats 1\nmax DurationMinutes 600\nmax Seats 8\nminlen PostalCode 5\nminlen Slug 3\nmaxlen DisplayName 100\nmaxlen PostalCode 10\nmaxlen Slug 60\nvalues Role student|teacher|admin\nvalues Visibility public|private"}
+{"id": "s85.deposits_batches", "output": "order week_start <= to_date\nsum total_amount = settlement_items.gross_amount"}
+{"id": "s85.settlement_items", "output": "none"}
+{"id": "s86.Users", "output": "none"}
+{"id": "s86.SalarySlips", "output": "order createdAt <= deletedAt\norder createdAt <= updatedAt\norder submittedAt <= reviewedAt\nsum grossPay = PayItems.earningAmount"}
+{"id": "s86.PayItems", "output": "product amount = earningAmount * hourlyRate"}
+{"id": "s86.Reviews", "output": "order created <= updatedAt"}
+{"id": "s87.Users", "output": "none"}
+{"id": "s87.ShopConsignments", "output": "order FromDate <= EndDate\norder SentAt <= ProcessedAt\nsum TotalWeight = Package.Weight"}
+{"id": "s87.Package", "output": "none"}
+{"id": "s87.Jobs", "output": "min Stars 0\nmax Stars 5\nmaxlen Email 255\nvalues Size small|medium|large"}
+{"id": "s87.FeatureFlags", "output": "order DateCreated <= ModifiedAt"}
+{"id": "s88.buyer", "output": "none"}
+{"id": "s88.menu_items", "output": "none"}
+{"id": "s88.carts", "output": "sum items_total = basket_items.total_price"}
+{"id": "s88.basket_items", "output": "product total_price = num_units * unit_price\ncopy unit_price = menu_items.retail_price\nmin num_units 1\nmax num_units 99"}
+{"id": "s88.quotes", "output": "order created <= updated\norder quote_date <= expires_on\norder quote_date <= paid_at\nsum num_items = estimate_line.quantity_ordered\nsum sub_total = estimate_line.amount_total"}
+{"id": "s88.estimate_line", "output": "product amount_total = quantity_ordered * unit_price\nmax quantity_ordered 99"}
+{"id": "s89.properties", "output": "order created_at <= updated_at"}
+{"id": "s89.assignments", "output": "order hired_on <= left_on\norder start_date <= end_date\nproduct amount = billable_hours * hourly_rate"}
+{"id": "s90.runs", "output": "order started_at <= completed_at\norder started_at <= finished_at"}
+{"id": "s90.rooms", "output": "order min_price <= max_price\nmin discount_percent 0\nmin price 0\nmax discount_percent 100\nminlen slug 3\nminlen username 2\nmaxlen slug 60\nmaxlen username 50\nvalues role student|teacher|admin"}
+{"id": "s91.user", "output": "order created_on <= archived_at\norder created_on <= changed_at"}
+{"id": "s91.items", "output": "order created_at <= updated_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s91.payments", "output": "order creation_date <= updated_at"}
+{"id": "s91.sale", "output": "order created_at <= changed_at\norder created_at <= deleted_at\norder sold_at <= canceled_at"}
+{"id": "s91.sale_items", "output": "order created_at <= date_modified\ncopy each_price = items.price"}
+{"id": "s91.refunds", "output": "order requested_at <= completed_at"}
+{"id": "s91.payment", "output": "order created_on <= updated"}
+{"id": "s91.erp_invoice", "output": "order created_at <= confirmed_at\norder created_at <= updated\norder invoice_date <= due_on\nsum subtotal = invoice_item.line_amount"}
+{"id": "s91.invoice_item", "output": "product line_amount = qty * price_per_unit\nmin qty 1\nmax qty 999"}
+{"id": "s91.erp_webhook", "output": "order created_at <= updated"}
+{"id": "s92.CatalogItems", "output": "order CreationDate <= ChangedAt\norder MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s92.Orders", "output": "order CreatedOn <= ChangedAt\norder CreatedOn <= DeletedAt\norder OrderDate <= CancelledAt\norder OrderDate <= PaidAt\norder PaidAt <= ShipDate\norder ShipDate <= DeliveryDate\nsum SubTotal = AppOrderLines.ExtPrice"}
+{"id": "s92.AppOrderLines", "output": "copy UnitAmount = CatalogItems.StandardCost"}
+{"id": "s92.Countries", "output": "order CreatedAt <= UpdatedAt"}
+{"id": "s93.FeatureFlags", "output": "order CreatedAt <= UpdatedAt"}
+{"id": "s93.Parts", "output": "order MinStock <= MaximumStock\nmin MinStock 0"}
+{"id": "s93.CoreStockMovements", "output": "order CreatedAt <= LastModified\nproduct Amount = Qty * UnitCost"}
+{"id": "s93.Sku", "output": "none"}
+{"id": "s93.Sales", "output": "sum NumItems = SaleItems.Quantity\nsum SubTotal = SaleItems.ItemTotal"}
+{"id": "s93.SaleItems", "output": "copy ItemPrice = Sku.StandardCost"}
+{"id": "s94.product_variant", "output": "order reorder_point <= maximum_stock\nmin reorder_point 0\nmax reorder_point 1000000"}
+{"id": "s94.stock_movements", "output": "copy cost_per_unit = product_variant.standard_cost"}
+{"id": "s94.device", "output": "none"}
+{"id": "s95.catalog_item", "output": "order created <= last_modified"}
+{"id": "s95.inventory_transaction", "output": "order created_at <= updated_at"}
+{"id": "s95.subscriptions", "output": "order created_at <= updated\norder start_date <= end_date\norder starts_at <= ends_at"}
+{"id": "s96.buyers", "output": "order created_at <= date_modified"}
+{"id": "s96.work_order", "output": "order date_created <= date_modified\nsum lines_total = work_order_lines.total_amount"}
+{"id": "s96.work_order_lines", "output": "min num_units 1\nmax num_units 100"}
+{"id": "s97.erp_pet", "output": "min age 16\nmin seats 1\nmin stars 0\nmax age 120\nmax seats 50\nmax stars 5\nminlen display_name 1\nminlen username 4\nmaxlen display_name 100\nmaxlen username 50\nvalues gender M|F|X"}
+{"id": "s98.courses", "output": "order created_at <= changed_at\norder enrolled_at <= graduated_at\norder enrolled_on <= completed_on\norder min_guests <= max_guests\nproduct total_price = billable_hours * price_per_night"}
+{"id": "s98.users", "output": "order creation_date <= updated_at"}
+{"id": "s98.shop_work_order_line", "output": "none"}
+{"id": "s98.buyers", "output": "none"}
+{"id": "s98.orders", "output": "order created_at <= changed_at\norder order_date <= paid_at\norder paid_at <= ship_date\norder ship_date <= delivered_at\nsum net_total = line_items.total\nsum total_quantity = line_items.unit_count"}
+{"id": "s98.line_items", "output": "product total = unit_count * price_each"}
+{"id": "s99.menu_item", "output": "order reorderLevel <= maxStock"}
+{"id": "s99.InventoryTransactions", "output": "order createdAt <= lastModified\nproduct extendedCost = units * cost"}
+{"id": "s99.notifications", "output": "none"}
+{"id": "s100.services", "output": "order created_at <= last_modified"}
+{"id": "s100.carts", "output": "sum num_items = basket_items.order_qty\nsum grand_total = basket_items.line_value"}
+{"id": "s100.basket_items", "output": "product line_value = order_qty * unit_amount\ncopy unit_amount = services.list_price"}
+{"id": "s100.product", "output": "order created_on <= updated"}
+{"id": "s100.sale", "output": "order inserted_at <= confirmed_at\norder inserted_at <= last_modified\nsum grand_total = sale_items.line_total"}
+{"id": "s100.sale_items", "output": "copy each_price = product.price_amount"}
+{"id": "s100.courses", "output": "order min_price <= max_price\nmin discount_percent 0\nmin priority 1\nmax discount_percent 100\nmax priority 10\nmaxlen postal_code 10\nvalues size small|medium|large"}
+{"id": "s101.jobs", "output": "order createdAt <= changedAt\nmin discountPercent 0\nmin percentage 0\nmin priority 0\nmax discountPercent 100\nmax percentage 100\nmax priority 3\nmaxlen displayName 64"}
+{"id": "s102.service", "output": "order created <= updated_at"}
+{"id": "s102.allocations", "output": "none"}
+{"id": "s102.shop_invoices", "output": "order issued_at <= due_on\norder issued_at <= paid_at\nsum num_items = app_invoice_items.units\nsum paid_total = allocations.amount_paid\nsum sum_total = app_invoice_items.amount_total"}
+{"id": "s102.app_invoice_items", "output": "order created_at <= archived_at\norder created_at <= changed_at\ncopy currency = shop_invoices.currency\ncopy each_price = service.base_price\nmin units 1\nmax units 100"}
+{"id": "s103.invoices", "output": "order issued_at <= due_on\norder issued_at <= settled_at\nsum lines_total = line_items.total"}
+{"id": "s103.line_items", "output": "none"}
+{"id": "s104.users", "output": "none"}
+{"id": "s104.salary_slip", "output": "order inserted_at <= updated\nsum gross = pay_item.amount"}
+{"id": "s104.pay_item", "output": "none"}
+{"id": "s104.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s104.payments", "output": "order date_created <= date_modified"}
+{"id": "s104.order", "output": "order inserted_at <= updated\norder payment_date <= ship_date\norder placed_at <= payment_date\nsum items_total = line_items.item_total"}
+{"id": "s104.line_items", "output": "max quantity_ordered 999"}
+{"id": "s104.product", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s104.carts", "output": "none"}
+{"id": "s104.cart_items", "output": "copy price_per_unit = product.standard_cost\nmin pieces 1\nmax pieces 1000"}
+{"id": "s105.goods_receipts", "output": "none"}
+{"id": "s106.erp_client", "output": "order created <= date_modified\norder created <= deleted_at"}
+{"id": "s106.allocations", "output": "none"}
+{"id": "s106.credit_notes", "output": "order created_at <= date_modified\norder issued_at <= paid_on\norder issued_at <= payment_due\nsum amount_paid = allocations.amount\nsum subtotal = credit_note_lines.ext_price"}
+{"id": "s106.credit_note_lines", "output": "min num_units 1\nmax num_units 999"}
+{"id": "s106.review", "output": "order created_at <= modified_at"}
+{"id": "s107.articles", "output": "order created_at <= updated_at"}
+{"id": "s107.invoice", "output": "order created_at <= confirmed_at\norder created_at <= updated_at\norder issue_date <= due_at"}
+{"id": "s107.invoice_items", "output": "copy price = articles.price"}
+{"id": "s107.members", "output": "none"}
+{"id": "s107.shipment", "output": "sum gross_weight = shipment_item.weight"}
+{"id": "s107.shipment_item", "output": "none"}
+{"id": "s108.payouts", "output": "order submitted_at <= processed_at\nsum amount = deposit_items.net_amount"}
+{"id": "s108.deposit_items", "output": "order date_created <= updated_at"}
+{"id": "s109.members", "output": "order created_at <= removed_at"}
+{"id": "s109.variants", "output": "order inserted_at <= last_modified"}
+{"id": "s109.invoices", "output": "order issued_at <= paid_at\norder issued_at <= payment_due"}
+{"id": "s109.invoice_detail", "output": "copy price = variants.price_amount"}
+{"id": "s109.rides", "output": "order created <= modified_at\norder pickup_at <= dropoff_at\norder started_at <= ended_at"}
+{"id": "s110.audit_logs", "output": "none"}
+{"id": "s111.packages_batches", "output": "order submitted_at <= reviewed_at"}
+{"id": "s111.shop_package", "output": "none"}
+{"id": "s111.crm_parts", "output": "none"}
+{"id": "s111.order", "output": "order created_at <= modified_at\norder order_date <= payment_date\nsum net_amount = order_lines.total_amount"}
+{"id": "s111.order_lines", "output": "copy unit_amount = crm_parts.list_price"}
+{"id": "s112.members", "output": "none"}
+{"id": "s112.artists", "output": "order date_of_birth <= date_of_death"}
+{"id": "s112.reviews", "output": "order created_at <= removed_at"}
+{"id": "s112.accounts", "output": "order date_created <= modified_at"}
+{"id": "s112.inventory_items", "output": "order inserted_at <= deleted_at\norder inserted_at <= modified_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s112.credit_notes", "output": "order created_at <= confirmed_at\norder created_at <= date_modified\norder credit_date <= due_on\nsum total_due = credit_note_lines.extended_price"}
+{"id": "s112.credit_note_lines", "output": "order created_at <= updated\ncopy currency = credit_notes.currency\nmin quantity_ordered 1\nmax quantity_ordered 999"}
+{"id": "s113.Setting", "output": "order creationDate <= modifiedAt"}
+{"id": "s113.ExpenseReport", "output": "order sentAt <= approvedAt\nsum total = expen.amountClaimed"}
+{"id": "s113.expen", "output": "order created <= deletedAt\norder created <= lastModified"}
+{"id": "s114.member", "output": "none"}
+{"id": "s114.shipments", "output": "none"}
+{"id": "s114.shipment_items", "output": "order createdAt <= updatedAt"}
+{"id": "s114.tbl_users", "output": "order createdOn <= lastModified"}
+{"id": "s114.receipts", "output": "sum linesTotal = ReceiptLines.lineValue"}
+{"id": "s114.ReceiptLines", "output": "none"}
+{"id": "s115.receipts", "output": "order created <= updated_at"}
+{"id": "s115.receipt_items", "output": "max quantity 10000"}
+{"id": "s115.app_member", "output": "order created_at <= updated"}
+{"id": "s115.product_variant", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s115.orders", "output": "order created_at <= removed_at\norder created_at <= updated\norder order_date <= cancelled_at\norder order_date <= required_date\norder order_date <= shipped_on\nsum net_total = order_products.ext_price\nsum units_total = order_products.quantity"}
+{"id": "s115.order_products", "output": "product ext_price = quantity * each_price\ncopy each_price = product_variant.unit_price"}
+{"id": "s115.cost_centers", "output": "sum total_budget = allocations.budgeted_amount"}
+{"id": "s115.allocations", "output": "none"}
+{"id": "s116.Shifts", "output": "order CreatedAt <= ModifiedAt\norder DoorsOpenAt <= StartsAt"}
+{"id": "s117.stays", "output": "order checkin_at <= checkout_at"}
+{"id": "s117.transaction", "output": "none"}
+{"id": "s117.receipts", "output": "order inserted_at <= confirmed_at\norder inserted_at <= modified_at"}
+{"id": "s117.receipt_items", "output": "order created_at <= removed_at\norder created_at <= updated\nmin quantity 1"}
+{"id": "s117.users", "output": "none"}
+{"id": "s118.merchant", "output": "none"}
+{"id": "s118.timesheets", "output": "order creation_date <= updated_at\nsum hours_total = shop_timesheet_lines.worked_hours"}
+{"id": "s118.shop_timesheet_lines", "output": "none"}
+{"id": "s118.salary_slips", "output": "order date_created <= date_modified\nsum gross = earnings.value"}
+{"id": "s118.earnings", "output": "none"}
+{"id": "s118.coupons", "output": "order created_at <= changed_at\nmin discount_percent 0\nmin quantity 0\nmax discount_percent 100\nminlen display_name 1\nminlen postal_code 5\nmaxlen display_name 64\nvalues role user|admin\nvalues size XS|S|M|L|XL"}
+{"id": "s119.Application", "output": "order Created <= UpdatedAt\norder ValidFrom <= ValidUntil\nmin Percentage 0\nmax Percentage 100\nminlen PostalCode 5\nmaxlen PostalCode 10"}
+{"id": "s119.Tickets", "output": "order InsertedAt <= ModifiedAt\norder ResolvedAt <= ClosedAt"}
+{"id": "s119.Goods", "output": "none"}
+{"id": "s119.StockAdjustment", "output": "product ExtendedCost = Qty * CostPerUnit\ncopy CostPerUnit = Goods.UnitCost"}
+{"id": "s120.ShopMerchants", "output": "none"}
+{"id": "s120.ErpJournalEntries", "output": "order DateCreated <= ChangedAt\norder PeriodStart <= ToDate\nsum DebitTotal = JournalLines.DebitAmount"}
+{"id": "s120.JournalLines", "output": "order CreatedOn <= DateModified"}
+{"id": "s121.ProductVariants", "output": "order CreatedAt <= LastModified"}
+{"id": "s121.Reversal", "output": "order RequestedAt <= CompletedAt"}
+{"id": "s121.Payments", "output": "none"}
+{"id": "s121.Receipts", "output": "order InsertedAt <= ModifiedAt\nsum LinesTotal = ReceiptItems.LineTotal"}
+{"id": "s121.ReceiptItems", "output": "product LineTotal = Units * PricePerUnit\nmin Units 1\nmax Units 10000"}
+{"id": "s121.Categories", "output": "none"}
+{"id": "s121.Articles", "output": "order MinStock <= StockCapacity\nmin MinStock 0"}
+{"id": "s121.GoodsReceipts", "output": "product Value = Qty * LandedCost"}
+{"id": "s122.user", "output": "min age 16\nmin percentage 0\nmin year 1950\nmax age 130\nmax percentage 100\nmax year 2099\nlen code 6\nvalues role user|admin"}
+{"id": "s122.Services", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s122.invoices", "output": "order created <= confirmedAt\norder invoiceDate <= dueOn\norder invoiceDate <= settledAt\nsum itemsTotal = CoreInvoiceDetails.lineAmount"}
+{"id": "s122.CoreInvoiceDetails", "output": "copy currency = invoices.currency\ncopy pricePerUnit = Services.salePrice"}
+{"id": "s122.User2", "output": "order createdAt <= changedAt"}
+{"id": "s122.MenuItems", "output": "order creationDate <= modifiedAt"}
+{"id": "s122.Reversals", "output": "order requestedAt <= processedAt"}
+{"id": "s122.Payments", "output": "none"}
+{"id": "s122.credit_notes", "output": "order creationDate <= updated\norder creditDate <= dueAt\nsum itemsTotal = credit_note_items.itemTotal\nsum paidTotal = Payments.amountPaid"}
+{"id": "s122.credit_note_items", "output": "max numUnits 99"}
+{"id": "s123.catalog_item", "output": "none"}
+{"id": "s123.Chargeback", "output": "order requestedAt <= completedAt"}
+{"id": "s123.Payments", "output": "none"}
+{"id": "s123.credit_notes", "output": "order creditDate <= dueOn\nsum amountPaid = Payments.amountPaid\nsum itemsTotal = CreditNoteLines.linePrice"}
+{"id": "s123.CreditNoteLines", "output": "none"}
+{"id": "s123.reviews", "output": "none"}
+{"id": "s124.Consignments", "output": "order DateCreated <= DateModified\norder WeekStart <= PeriodEnd\nsum WeightTotal = Parcels.GrossWeight"}
+{"id": "s124.Parcels", "output": "none"}
+{"id": "s124.Accounts", "output": "none"}
+{"id": "s124.CrmWebinars", "output": "order DoorsOpenAt <= StartsAt\norder StartTime <= EndTime"}
+{"id": "s124.Accounts8", "output": "none"}
+{"id": "s124.CrmQuotes", "output": "order InsertedAt <= UpdatedAt\norder IssuedOn <= PaidAt\norder IssuedOn <= ValidUntil\nsum LinesTotal = QuoteLines.ExtendedPrice"}
+{"id": "s124.QuoteLines", "output": "order CreatedAt <= UpdatedAt\nproduct ExtendedPrice = UnitCount * UnitPrice\nmin UnitCount 1"}
+{"id": "s125.buyers", "output": "none"}
+{"id": "s125.items", "output": "none"}
+{"id": "s125.work_orders", "output": "order date_created <= updated_at\nsum subtotal = tbl_work_order_parts.line_total"}
+{"id": "s125.tbl_work_order_parts", "output": "order creation_date <= date_modified"}
+{"id": "s126.clients", "output": "order date_created <= date_modified"}
+{"id": "s126.menu_items", "output": "order created <= updated_at"}
+{"id": "s126.orders", "output": "order dispatched_at <= delivered_at\norder purchased_at <= canceled_at\norder purchased_at <= expected_delivery\nsum net_total = order_line.amount"}
+{"id": "s126.order_line", "output": "order created_at <= deleted_at\norder created_at <= updated"}
+{"id": "s127.settings", "output": "none"}
+{"id": "s127.Vehicles", "output": "order createdOn <= lastModified\nmin age 13\nmin capacity 1\nmin percentage 0\nmax age 120\nmax percentage 100\nminlen displayname 1\nminlen title 1\nmaxlen displayname 64\nmaxlen title 120\nlen currency 3"}
+{"id": "s128.Rooms", "output": "order createdAt <= updatedAt"}
+{"id": "s128.PayPeriods", "output": "order creationDate <= updated\norder kickoffDate <= deadline"}
+{"id": "s128.pets", "output": "min age 18\nmax age 130\nminlen phone 8\nmaxlen bio 280\nmaxlen phone 15\nlen country 2"}
+{"id": "s129.Skus", "output": "order CreatedAt <= UpdatedAt\norder ReorderLevel <= StockCapacity"}
+{"id": "s129.StockAdjustments", "output": "product Value = Quantity * UnitValue"}
+{"id": "s129.Tickets", "output": "order MinAge <= MaxAge\nmin Priority 0\nmin WeightKg 0\nmax Priority 10\nminlen DisplayName 1\nminlen Username 3\nmaxlen DisplayName 64"}
+{"id": "s130.membership", "output": "order min_age <= max_age\norder starts_at <= ends_at\norder valid_from <= valid_until"}
+{"id": "s130.client", "output": "order creation_date <= modified_at\norder creation_date <= removed_at"}
+{"id": "s130.app_credit_note", "output": "order created_at <= confirmed_at\norder created_at <= modified_at\norder credit_date <= due_on\nsum items_total = credit_note_item.extended_price"}
+{"id": "s130.credit_note_item", "output": "product extended_price = pieces * rate\nmax pieces 100"}
+{"id": "s130.accounts", "output": "none"}
+{"id": "s130.playlists", "output": "order created_at <= date_modified\nsum duration_seconds = playlist_tracks.seconds"}
+{"id": "s130.playlist_tracks", "output": "none"}
+{"id": "s131.Clients", "output": "order CreatedAt <= ChangedAt"}
+{"id": "s131.ProductVariant", "output": "order CreationDate <= UpdatedAt"}
+{"id": "s131.PurchaseOrders", "output": "order RaisedAt <= ShippedAt\norder ShippedAt <= PaidAt\nsum LinesTotal = PoLines.ItemTotal"}
+{"id": "s131.PoLines", "output": "copy Currency = PurchaseOrders.Currency\ncopy EachPrice = ProductVariant.SalePrice"}
+{"id": "s131.Promotion", "output": "order ActiveFrom <= ActiveUntil\norder CreatedOn <= UpdatedAt\norder OpeningBalance <= ClosingBalance"}
+{"id": "s132.refunds", "output": "order requested_at <= refunded_at"}
+{"id": "s132.allocations", "output": "none"}
+{"id": "s132.bills", "output": "order bill_date <= payment_due\norder bill_date <= settled_at\nsum num_items = bill_items.num_units\nsum sub_total = bill_items.line_amount"}
+{"id": "s132.bill_items", "output": "product line_amount = num_units * price_per_unit\nmin num_units 1\nmax num_units 100"}
+{"id": "s133.catalog_items", "output": "order created <= updated"}
+{"id": "s133.sales", "output": "order created <= updated\norder sale_date <= expected_delivery\nsum num_items = sales_details.qty_ordered\nsum subtotal = sales_details.extended_price"}
+{"id": "s133.sales_details", "output": "product extended_price = qty_ordered * unit_rate\ncopy unit_rate = catalog_items.list_price"}
+{"id": "s133.shop_sales", "output": "order created_at <= confirmed_at\norder sold_at <= expected_delivery\nsum net_total = sale_items.total_amount\nsum units_total = sale_items.qty"}
+{"id": "s133.sale_items", "output": "product total_amount = qty * rate\nmax qty 100"}
+{"id": "s133.cost_center", "output": "order start_date <= end_date\nsum total = budget_lines.budgeted_amount"}
+{"id": "s133.budget_lines", "output": "none"}
+{"id": "s134.shift", "output": "order created_on <= updated_at\norder start_at <= end_at\nproduct charge = num_days * rate_per_day"}
+{"id": "s134.catalog_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s134.sales", "output": "order created_at <= last_modified\norder sold_at <= canceled_at\norder sold_at <= payment_date\nsum subtotal = sales_details.ext_price"}
+{"id": "s134.sales_details", "output": "product ext_price = quantity * price_each"}
+{"id": "s134.product", "output": "order created_at <= updated_at\nmin quantity 1\nmin stars 0\nmax quantity 99\nmax stars 5\nmaxlen email 254\nmaxlen phone 20\nvalues level beginner|intermediate|advanced"}
+{"id": "s135.menu_items", "output": "order created_on <= date_modified\norder created_on <= deleted_at"}
+{"id": "s135.carts", "output": "order date_created <= changed_at\norder date_created <= confirmed_at\nsum net_total = basket_item.subtotal\nsum total_items = basket_item.pieces"}
+{"id": "s135.basket_item", "output": "product subtotal = pieces * item_price\ncopy currency = carts.currency\ncopy item_price = menu_items.list_price"}
+{"id": "s135.buyers", "output": "order creation_date <= changed_at"}
+{"id": "s135.products", "output": "none"}
+{"id": "s135.invoices", "output": "order creation_date <= confirmed_at\norder creation_date <= updated_at\norder issued_at <= paid_at\nsum units_total = invoice_lines.units"}
+{"id": "s135.invoice_lines", "output": "copy item_price = products.list_price"}
+{"id": "s135.members", "output": "order created <= removed_at\norder created <= updated_at"}
+{"id": "s135.catalog_item", "output": "order created_at <= changed_at"}
+{"id": "s135.refund", "output": "order requested_at <= completed_at"}
+{"id": "s135.receipts_applied", "output": "order inserted_at <= last_modified"}
+{"id": "s135.invoices_9", "output": "order creation_date <= modified_at\norder invoice_date <= payment_due\nsum items_total = invoice_details.item_total\nsum paid_amount = receipts_applied.amount_paid\nsum total_items = invoice_details.qty_ordered"}
+{"id": "s135.invoice_details", "output": "copy unit_price = catalog_item.price_amount\nmin qty_ordered 1\nmax qty_ordered 999"}
+{"id": "s136.support_requests", "output": "order opened_on <= closed_on\norder resolved_at <= closed_at"}
+{"id": "s136.bills", "output": "order bill_date <= settled_at"}
+{"id": "s136.bill_item", "output": "none"}
+{"id": "s137.shop_user", "output": "none"}
+{"id": "s137.expense_reports", "output": "order created_on <= date_modified\norder start_date <= to_date\nsum claimed_total = tbl_expenses.value"}
+{"id": "s137.tbl_expenses", "output": "none"}
+{"id": "s137.app_elections", "output": "order inserted_at <= updated\norder listed_at <= expires_at\norder odometer_start <= odometer_end\norder start_time <= end_time"}
+{"id": "s137.clients", "output": "order created_at <= last_modified\norder created_at <= removed_at"}
+{"id": "s137.inventory_items", "output": "none"}
+{"id": "s137.receipts_applied", "output": "order date_created <= modified_at"}
+{"id": "s137.sales", "output": "order created_at <= updated\nsum lines_total = sales_details.item_total"}
+{"id": "s137.sales_details", "output": "product item_total = count * unit_cost\ncopy currency = sales.currency\ncopy unit_cost = inventory_items.price_amount\nmin count 1"}
+{"id": "s138.journey", "output": "order departs_at <= arrives_at\norder min_age <= max_age\norder started_at <= ended_at"}
+{"id": "s138.loans", "output": "order created_at <= last_modified\norder date_from <= date_to\norder from_date <= to_date\norder lower_bound <= upper_bound\nproduct total_price = billable_hours * nightly_rate"}
+{"id": "s138.member", "output": "order creation_date <= updated_at"}
+{"id": "s138.app_room_bookings", "output": "order inserted_at <= modified_at\norder start_date <= end_date\nproduct charge = num_days * daily_rate\ncopy daily_rate = member.daily_rate"}
+{"id": "s139.coupons", "output": "order starts_at <= ends_at\nmin price 0\nlen code 8\nlen password 12\nlen currency 3\nvalues gender M|F|X\nvalues size XS|S|M|L|XL"}
+{"id": "s140.Auction", "output": "order createdAt <= updated\norder listedAt <= expiresAt"}
+{"id": "s141.journal_entries", "output": "order created_on <= changed_at\norder created_on <= deleted_at\norder period_start <= week_end\nsum debit_total = journal_line.debit_amount"}
+{"id": "s141.journal_line", "output": "none"}
+{"id": "s142.page", "output": "none"}
+{"id": "s142.pages", "output": "none"}
+{"id": "s143.donations", "output": "order created_at <= updated_at\norder min_age <= max_age\nmin rating 1\nmin seats 1\nmin stars 0\nmin weight_kg 0\nmax rating 10\nmax seats 50\nmax stars 5\nminlen phone 7\nminlen postal_code 4\nmaxlen phone 15\nvalues level low|medium|high"}
+{"id": "s144.addresses", "output": "none"}
+{"id": "s144.users", "output": "none"}
+{"id": "s144.consignments", "output": "order date_created <= deleted_at\norder date_created <= updated\nsum total_weight = package.weight"}
+{"id": "s144.package", "output": "none"}
+{"id": "s144.clients", "output": "none"}
+{"id": "s144.article", "output": "none"}
+{"id": "s144.order", "output": "order created <= updated\norder placed_at <= canceled_at\norder placed_at <= due_date\nsum amount = order_details.amount_total"}
+{"id": "s144.order_details", "output": "product amount_total = quantity * rate\ncopy rate = article.base_price\nmin quantity 1"}
+{"id": "s145.catalog_items", "output": "none"}
+{"id": "s145.orders", "output": "order submitted_at <= cancelled_at"}
+{"id": "s145.order_item", "output": "product line_value = units * unit_cost\ncopy unit_cost = catalog_items.unit_price"}
+{"id": "s145.listings", "output": "min stars 0\nmax stars 5\nminlen password 12\nmaxlen code 20\nlen country 2"}
+{"id": "s145.properties", "output": "none"}
+{"id": "s145.stays", "output": "order arrival_date <= departure_date\norder checkin_at <= checkout_at"}
+{"id": "s146.mixes", "output": "order weekStart <= periodEnd\nsum totalDuration = playlist_track.seconds"}
+{"id": "s146.playlist_track", "output": "none"}
+{"id": "s147.crm_receipt", "output": "sum net_amount = receipt_lines.net_amount\nsum num_items = receipt_lines.num_units"}
+{"id": "s147.receipt_lines", "output": "order created <= date_modified\ncopy unit_amount = crm_receipt.unit_amount"}
+{"id": "s147.membership", "output": "order min_players <= max_players\norder trial_start <= trial_end\norder start_date <= end_date"}
+{"id": "s147.tickets", "output": "order min_age <= max_age\nmin duration_minutes 5\nmin percentage 0\nmin rating 1\nmax duration_minutes 480\nmax percentage 100\nmax rating 5\nminlen code 6\nminlen phone 8\nmaxlen code 6\nvalues gender female|male|nonbinary|unspecified"}
+{"id": "s148.menu_items", "output": "order created_at <= date_modified"}
+{"id": "s148.stock_adjustments", "output": "none"}
+{"id": "s149.TimeReports", "output": "order submittedAt <= reviewedAt\norder weekStart <= periodEnd\nsum totalHours = TimesheetEntries.durationHours"}
+{"id": "s149.TimesheetEntries", "output": "none"}
+{"id": "s150.Variant", "output": "none"}
+{"id": "s150.Bills", "output": "order BilledAt <= DueAt\nsum AmountTotal = BillItems.LinePrice"}
+{"id": "s150.BillItems", "output": "none"}
+{"id": "s151.customers", "output": "none"}
+{"id": "s151.positions_held", "output": "order created_at <= date_modified\norder hire_date <= termination_date\nproduct amount = billable_hours * daily_rate\ncopy daily_rate = customers.nightly_rate"}
+{"id": "s151.erp_tickets", "output": "order valid_from <= valid_until\nmin percentage 0\nmin seats 1\nmax percentage 100\nmax seats 50\nminlen phone 8\nminlen sku 6\nmaxlen phone 15\nmaxlen username 30\nvalues gender male|female|other"}
+{"id": "s152.payslip_lines", "output": "order created_at <= date_modified\nproduct amount = earning_amount * unit_rate"}
+{"id": "s152.plans_users", "output": "order current_period_start <= current_period_end\norder starts_at <= ends_at"}
+{"id": "s152.addresses", "output": "none"}
+{"id": "s153.purchase_orders", "output": "order ordered_on <= payment_date\norder payment_date <= shipped_at\norder shipped_at <= received_at\nsum total_items = purchase_order_lines.qty_ordered"}
+{"id": "s153.purchase_order_lines", "output": "order created_at <= changed_at\nproduct line_price = qty_ordered * price_per_unit\ncopy currency = purchase_orders.currency"}
+{"id": "s153.menu_items", "output": "none"}
+{"id": "s153.receipts", "output": "sum sub_total = receipt_items.total_price"}
+{"id": "s153.receipt_items", "output": "order created_at <= archived_at"}
+{"id": "s154.CrmCountries", "output": "order CreationDate <= UpdatedAt"}
+{"id": "s154.Pets", "output": "order MinPrice <= MaxPrice\nmin Capacity 1\nmin Priority 0\nmin Stars 1\nmax Priority 3\nmax Stars 5\nminlen Sku 4\nmaxlen Sku 32\nvalues Status pending|paid|failed|refunded"}
+{"id": "s154.Tickets", "output": "order CreatedAt <= ChangedAt\nmin DiscountPercent 0\nmin Seats 1\nmax DiscountPercent 100\nmax Seats 8\nminlen PostalCode 4\nmaxlen PostalCode 10\nvalues Gender M|F|X\nvalues Visibility everyone|friends|only_me"}
+{"id": "s155.customers", "output": "order createdAt <= updatedAt"}
+{"id": "s155.campaigns", "output": "order availableFrom <= availableUntil\norder createdOn <= archivedAt\norder createdOn <= modifiedAt\norder startDate <= endDate"}
+{"id": "s155.Meetings", "output": "order createdAt <= dateModified\norder minCapacity <= maxCapacity\norder registrationOpensAt <= registrationClosesAt\norder scheduledStart <= scheduledEnd"}
+{"id": "s156.staff", "output": "none"}
+{"id": "s156.shipments", "output": "order sent_at <= reviewed_at\norder start_date <= to_date\nsum total_weight = shipment_item.gross_weight"}
+{"id": "s156.shipment_item", "output": "none"}
+{"id": "s156.app_property", "output": "none"}
+{"id": "s156.terms", "output": "order admitted_at <= discharged_at\norder created <= last_modified\norder enrolled_on <= completed_on\norder low <= high"}
+{"id": "s156.articles", "output": "order date_created <= date_modified\nmin year 1950\nmax year 2100\nminlen display_name 1\nminlen title 1\nmaxlen code 32\nmaxlen display_name 64\nmaxlen title 120"}
+{"id": "s157.Articles", "output": "order CreationDate <= UpdatedAt\norder MinStock <= StockCapacity"}
+{"id": "s157.CrmStockAdjustments", "output": "none"}
+{"id": "s158.rooms", "output": "order inserted_at <= updated_at\norder min_price <= max_price\nmin stars 0\nmax stars 5\nminlen username 2\nmaxlen email 320"}
+{"id": "s159.CoreAccounts", "output": "order CreatedAt <= DeletedAt"}
+{"id": "s159.ErpCatalogItem", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s159.Invoices", "output": "order Created <= Updated\norder IssueDate <= DueOn\norder IssueDate <= PaidOn\nsum ItemsTotal = InvoiceLine.LineValue"}
+{"id": "s159.InvoiceLine", "output": "order DateCreated <= UpdatedAt\ncopy Currency = Invoices.Currency\ncopy UnitRate = ErpCatalogItem.PriceAmount"}
+{"id": "s159.MenuItem", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s159.Sales", "output": "order CreatedOn <= ArchivedAt\norder CreatedOn <= ChangedAt\norder SaleDate <= CanceledAt\nsum NetAmount = SaleItems.ExtendedPrice"}
+{"id": "s159.SaleItems", "output": "copy CurrencyCode = Sales.CurrencyCode\ncopy UnitAmount = MenuItem.ListPrice"}
+{"id": "s160.positions_held", "output": "order date_hired <= date_terminated\norder hired_on <= left_on"}
+{"id": "s161.SalesEvents", "output": "order availableFrom <= availableUntil\norder createdAt <= updatedAt\norder startsAt <= endsAt"}
+{"id": "s162.meetings", "output": "order min_temperature <= max_temperature\norder start_at <= end_at"}
+{"id": "s162.parts", "output": "none"}
+{"id": "s162.work_orders", "output": "order created <= archived_at\norder created <= confirmed_at\norder created <= updated_at\nsum lines_total = work_order_lines.subtotal"}
+{"id": "s162.work_order_lines", "output": "order created_at <= updated\ncopy item_price = parts.price_amount"}
+{"id": "s162.cour", "output": "order created_at <= last_modified\nmin capacity 1\nmin quantity 0\nmax capacity 10000\nmax quantity 999\nminlen code 4\nmaxlen bio 2000\nmaxlen code 20"}
+{"id": "s163.categories", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "s163.members", "output": "none"}
+{"id": "s163.menu_items", "output": "none"}
+{"id": "s163.bills", "output": "order billed_at <= paid_on\norder creation_date <= changed_at"}
+{"id": "s163.tbl_bill_items", "output": "copy currency = bills.currency\ncopy unit_rate = menu_items.price"}
+{"id": "s163.crm_accounts", "output": "order created_on <= changed_at"}
+{"id": "s163.part", "output": "none"}
+{"id": "s163.sales", "output": "order created_at <= last_modified\nsum subtotal = sale_lines.line_total\nsum total_items = sale_lines.quantity"}
+{"id": "s163.sale_lines", "output": "min quantity 1"}
+{"id": "s164.client", "output": "none"}
+{"id": "s164.services", "output": "none"}
+{"id": "s164.receipt", "output": "sum invoice_total = receipt_lines.total"}
+{"id": "s164.receipt_lines", "output": "product total = quantity * each_price\ncopy each_price = services.price_amount\nmin quantity 1"}
+{"id": "s164.product_variants", "output": "none"}
+{"id": "s164.quote", "output": "order issued_on <= expiry_date\norder issued_on <= settled_at"}
+{"id": "s164.app_quote_lines", "output": "none"}
+{"id": "s164.members", "output": "none"}
+{"id": "s164.receipts_applied", "output": "order created_at <= deleted_at\norder created_at <= last_modified"}
+{"id": "s164.receipts", "output": "none"}
+{"id": "s164.receipt_item", "output": "order created <= last_modified\ncopy currency = receipts.currency\nmin quantity 1\nmax quantity 999"}
+{"id": "s165.account", "output": "order createdAt <= modifiedAt"}
+{"id": "s165.Ticket", "output": "order openedOn <= closedOn\norder resolvedAt <= closedAt"}
+{"id": "s165.Client", "output": "none"}
+{"id": "s165.purchase_orders", "output": "order created <= modifiedAt\norder orderedOn <= deliverBy\nsum subTotal = purchase_order_lines.lineAmount"}
+{"id": "s165.purchase_order_lines", "output": "product lineAmount = pieces * pricePerUnit"}
+{"id": "s166.recipes", "output": "order inserted_at <= removed_at\norder start_date <= end_date\nmin duration_minutes 15\nmin quantity 1\nmax duration_minutes 1440\nmax quantity 99\nminlen username 4\nmaxlen username 30\nvalues role admin|member|viewer\nvalues size small|medium|large"}
+{"id": "s166.accounts", "output": "order created <= deleted_at\norder created <= last_modified"}
+{"id": "s166.tbl_inventory_items", "output": "none"}
+{"id": "s166.allocations", "output": "order inserted_at <= modified_at"}
+{"id": "s166.credit_note", "output": "order created_at <= modified_at\norder credit_date <= due_on\nsum paid_amount = allocations.amount"}
+{"id": "s166.credit_note_lines", "output": "order created_at <= updated"}
+{"id": "s167.members", "output": "order createdAt <= updated"}
+{"id": "s167.Quotes", "output": "order quoteDate <= settledAt\nsum linesTotal = estimate_lines.total"}
+{"id": "s167.estimate_lines", "output": "product total = quantity * unitRate\ncopy currencyCode = Quotes.currencyCode"}
+{"id": "s167.Settlement", "output": "order created <= lastModified\norder periodStart <= periodEnd\nsum totalAmount = payout_items.netAmount"}
+{"id": "s167.payout_items", "output": "none"}
+{"id": "s167.cart", "output": "order insertedAt <= dateModified"}
+{"id": "s167.BasketItem", "output": "order created <= lastModified\nmin count 1\nmax count 10000"}
+{"id": "s168.Customers", "output": "order CreationDate <= ModifiedAt"}
+{"id": "s168.MenuItems", "output": "none"}
+{"id": "s168.Cart", "output": "none"}
+{"id": "s168.BasketItem", "output": "copy UnitRate = MenuItems.UnitPrice"}
+{"id": "s168.Vehicles", "output": "min Rating 1\nmin Year 1900\nmax Rating 10\nmax Year 2099\nminlen DisplayName 1\nmaxlen DisplayName 50\nlen Currency 3\nvalues Status pending|paid|failed|refunded"}
+{"id": "s169.bills", "output": "order billed_at <= due_on\norder creation_date <= date_modified\nsum sub_total = bill_lines.total_price"}
+{"id": "s169.bill_lines", "output": "product total_price = qty * item_price\nmin qty 1\nmax qty 10000"}
+{"id": "s169.purchase_orders", "output": "order created <= confirmed_at\norder created <= updated\norder dispatched_at <= paid_at\norder raised_at <= dispatched_at\norder raised_at <= required_date\nsum subtotal = tbl_po_items.total_amount"}
+{"id": "s169.tbl_po_items", "output": "none"}
+{"id": "s169.jobs", "output": "order inserted_at <= changed_at\norder min_age <= max_age\norder scheduled_for <= started_at\norder started_at <= completed_at"}
+{"id": "s170.vehicles", "output": "order created_on <= modified_at\norder starts_at <= ends_at\nmin capacity 1\nmin discount_percent 0\nmin rating 1\nmax capacity 10000\nmax discount_percent 100\nmax rating 5\nlen code 10"}
+{"id": "s170.policies", "output": "order signed_on <= effective_date\norder start_date <= end_date"}
+{"id": "s171.employees", "output": "none"}
+{"id": "s171.mixes", "output": "order start_date <= to_date\nsum total_duration = songs.duration_seconds"}
+{"id": "s171.songs", "output": "order inserted_at <= deleted_at\norder inserted_at <= updated_at"}
+{"id": "s172.clients", "output": "order date_created <= date_modified\norder date_created <= removed_at"}
+{"id": "s172.sales", "output": "order created_at <= updated\norder sold_at <= payment_date\nsum item_count = sales_details.units\nsum subtotal = sales_details.total"}
+{"id": "s172.sales_details", "output": "product total = units * unit_price"}
+{"id": "s172.products", "output": "order reorder_level <= maximum_stock\nmin reorder_level 0\nmax reorder_level 1000000"}
+{"id": "s172.stock_movements", "output": "product extended_cost = quantity_change * actual_cost"}
+{"id": "s173.Pages", "output": "none"}
+{"id": "s173.Legs", "output": "order InsertedAt <= LastModified\norder StartedAt <= EndedAt"}
+{"id": "s174.Quote", "output": "order insertedAt <= updatedAt\nsum itemsTotal = quote_lines.total"}
+{"id": "s174.quote_lines", "output": "order createdOn <= changedAt\nproduct total = quantity * pricePerUnit"}
+{"id": "s175.merchants", "output": "none"}
+{"id": "s175.deposits_batches", "output": "order created_at <= date_modified\norder start_date <= week_end\norder submitted_at <= processed_at\nsum total_amount = payout_item.amount"}
+{"id": "s175.payout_item", "output": "none"}
+{"id": "s175.account", "output": "none"}
+{"id": "s175.crm_journal_entries", "output": "order created_at <= updated_at\norder week_start <= to_date\nsum debit_total = postings.debit"}
+{"id": "s175.postings", "output": "none"}
+{"id": "s176.tags", "output": "none"}
+{"id": "s176.services", "output": "order inserted_at <= archived_at\norder inserted_at <= updated"}
+{"id": "s176.shop_sales", "output": "order created_at <= confirmed_at\norder created_at <= updated_at\nsum items_total = sale_lines.line_value"}
+{"id": "s176.sale_lines", "output": "copy unit_rate = services.standard_cost"}
+{"id": "s177.Reversals", "output": "order requestedAt <= processedAt"}
+{"id": "s177.transaction", "output": "order createdAt <= modifiedAt"}
+{"id": "s177.Order", "output": "order insertedAt <= removedAt\norder purchasedAt <= deliverBy\norder purchasedAt <= shippedOn\nsum amountPaid = transaction.value"}
+{"id": "s177.OrderItem", "output": "none"}
+{"id": "s178.invoices", "output": "order issue_date <= due_at\norder issue_date <= settled_at\nsum invoice_total = line_items.amount\nsum total_items = line_items.quantity"}
+{"id": "s178.line_items", "output": "none"}
+{"id": "s178.payments", "output": "none"}
+{"id": "s178.work_order", "output": "order inserted_at <= last_modified\nsum paid_amount = payments.amount_paid\nsum sum_total = app_work_order_lines.line_total"}
+{"id": "s178.app_work_order_lines", "output": "product line_total = units * unit_rate\nmin units 1\nmax units 10000"}
+{"id": "s179.users", "output": "order created_at <= changed_at\nmin priority 0\nmax priority 10\nlen currency 3"}
+{"id": "s179.jobs", "output": "min percentage 0\nmin quantity 1\nmin seats 1\nmax percentage 100\nmax quantity 99\nmax seats 8\nminlen username 2\nmaxlen username 150\nvalues visibility everyone|friends|only_me"}
+{"id": "s180.assignments", "output": "order date_hired <= date_terminated"}
+{"id": "s180.variants", "output": "none"}
+{"id": "s180.orders", "output": "order created_at <= updated_at\norder placed_at <= shipped_at\norder shipped_at <= delivery_date\nsum net_total = erp_line_item.amount"}
+{"id": "s180.erp_line_item", "output": "order inserted_at <= updated_at\nproduct amount = quantity * each_price\ncopy each_price = variants.default_price"}
+{"id": "s181.pets", "output": "order created_at <= updated_at\norder start_date <= end_date\nmin capacity 1\nmin rating 1\nmax capacity 1000\nmax rating 10\nmaxlen sku 32\nvalues gender female|male|nonbinary|unspecified"}
+{"id": "s181.inventory_transactions", "output": "order created_at <= updated_at\nproduct extended_cost = units * unit_value"}
+{"id": "s182.stock_adjustment", "output": "order created <= last_modified\nproduct amount = qty * cost_per_unit"}
+{"id": "s182.users", "output": "none"}
+{"id": "s182.goods", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s182.receipts", "output": "order created_at <= changed_at\norder created_at <= confirmed_at\nsum net_total = receipt_lines.extended_price"}
+{"id": "s182.receipt_lines", "output": "product extended_price = pieces * unit_rate\ncopy unit_rate = goods.standard_cost"}
+{"id": "s183.rooms", "output": "min age 16\nmin percentage 0\nmin seats 1\nmax age 130\nmax percentage 100\nmax seats 9\nminlen postal_code 3\nminlen slug 3\nmaxlen postal_code 10\nmaxlen slug 60"}
+{"id": "s183.posts", "output": "none"}
+{"id": "s184.shop_licenses", "output": "order min_salary <= max_salary\norder trial_start <= trial_end\nproduct total = days * rate_per_day"}
+{"id": "s185.CatalogItems", "output": "order createdOn <= deletedAt"}
+{"id": "s185.quotes", "output": "order createdAt <= archivedAt\norder createdAt <= modifiedAt\norder issuedOn <= expiresOn\norder issuedOn <= settledAt\nsum subTotal = estimate_lines.total"}
+{"id": "s185.estimate_lines", "output": "product total = quantity * rate\ncopy rate = CatalogItems.price\nmin quantity 1\nmax quantity 999"}
+{"id": "s185.Users", "output": "order insertedAt <= changedAt"}
+{"id": "s185.AppSkus", "output": "order createdAt <= updatedAt\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s185.bill", "output": "order billDate <= dueOn\norder billDate <= paidOn\norder insertedAt <= updatedAt\nsum amountTotal = BillLines.linePrice\nsum itemCount = BillLines.orderQty"}
+{"id": "s185.BillLines", "output": "order createdOn <= dateModified\ncopy unitCost = AppSkus.price\nmin orderQty 1\nmax orderQty 10000"}
+{"id": "s185.payments", "output": "none"}
+{"id": "s185.receipt", "output": "sum numItems = ReceiptLines.unitCount"}
+{"id": "s185.ReceiptLines", "output": "copy currencyCode = receipt.currencyCode"}
+{"id": "s186.articles", "output": "order reorder_point <= stock_capacity"}
+{"id": "s186.goods_receipt", "output": "order date_created <= last_modified\nproduct amount = quantity_change * received_cost"}
+{"id": "s186.device", "output": "order created_on <= date_modified"}
+{"id": "s187.event", "output": "order created_on <= changed_at\nmin rating 1\nmax rating 5\nminlen slug 3\nvalues level low|medium|high"}
+{"id": "s188.erp_room_bookings", "output": "order checkIn <= checkOut\norder creationDate <= lastModified"}
+{"id": "s188.Comment", "output": "order createdAt <= updated"}
+{"id": "s189.leave_requests", "output": "order date_created <= modified_at\norder date_from <= date_to\norder min_players <= max_players"}
+{"id": "s189.auctions", "output": "order lower_bound <= upper_bound\norder published_at <= unpublished_at\nproduct total = nights * nightly_rate"}
+{"id": "s190.Accounts", "output": "none"}
+{"id": "s190.Build", "output": "order CreatedAt <= Updated\norder MinLength <= MaxLength\norder StartedAt <= FinishedAt"}
+{"id": "s190.PlansUser", "output": "order CreationDate <= RemovedAt\norder LowerBound <= UpperBound\norder StartDate <= EndDate"}
+{"id": "s190.Items", "output": "none"}
+{"id": "s190.InventoryTransactions", "output": "order CreationDate <= UpdatedAt\nproduct TotalValue = Quantity * CostPerUnit\ncopy CostPerUnit = Items.AverageCost"}
+{"id": "s191.receipt", "output": "order created_at <= deleted_at\norder created_at <= updated\nsum amount_due = receipt_items.total\nsum item_count = receipt_items.unit_count"}
+{"id": "s191.receipt_items", "output": "none"}
+{"id": "s192.Customers", "output": "order Created <= LastModified"}
+{"id": "s192.Issues", "output": "order CreatedAt <= UpdatedAt\norder ResolvedAt <= ClosedAt"}
+{"id": "s193.inventory_items", "output": "order inserted_at <= changed_at\norder min_stock <= max_stock"}
+{"id": "s193.goods_receipts", "output": "order created_at <= archived_at\norder created_at <= last_modified\nproduct extended_cost = quantity_change * unit_value\ncopy unit_value = inventory_items.unit_cost"}
+{"id": "s194.products", "output": "none"}
+{"id": "s194.quotes", "output": "order issued_on <= expiry_date\norder issued_on <= paid_at"}
+{"id": "s194.estimate_line", "output": "order date_created <= changed_at\ncopy each_price = products.list_price"}
+{"id": "s194.room", "output": "order created <= updated_at"}
+{"id": "s194.poll", "output": "order created_at <= updated_at\norder published_at <= unpublished_at\norder start_time <= end_time"}
+{"id": "s195.sales", "output": "order sale_date <= expected_delivery\norder sale_date <= payment_date\nsum subtotal = sales_details.total_amount\nsum units_total = sales_details.num_units"}
+{"id": "s195.sales_details", "output": "product total_amount = num_units * each_price"}
+{"id": "s195.buyer", "output": "order creation_date <= updated_at"}
+{"id": "s195.menu_items", "output": "none"}
+{"id": "s195.receipts", "output": "none"}
+{"id": "s195.receipt_items", "output": "product amount = units * price_per_unit"}
+{"id": "s195.venues", "output": "order created_at <= deleted_at\norder created_at <= last_modified"}
+{"id": "s195.promotion", "output": "order available_from <= available_until\norder floor_price <= ceiling_price"}
+{"id": "s196.appointment", "output": "order created_on <= date_modified\norder created_on <= removed_at\norder doors_open_at <= starts_at\norder start_time <= end_time"}
+{"id": "s196.webhook", "output": "order created_on <= updated_at"}
+{"id": "s197.Refunds", "output": "order requestedAt <= completedAt"}
+{"id": "s197.Payment", "output": "order dateCreated <= dateModified"}
+{"id": "s197.Sales", "output": "order saleDate <= canceledAt\norder saleDate <= dueDate\norder saleDate <= shippedOn\nsum amountPaid = Payment.paidAmount\nsum subtotal = sale_lines.totalPrice"}
+{"id": "s197.sale_lines", "output": "copy currencyCode = Sales.currencyCode"}
+{"id": "s198.staff", "output": "none"}
+{"id": "s198.consignments", "output": "order date_created <= updated\norder submitted_at <= processed_at\nsum total_weight = parcels.gross_weight"}
+{"id": "s198.parcels", "output": "none"}
+{"id": "s198.parts", "output": "none"}
+{"id": "s198.invoices", "output": "order issued_at <= due_on\nsum items_total = line_items.line_amount\nsum total_quantity = line_items.units"}
+{"id": "s198.line_items", "output": "product line_amount = units * unit_price\ncopy unit_price = parts.retail_price"}
+{"id": "s199.playlists", "output": "order created_on <= date_modified\norder submitted_at <= processed_at\nsum total_duration = songs.seconds"}
+{"id": "s199.songs", "output": "none"}
+{"id": "s199.listing", "output": "min duration_minutes 1\nmax duration_minutes 480\nminlen postal_code 5\nmaxlen phone 15\nmaxlen postal_code 10\nvalues level beginner|intermediate|advanced"}
+{"id": "s199.flights", "output": "order created <= last_modified\norder scheduled_departure <= scheduled_arrival\norder started_at <= ended_at\nproduct total = days * rate"}
+{"id": "s200.users", "output": "none"}
+{"id": "s200.products", "output": "order created <= changed_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s200.sales", "output": "sum items_total = erp_sales_details.extended_price"}
+{"id": "s200.erp_sales_details", "output": "product extended_price = num_units * price_each\ncopy price_each = products.retail_price"}
+{"id": "s201.semesters", "output": "order min_capacity <= max_capacity\norder starts_on <= ends_on"}
+{"id": "s201.tracks", "output": "order created_at <= updated"}
+{"id": "s201.erp_events", "output": "order created <= modified_at\norder min_price <= max_price\nmin year 1950\nmax year 2099\nvalues gender M|F|X"}
+{"id": "s202.CatalogItem", "output": "none"}
+{"id": "s202.work_orders", "output": "order createdAt <= confirmedAt\norder createdAt <= updatedAt"}
+{"id": "s202.WorkOrderParts", "output": "order createdAt <= updatedAt"}
+{"id": "s203.variants", "output": "order inserted_at <= changed_at\norder reorder_level <= maximum_stock"}
+{"id": "s203.stock_adjustments", "output": "order created_at <= updated_at\nproduct amount = qty * actual_cost"}
+{"id": "s204.customers", "output": "order created_on <= updated_at"}
+{"id": "s204.variants", "output": "none"}
+{"id": "s204.purchase_orders", "output": "sum amount_total = po_line.amount_total"}
+{"id": "s204.po_line", "output": "copy unit_rate = variants.standard_cost\nmin pieces 1"}
+{"id": "s204.variants_5", "output": "order created_on <= updated_at"}
+{"id": "s204.sales", "output": "order sale_date <= ship_date\norder ship_date <= payment_date\nsum total_items = crm_sale_lines.count"}
+{"id": "s204.crm_sale_lines", "output": "copy unit_amount = variants_5.sale_price"}
+{"id": "s205.Accounts", "output": "order InsertedAt <= ModifiedAt"}
+{"id": "s205.Lea", "output": "order EffectiveDate <= ExpirationDate\norder MinimumOrder <= MaximumOrder\nproduct Total = Nights * Rate\ncopy Rate = Accounts.DailyRate"}
+{"id": "s205.Favorites", "output": "none"}
+{"id": "s206.app_merchants", "output": "none"}
+{"id": "s206.settlements", "output": "order creation_date <= removed_at\norder period_start <= week_end\nsum total_amount = payout_items.gross_amount"}
+{"id": "s206.payout_items", "output": "order date_created <= last_modified"}
+{"id": "s206.article", "output": "none"}
+{"id": "s206.receipts", "output": "order created <= updated_at\nsum subtotal = receipt_items.amount"}
+{"id": "s206.receipt_items", "output": "order inserted_at <= updated\nmin pieces 1\nmax pieces 1000"}
+{"id": "s206.projects", "output": "order begin_date <= finish_date\norder created_at <= last_modified\norder period_start <= period_end"}
+{"id": "s207.Parts", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s207.CrmPurchaseOrders", "output": "order orderedOn <= cancelledAt\norder orderedOn <= paidAt\nsum totalAmount = purchase_order_lines.subtotal"}
+{"id": "s207.purchase_order_lines", "output": "copy unitAmount = Parts.unitPrice"}
+{"id": "s207.Tickets", "output": "order createdAt <= updatedAt\nmin percentage 0\nmax percentage 100\nminlen displayName 1\nminlen slug 3\nminlen title 5\nmaxlen displayName 64\nmaxlen slug 60\nvalues gender male|female|other"}
+{"id": "s207.Licenses", "output": "order activatedAt <= expiresAt\norder validFrom <= validUntil"}
+{"id": "s208.timesheets", "output": "order sent_at <= reviewed_at\nsum total_hours = timesheet_entry.duration_hours"}
+{"id": "s208.timesheet_entry", "output": "none"}
+{"id": "s208.buyers", "output": "order created_at <= archived_at\norder created_at <= modified_at"}
+{"id": "s208.shop_order", "output": "order dispatched_at <= paid_at\norder purchased_at <= cancelled_at\norder purchased_at <= dispatched_at"}
+{"id": "s208.line_items", "output": "product line_price = unit_count * rate"}
+{"id": "s208.users", "output": "min stars 1\nmax stars 5\nvalues status draft|published|archived"}
+{"id": "s209.sales_events", "output": "order active_from <= active_until\norder start_date <= end_date"}
+{"id": "s209.client", "output": "none"}
+{"id": "s209.products", "output": "order created_at <= updated_at"}
+{"id": "s209.credit_note", "output": "order created_at <= modified_at\norder credit_date <= due_at\nsum subtotal = credit_note_item.subtotal"}
+{"id": "s209.credit_note_item", "output": "order created_on <= archived_at\norder created_on <= updated_at\nmin quantity 1\nmax quantity 100"}
+{"id": "s209.consignments", "output": "order from_date <= week_end"}
+{"id": "s209.parcels", "output": "none"}
+{"id": "s210.accounts", "output": "none"}
+{"id": "s210.erp_billing_periods", "output": "order begin_date <= finish_date\norder created <= last_modified"}
+{"id": "s210.categories", "output": "none"}
+{"id": "s211.core_product", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s211.sale", "output": "order created_at <= modified_at"}
+{"id": "s211.sale_item", "output": "min unit_count 1\nmax unit_count 999"}
+{"id": "s212.reimbursement", "output": "order created_at <= deleted_at\norder created_at <= updated_at\nsum claimed_total = claim_items.cost"}
+{"id": "s212.claim_items", "output": "none"}
+{"id": "s212.billing_period", "output": "order created_on <= updated_at\norder planned_start <= planned_end"}
+{"id": "s213.Product", "output": "none"}
+{"id": "s213.Quotes", "output": "order IssuedOn <= PaidOn\norder IssuedOn <= ValidUntil\nsum Subtotal = QuoteItem.ExtPrice"}
+{"id": "s213.QuoteItem", "output": "copy UnitRate = Product.UnitPrice"}
+{"id": "s213.Account", "output": "order CreatedOn <= DateModified"}
+{"id": "s213.Item", "output": "none"}
+{"id": "s213.CreditNote", "output": "order CreatedAt <= ChangedAt\norder CreditDate <= PaidOn\nsum ItemsTotal = CoreCreditNoteLines.ItemTotal"}
+{"id": "s213.CoreCreditNoteLines", "output": "order DateCreated <= DateModified\ncopy EachPrice = Item.SalePrice"}
+{"id": "s213.Shift", "output": "order CreatedAt <= ModifiedAt\norder MinimumAmount <= MaximumAmount\norder RegistrationOpensAt <= RegistrationClosesAt\nproduct Charge = Nights * PricePerNight"}
+{"id": "s214.buyer", "output": "order created_at <= last_modified\norder created_at <= removed_at"}
+{"id": "s214.items", "output": "order created <= modified_at"}
+{"id": "s214.receipts_applied", "output": "none"}
+{"id": "s214.work_orders", "output": "order created_at <= last_modified\nsum paid_total = receipts_applied.amount_paid"}
+{"id": "s214.work_order_part", "output": "copy price_per_unit = items.price_amount\nmin num_units 1"}
+{"id": "s214.imports", "output": "order queued_at <= started_at"}
+{"id": "s215.crm_rooms", "output": "none"}
+{"id": "s215.exports", "output": "order inserted_at <= changed_at\norder min_guests <= max_guests\norder queued_at <= started_at\norder start_time <= end_time"}
+{"id": "s216.carts", "output": "sum netAmount = basket_items.totalPrice"}
+{"id": "s216.basket_items", "output": "order created <= dateModified\nproduct totalPrice = pieces * rate\ncopy currencyCode = carts.currencyCode"}
+{"id": "s216.Products", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s216.Orders", "output": "order placedAt <= paymentDate\nsum netTotal = order_products.netAmount"}
+{"id": "s216.order_products", "output": "product netAmount = unitCount * unitPrice\ncopy unitPrice = Products.listPrice"}
+{"id": "s216.tbl_listings", "output": "order minAge <= maxAge\nmin quantity 0\nmax quantity 100\nminlen password 12\nminlen displayName 1\nmaxlen displayName 50"}
+{"id": "s217.webhooks", "output": "none"}
+{"id": "s217.buyers", "output": "order inserted_at <= archived_at\norder inserted_at <= updated"}
+{"id": "s217.invoices", "output": "order issued_at <= due_date\norder issued_at <= paid_at"}
+{"id": "s217.line_items", "output": "none"}
+{"id": "s218.buyer", "output": "order inserted_at <= updated_at"}
+{"id": "s218.product_variants", "output": "none"}
+{"id": "s218.orders", "output": "order inserted_at <= archived_at\norder inserted_at <= confirmed_at\norder inserted_at <= updated_at\norder payment_date <= shipped_at\norder placed_at <= canceled_at\norder placed_at <= due_date\norder placed_at <= payment_date\norder payment_date <= delivery_date\nsum order_total = order_details.net_amount"}
+{"id": "s218.order_details", "output": "product net_amount = qty_ordered * price_each\nmax qty_ordered 999"}
+{"id": "s218.plans_users", "output": "order floor_price <= ceiling_price\norder inserted_at <= last_modified\norder starts_at <= ends_at\norder trial_start <= trial_end"}
+{"id": "s218.members", "output": "order creation_date <= changed_at"}
+{"id": "s218.events", "output": "order starts_at <= ends_at"}
+{"id": "s219.tbl_accounts", "output": "order inserted_at <= last_modified"}
+{"id": "s219.goods", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s219.transactions", "output": "none"}
+{"id": "s219.credit_notes", "output": "order created_on <= updated_at\norder credit_date <= due_on\norder credit_date <= paid_at\nsum sub_total = credit_note_items.ext_price"}
+{"id": "s219.credit_note_items", "output": "order created_at <= date_modified\norder created_at <= removed_at\ncopy currency_code = credit_notes.currency_code\ncopy unit_price = goods.retail_price"}
+{"id": "s219.memberships", "output": "order activated_at <= expires_at\norder creation_date <= updated_at\norder start_km <= end_km"}
+{"id": "s219.account", "output": "order created_on <= updated"}
+{"id": "s219.bills", "output": "order bill_date <= paid_on\norder created_at <= confirmed_at\norder created_at <= date_modified\nsum total = bill_items.amount"}
+{"id": "s219.bill_items", "output": "min units 1\nmax units 99"}
+{"id": "s220.articles", "output": "order date_created <= updated_at\norder start_date <= end_date\nmin quantity 0\nmin rating 1\nmax rating 10\nminlen sku 8\nmaxlen sku 16\nmaxlen title 120\nvalues visibility public|private|unlisted"}
+{"id": "s220.accounts", "output": "order date_created <= last_modified"}
+{"id": "s220.core_inventory_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s220.cart", "output": "sum subtotal = basket_items.line_amount"}
+{"id": "s220.basket_items", "output": "order created <= archived_at\norder created <= last_modified\ncopy unit_cost = core_inventory_items.sale_price"}
+{"id": "s220.member", "output": "order created <= modified_at"}
+{"id": "s220.products", "output": "order created_at <= deleted_at\norder created_at <= updated"}
+{"id": "s220.purchase_orders", "output": "order created_at <= deleted_at\norder created_at <= modified_at\norder order_date <= shipped_at\norder shipped_at <= received_at"}
+{"id": "s220.po_items", "output": "product ext_price = count * unit_price\ncopy unit_price = products.retail_price"}
+{"id": "s221.parts", "output": "order created <= date_modified"}
+{"id": "s221.invoices", "output": "order date_created <= confirmed_at\norder date_created <= modified_at\norder invoice_date <= due_date\nsum total_value = invoice_items.line_amount"}
+{"id": "s221.invoice_items", "output": "none"}
+{"id": "s222.runs", "output": "order enqueued_at <= dequeued_at\norder start_time <= end_time"}
+{"id": "s223.incident", "output": "order creation_date <= modified_at\norder resolved_at <= closed_at"}
+{"id": "s223.budget", "output": "sum budget_total = allocations.budgeted_amount"}
+{"id": "s223.allocations", "output": "none"}
+{"id": "s224.erp_discounts", "output": "order created <= updated_at\norder launch_date <= sunset_date\norder valid_from <= valid_to"}
+{"id": "s224.clients", "output": "order date_created <= updated_at"}
+{"id": "s224.app_articles", "output": "order creation_date <= changed_at"}
+{"id": "s224.purchase_orders", "output": "order created_at <= updated_at\norder raised_at <= cancelled_at\nsum sub_total = po_lines.amount_total\nsum total_items = po_lines.quantity"}
+{"id": "s224.po_lines", "output": "order created <= date_modified\norder created <= deleted_at\nproduct amount_total = quantity * price\ncopy price = app_articles.base_price\nmin quantity 1"}
+{"id": "s225.Employees", "output": "order HireDate <= TerminationDate\norder JoinedAt <= LeftAt\norder MinLength <= MaxLength"}
+{"id": "s225.Employees8", "output": "none"}
+{"id": "s225.Payslips", "output": "order CreatedAt <= ChangedAt\norder FromDate <= PeriodEnd\norder SubmittedAt <= ReviewedAt\nsum TotalEarnings = PayrollLines.Value"}
+{"id": "s225.PayrollLines", "output": "order InsertedAt <= DateModified"}
+{"id": "s225.Jobs", "output": "order CreationDate <= DateModified\norder MinAge <= MaxAge\nmin Age 0\nmin Price 0\nmin Capacity 1\nmin WeightKg 0\nmax Age 120\nmax Price 10000\nmax Capacity 500\nminlen PostalCode 5\nmaxlen PostalCode 10\nlen Currency 3\nvalues Status pending|paid|failed|refunded"}
+{"id": "s226.buyer", "output": "order created_at <= modified_at"}
+{"id": "s226.variants", "output": "none"}
+{"id": "s226.allocations", "output": "none"}
+{"id": "s226.purchase_order", "output": "order order_date <= cancelled_at\norder order_date <= required_date\nsum num_items = purchase_order_line.unit_count\nsum subtotal = purchase_order_line.total_price\nsum total_paid = allocations.value"}
+{"id": "s226.purchase_order_line", "output": "copy unit_amount = variants.standard_cost"}
+{"id": "s226.shop_reviews", "output": "minlen display_name 1\nminlen password 8\nmaxlen display_name 50\nmaxlen title 120"}
+{"id": "s226.skus", "output": "order created_at <= modified_at"}
+{"id": "s226.stock_adjustments", "output": "product value = quantity_change * cost\ncopy cost = skus.average_cost"}
+{"id": "s227.Reviews", "output": "none"}
+{"id": "s227.Stays", "output": "order InsertedAt <= DateModified\norder OpeningBalance <= ClosingBalance\norder StartDate <= EndDate"}
+{"id": "s228.events", "output": "min discount_percent 0\nmin seats 1\nmax discount_percent 100\nmax seats 50\nminlen sku 6\nmaxlen postal_code 10\nmaxlen sku 32\nlen currency 3\nvalues gender female|male|nonbinary|unspecified"}
+{"id": "s228.catalog_item", "output": "order date_created <= modified_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s228.invoice", "output": "order created <= date_modified\norder issued_on <= due_date\nsum amount_total = line_items.ext_price"}
+{"id": "s228.line_items", "output": "product ext_price = qty_ordered * negotiated_price\ncopy currency = invoice.currency"}
+{"id": "s229.pay_stubs", "output": "order start_date <= end_date\nsum gross_pay = earnings.value"}
+{"id": "s229.earnings", "output": "product cost = value * pay_rate"}
+{"id": "s229.reimbursements", "output": "order created_at <= updated_at\nsum claimed_total = claim_items.amount"}
+{"id": "s229.claim_items", "output": "order creation_date <= updated_at"}
+{"id": "s229.recipes", "output": "order starts_at <= ends_at\nmin priority 1\nmin year 1950\nmax priority 10\nmax year 2100\nminlen display_name 1\nminlen sku 16\nminlen title 3\nmaxlen display_name 64\nmaxlen sku 16\nmaxlen title 80\nlen country 2\nvalues role user|admin"}
+{"id": "s230.pages", "output": "order creation_date <= modified_at"}
+{"id": "s230.salary_slips", "output": "order inserted_at <= updated_at\nsum gross_pay = payslip_lines.value"}
+{"id": "s230.payslip_lines", "output": "none"}
+{"id": "s230.menu_items", "output": "none"}
+{"id": "s230.receipts_applied", "output": "none"}
+{"id": "s230.receipt", "output": "order created_at <= changed_at\nsum amount_paid = receipts_applied.amount_paid\nsum subtotal = receipt_lines.subtotal"}
+{"id": "s230.receipt_lines", "output": "copy each_price = menu_items.unit_price"}
+{"id": "s231.users", "output": "order date_created <= changed_at"}
+{"id": "s231.menu_item", "output": "none"}
+{"id": "s231.bills", "output": "order bill_date <= due_at"}
+{"id": "s231.bill_lines", "output": "order created_at <= updated_at\ncopy unit_rate = menu_item.retail_price\nmax pieces 999"}
+{"id": "s231.venues", "output": "order creation_date <= archived_at"}
+{"id": "s231.meetings", "output": "order start_at <= end_at\norder start_time <= end_time\nproduct total_cost = duration_hours * rate"}
+{"id": "s231.registrations", "output": "order admitted_at <= discharged_at\norder enrolled_on <= completed_on\norder inserted_at <= updated_at\norder min_capacity <= max_capacity"}
+{"id": "s232.Staff", "output": "order hireDate <= terminationDate\norder insertedAt <= dateModified"}
+{"id": "s233.incident", "output": "order created_at <= first_response_at\norder opened_on <= closed_on\nproduct charge = num_days * rate"}
+{"id": "s233.payslip", "output": "order created_at <= updated_at\nsum gross_pay = payroll_lines.value"}
+{"id": "s233.payroll_lines", "output": "order created_at <= modified_at\norder created_at <= removed_at"}
+{"id": "s233.product_variant", "output": "order created_at <= date_modified"}
+{"id": "s233.payments", "output": "none"}
+{"id": "s233.quotes", "output": "order quote_date <= expiry_date\nsum amount_paid = payments.amount_paid\nsum items_total = estimate_lines.total_amount"}
+{"id": "s233.estimate_lines", "output": "product total_amount = order_qty * price\ncopy price = product_variant.default_price"}
+{"id": "s234.CatalogItem", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s234.ReceiptsApplied", "output": "order CreatedAt <= DeletedAt"}
+{"id": "s234.Invoices", "output": "order CreatedAt <= ChangedAt\norder IssueDate <= DueOn\nsum SubTotal = InvoiceDetails.ExtendedPrice"}
+{"id": "s234.InvoiceDetails", "output": "product ExtendedPrice = QuantityOrdered * EachPrice\ncopy EachPrice = CatalogItem.ListPrice"}
+{"id": "s234.DepositsBatch", "output": "sum Amount = PayoutItems.NetAmount"}
+{"id": "s234.PayoutItems", "output": "order DateCreated <= UpdatedAt"}
+{"id": "s234.Buyer9", "output": "order CreatedAt <= Updated"}
+{"id": "s234.Sku", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s234.Chargebacks", "output": "order RequestedAt <= CompletedAt"}
+{"id": "s234.Allocations", "output": "order CreatedAt <= ModifiedAt\norder CreatedAt <= RemovedAt"}
+{"id": "s234.ErpCreditNotes", "output": "order CreditDate <= DueDate\norder CreditDate <= PaidAt\nsum PaidAmount = Allocations.AmountPaid\nsum SubTotal = CreditNoteLine.ItemTotal"}
+{"id": "s234.CreditNoteLine", "output": "product ItemTotal = Units * UnitAmount\ncopy CurrencyCode = ErpCreditNotes.CurrencyCode\ncopy UnitAmount = Sku.PriceAmount\nmin Units 1\nmax Units 100"}
+{"id": "s235.inventory_items", "output": "none"}
+{"id": "s235.reversals", "output": "order requested_at <= completed_at"}
+{"id": "s235.transactions", "output": "order created_at <= last_modified"}
+{"id": "s235.work_orders", "output": "order created_at <= confirmed_at\nsum paid_total = transactions.amount\nsum sub_total = work_order_parts.amount"}
+{"id": "s235.work_order_parts", "output": "copy unit_rate = inventory_items.retail_price"}
+{"id": "s236.flights", "output": "order departs_at <= arrives_at"}
+{"id": "s236.events", "output": "order inserted_at <= modified_at\nmin price 0\nminlen postal_code 3\nminlen sku 6\nminlen slug 3\nmaxlen postal_code 10\nmaxlen sku 16\nmaxlen slug 60\nvalues level beginner|intermediate|advanced"}
+{"id": "s237.vacations", "output": "order start_date <= end_date"}
+{"id": "s238.MenuItems", "output": "order CreatedAt <= LastModified\norder ReorderPoint <= StockCapacity"}
+{"id": "s238.StockMoves", "output": "product ExtendedCost = Quantity * CostPerUnit\ncopy CostPerUnit = MenuItems.StandardCost"}
+{"id": "s238.ErpApiKeys", "output": "none"}
+{"id": "s238.Appointments", "output": "order MinPrice <= MaxPrice\norder ScheduledStart <= ScheduledEnd"}
+{"id": "s239.goods", "output": "order min_stock <= max_stock\nmin min_stock 0\nmax min_stock 1000000"}
+{"id": "s239.inventory_transactions", "output": "order creation_date <= updated\nproduct extended_cost = quantity_change * unit_cost"}
+{"id": "s239.consignment", "output": "order period_start <= week_end\norder submitted_at <= reviewed_at\nsum gross_weight = core_shipment_items.weight"}
+{"id": "s239.core_shipment_items", "output": "order inserted_at <= modified_at"}
+{"id": "s239.profiles", "output": "order inserted_at <= archived_at\norder inserted_at <= modified_at"}
+{"id": "s240.product_variant", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s240.reversals", "output": "order requested_at <= processed_at"}
+{"id": "s240.receipts_applied", "output": "none"}
+{"id": "s240.sale", "output": "order created_at <= confirmed_at\norder created_at <= updated_at\norder sale_date <= paid_at\nsum sub_total = sale_item.line_price"}
+{"id": "s240.sale_item", "output": "copy price_each = product_variant.unit_price"}
+{"id": "s240.payouts", "output": "order week_start <= end_date\nsum total_amount = deposit_items.net_amount"}
+{"id": "s240.deposit_items", "output": "none"}
+{"id": "s240.catalog_items", "output": "order created_at <= updated\norder reorder_point <= max_stock\nmin reorder_point 0\nmax reorder_point 1000000"}
+{"id": "s240.stock_adjustment", "output": "order created <= updated\nproduct extended_cost = quantity * actual_cost"}
+{"id": "s241.favorites", "output": "order inserted_at <= changed_at"}
+{"id": "s241.reversal", "output": "order requested_at <= processed_at"}
+{"id": "s241.app_allocations", "output": "none"}
+{"id": "s241.orders", "output": "order order_date <= payment_date\nsum subtotal = order_details.total_amount"}
+{"id": "s241.order_details", "output": "order inserted_at <= updated_at\nproduct total_amount = order_qty * unit_price\nmin order_qty 1\nmax order_qty 100"}
+{"id": "s242.skus", "output": "order reorder_level <= stock_capacity\nmin reorder_level 0\nmax reorder_level 1000000"}
+{"id": "s242.stock_movements", "output": "product amount = quantity_change * cost_per_unit"}
+{"id": "s243.Product", "output": "order dateCreated <= changedAt\norder dateCreated <= removedAt\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s243.chargebacks", "output": "order requestedAt <= refundedAt"}
+{"id": "s243.ReceiptsApplied", "output": "none"}
+{"id": "s243.Orders", "output": "order insertedAt <= confirmedAt\norder insertedAt <= updatedAt\norder placedAt <= shippedAt\norder shippedAt <= paymentDate\norder paymentDate <= receivedAt\nsum amountPaid = ReceiptsApplied.paidAmount\nsum subTotal = line_items.subtotal\nsum unitsTotal = line_items.quantityOrdered"}
+{"id": "s243.line_items", "output": "order dateCreated <= updated\nmin quantityOrdered 1\nmax quantityOrdered 1000"}
+{"id": "s243.Services", "output": "order created <= modifiedAt\norder safetyStock <= maximumStock\nmin safetyStock 0"}
+{"id": "s243.stock_movements", "output": "product totalCost = qty * unitCost\ncopy unitCost = Services.standardCost"}
+{"id": "s244.app_positions_held", "output": "order min_age <= max_age\norder start_date <= end_date"}
+{"id": "s245.MenuItems", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s245.Payments", "output": "none"}
+{"id": "s245.Bills", "output": "order BillDate <= PaidAmount\norder DateCreated <= ConfirmedAt\norder BillDate <= PaymentDue\nsum PaidAmount = Payments.AmountPaid\nsum SubTotal = BillItems.Total\nsum TotalItems = BillItems.Qty"}
+{"id": "s245.BillItems", "output": "order CreatedOn <= UpdatedAt\ncopy Currency = Bills.Currency\ncopy PriceEach = MenuItems.Price"}
+{"id": "s245.Merchants", "output": "none"}
+{"id": "s245.Payout", "output": "sum NetAmount = SettlementItem.GrossAmount"}
+{"id": "s245.SettlementItem", "output": "none"}
+{"id": "s246.service", "output": "none"}
+{"id": "s246.transactions", "output": "none"}
+{"id": "s246.credit_notes", "output": "order issued_at <= due_date\nsum amount_paid = transactions.paid_amount\nsum sub_total = app_credit_note_line.line_amount"}
+{"id": "s246.app_credit_note_line", "output": "order created_at <= changed_at"}
+{"id": "s247.venues", "output": "none"}
+{"id": "s247.tickets", "output": "order created_at <= first_response_at\norder min_score <= max_score\norder reported_at <= acknowledged_at"}
+{"id": "s247.admissions", "output": "order enrolled_on <= completed_on\norder term_start <= term_end\nproduct total_price = num_days * rate_per_day"}
+{"id": "s248.Budgets", "output": "order KickoffDate <= Deadline"}
+{"id": "s248.Donations", "output": "min DurationMinutes 1\nmin Rating 1\nmax DurationMinutes 480\nmax Rating 10\nmaxlen Bio 280\nvalues Gender M|F|X"}
+{"id": "s249.AppWarranty", "output": "order coverageStart <= coverageEnd\norder creationDate <= changedAt\norder signedOn <= effectiveDate"}
+{"id": "s250.journal_entries", "output": "order created_at <= updated_at\nsum total_debit = journal_lines.debit_amount"}
+{"id": "s250.journal_lines", "output": "none"}
+{"id": "s250.payroll_runs", "output": "order submitted_at <= reviewed_at"}
+{"id": "s250.pay_items", "output": "none"}
+{"id": "s251.stock_movement", "output": "product value = quantity * unit_cost"}
+{"id": "s251.app_vehicle", "output": "order creation_date <= changed_at"}
+{"id": "s251.employments", "output": "order hire_date <= termination_date\norder hired_on <= left_on\nproduct total = duration_hours * rate"}
+{"id": "s252.playlists", "output": "order submitted_at <= processed_at\nsum total_duration = songs.duration_seconds"}
+{"id": "s252.songs", "output": "none"}
+{"id": "s252.buyers", "output": "none"}
+{"id": "s252.services", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s252.receipts", "output": "order created_at <= date_modified\nsum lines_total = receipt_lines.total_amount"}
+{"id": "s252.receipt_lines", "output": "product total_amount = qty_ordered * item_price\ncopy item_price = services.base_price"}
+{"id": "s253.Projects", "output": "order CreatedAt <= UpdatedAt\norder KickoffDate <= Deadline\norder StartDate <= EndDate\nproduct Total = BillableHours * NightlyRate"}
+{"id": "s253.Accounts", "output": "min Percentage 0\nmin Quantity 0\nmax Percentage 100\nmax Quantity 99\nminlen Password 10\nvalues Level junior|mid|senior"}
+{"id": "s253.Accounts2", "output": "order CreatedOn <= UpdatedAt"}
+{"id": "s253.ProductVariants", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s253.Reversals", "output": "order RequestedAt <= CompletedAt"}
+{"id": "s253.Transactions", "output": "none"}
+{"id": "s253.Order", "output": "order OrderDate <= DeliverBy\norder OrderDate <= ShippedAt\norder ShippedAt <= PaidAt\nsum NetTotal = LineItems.Subtotal"}
+{"id": "s253.LineItems", "output": "order CreatedAt <= ModifiedAt\nproduct Subtotal = UnitCount * UnitRate\ncopy UnitRate = ProductVariants.RetailPrice"}
+{"id": "s254.members", "output": "none"}
+{"id": "s254.purchase_orders", "output": "order dispatchedAt <= paidAt\norder orderDate <= dispatchedAt\nsum itemsTotal = purchase_order_item.extendedPrice"}
+{"id": "s254.purchase_order_item", "output": "product extendedPrice = unitCount * unitPrice\nmin unitCount 1\nmax unitCount 1000"}
+{"id": "s255.parts", "output": "order safety_stock <= max_stock"}
+{"id": "s255.inventory_transactions", "output": "copy cost_per_unit = parts.average_cost"}
+{"id": "s255.albums", "output": "order from_date <= end_date\norder inserted_at <= modified_at\nsum total_duration = tracks.seconds"}
+{"id": "s255.tracks", "output": "none"}
+{"id": "s256.staff", "output": "none"}
+{"id": "s256.reimbursements", "output": "order created <= modified_at\norder start_date <= period_end\norder submitted_at <= processed_at\nsum total_amount = claim_items.amount_claimed"}
+{"id": "s256.claim_items", "output": "none"}
+{"id": "s256.core_product_variants", "output": "none"}
+{"id": "s256.refunds", "output": "order requested_at <= completed_at"}
+{"id": "s256.receipts_applied", "output": "none"}
+{"id": "s256.quotes", "output": "sum paid_amount = receipts_applied.value\nsum total_value = quote_lines.total"}
+{"id": "s256.quote_lines", "output": "order created_at <= archived_at\nproduct total = qty_ordered * unit_cost\ncopy unit_cost = core_product_variants.retail_price\nmin qty_ordered 1\nmax qty_ordered 100"}
+{"id": "s256.part", "output": "order date_created <= updated_at"}
+{"id": "s256.receipts", "output": "order date_created <= updated_at\nsum total_price = receipt_lines.subtotal"}
+{"id": "s256.receipt_lines", "output": "order date_created <= archived_at\nproduct subtotal = order_qty * unit_amount\ncopy currency = receipts.currency\nmin order_qty 1"}
+{"id": "s257.Users", "output": "order insertedAt <= updated"}
+{"id": "s257.InventoryItems", "output": "none"}
+{"id": "s257.ReceiptsApplied", "output": "order createdAt <= updatedAt"}
+{"id": "s257.WorkOrder", "output": "sum grandTotal = WorkOrderParts.netAmount\nsum paidTotal = ReceiptsApplied.paidAmount"}
+{"id": "s257.WorkOrderParts", "output": "product netAmount = qtyOrdered * pricePerUnit"}
+{"id": "s258.AuditLogs", "output": "order createdAt <= lastModified"}
+{"id": "s258.skus", "output": "order createdAt <= modifiedAt"}
+{"id": "s258.StockMoves", "output": "order creationDate <= updatedAt\nproduct value = qty * unitCost\ncopy unitCost = skus.standardCost"}
+{"id": "s258.Sku", "output": "order createdAt <= lastModified"}
+{"id": "s258.stock_adjustments", "output": "copy unitCost = Sku.averageCost"}
+{"id": "s259.parts", "output": "order inserted_at <= last_modified\norder reorder_point <= stock_capacity"}
+{"id": "s259.stock_movements", "output": "product total_value = quantity_change * landed_cost"}
+{"id": "s260.tbl_catalog_item", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s260.invoices", "output": "order created_at <= updated_at\norder invoice_date <= due_date\norder invoice_date <= settled_at\nsum items_total = invoice_details.line_value"}
+{"id": "s260.invoice_details", "output": "none"}
+{"id": "s261.Goods", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s261.credit_notes", "output": "order issuedAt <= paymentDue\nsum linesTotal = ErpCreditNoteLines.totalPrice"}
+{"id": "s261.ErpCreditNoteLines", "output": "none"}
+{"id": "s262.client", "output": "none"}
+{"id": "s262.product_variants", "output": "order created_on <= changed_at"}
+{"id": "s262.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s262.transactions", "output": "none"}
+{"id": "s262.credit_note", "output": "order created_at <= updated_at\norder credit_date <= paid_at\nsum total_paid = transactions.paid_amount"}
+{"id": "s262.erp_credit_note_lines", "output": "copy item_price = product_variants.list_price\nmin order_qty 1\nmax order_qty 10000"}
+{"id": "s262.item", "output": "order created_at <= last_modified"}
+{"id": "s262.work_orders", "output": "order created_at <= confirmed_at\norder created_at <= updated_at\nsum num_items = work_order_part.unit_count\nsum total_amount = work_order_part.line_total"}
+{"id": "s262.work_order_part", "output": "copy unit_cost = item.standard_cost"}
+{"id": "s263.people", "output": "order birth_date <= death_date\norder created_on <= updated_at"}
+{"id": "s263.accounts", "output": "order start_date <= end_date\nmin capacity 1\nmin quantity 0\nmin rating 1\nmin seats 1\nmax capacity 500\nmax rating 5\nmax seats 8\nlen country 2\nvalues status pending|paid|failed|refunded"}
+{"id": "s263.members", "output": "order inserted_at <= deleted_at"}
+{"id": "s263.bill", "output": "order created_at <= archived_at\norder created_at <= updated"}
+{"id": "s263.bill_lines", "output": "product line_value = count * unit_amount\nmin count 1"}
+{"id": "s264.listings", "output": "order date_created <= modified_at\norder start_time <= end_time"}
+{"id": "s265.Favorites", "output": "order CreatedAt <= ChangedAt"}
+{"id": "s265.Quotes", "output": "order CreatedAt <= DeletedAt\norder CreatedAt <= Updated\nsum InvoiceTotal = QuoteItems.Total"}
+{"id": "s265.QuoteItems", "output": "order CreatedAt <= DateModified\nproduct Total = OrderQty * PriceEach\nmin OrderQty 1"}
+{"id": "s265.Members", "output": "order DateCreated <= ModifiedAt"}
+{"id": "s265.Phases", "output": "order OpensOn <= ClosesOn"}
+{"id": "s266.stock_adjustments", "output": "order created_at <= modified_at\nproduct amount = quantity_change * cost"}
+{"id": "s266.catalog_items", "output": "order creation_date <= updated_at"}
+{"id": "s266.stock_adjustments_9", "output": "copy unit_value = catalog_items.standard_cost"}
+{"id": "s267.accounts", "output": "none"}
+{"id": "s267.services", "output": "order created_at <= updated_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s267.purchase_orders", "output": "order created <= confirmed_at\norder created <= updated\norder order_date <= dispatched_at\nsum net_total = po_lines.line_amount\nsum total_quantity = po_lines.order_qty"}
+{"id": "s267.po_lines", "output": "product line_amount = order_qty * unit_price\ncopy unit_price = services.default_price"}
+{"id": "s267.members", "output": "none"}
+{"id": "s267.invoices", "output": "order issued_on <= paid_at\norder issued_on <= payment_due\nsum amount = tbl_invoice_details.line_total"}
+{"id": "s267.tbl_invoice_details", "output": "order created_at <= changed_at\nproduct line_total = quantity * rate\nmin quantity 1"}
+{"id": "s268.CrmItems", "output": "none"}
+{"id": "s268.StockMoves", "output": "product value = qty * actualCost"}
+{"id": "s268.Builds", "output": "order minScore <= maxScore\norder startedAt <= finishedAt"}
+{"id": "s269.shifts", "output": "order inserted_at <= archived_at\norder inserted_at <= updated_at\norder starts_at <= ends_at"}
+{"id": "s269.customers", "output": "order created_at <= updated"}
+{"id": "s269.inventory_items", "output": "none"}
+{"id": "s269.invoice", "output": "order created_at <= changed_at\norder invoice_date <= due_on\nsum items_total = invoice_lines.amount"}
+{"id": "s269.invoice_lines", "output": "order created_on <= last_modified\nproduct amount = quantity * unit_cost"}
+{"id": "s270.accounts", "output": "min price 0\nmaxlen display_name 64\nmaxlen email 320\nlen code 6"}
+{"id": "s270.app_vehicles", "output": "order created_at <= deleted_at\norder created_at <= updated"}
+{"id": "s270.cases", "output": "order created_at <= first_response_at\norder created_at <= updated_at\norder reported_at <= acknowledged_at"}
+{"id": "s270.customers", "output": "order date_created <= date_modified"}
+{"id": "s270.sku", "output": "none"}
+{"id": "s270.purchase_orders", "output": "sum items_total = po_lines.amount"}
+{"id": "s270.po_lines", "output": "product amount = quantity_ordered * price_each\ncopy price_each = sku.standard_cost"}
+{"id": "s271.services", "output": "none"}
+{"id": "s271.sales", "output": "sum total_due = sales_details.line_amount"}
+{"id": "s271.sales_details", "output": "copy rate = services.retail_price"}
+{"id": "s272.Classes", "output": "order Low <= High\norder StartAt <= EndAt\norder StartsAt <= EndsAt"}
+{"id": "s272.Items", "output": "none"}
+{"id": "s272.Bills", "output": "order BilledAt <= DueDate\norder BilledAt <= PaidAt\nsum LinesTotal = BillItems.ItemTotal"}
+{"id": "s272.BillItems", "output": "order CreatedAt <= ChangedAt\nproduct ItemTotal = QtyOrdered * Price\ncopy Price = Items.DefaultPrice\nmin QtyOrdered 1"}
+{"id": "s273.api_keys", "output": "order created_on <= last_modified"}
+{"id": "s273.users", "output": "none"}
+{"id": "s273.ledger_batches", "output": "order period_start <= week_end\nsum total_debit = postings.debit_amount"}
+{"id": "s273.postings", "output": "none"}
+{"id": "s274.rooms", "output": "min seats 1\nmax seats 50\nmaxlen sku 16\nlen code 6\nvalues level junior|mid|senior\nvalues visibility everyone|friends|only_me"}
+{"id": "s274.goods", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s274.credit_note", "output": "order created <= modified_at\norder issued_at <= due_at\nsum sub_total = credit_note_items.line_value"}
+{"id": "s274.credit_note_items", "output": "order inserted_at <= deleted_at\norder inserted_at <= modified_at\nproduct line_value = order_qty * unit_price\ncopy unit_price = goods.list_price"}
+{"id": "s275.quotes", "output": "order creation_date <= confirmed_at\norder issued_on <= expires_on\norder issued_on <= paid_at\nsum items_total = quote_items.net_amount"}
+{"id": "s275.quote_items", "output": "order created_at <= updated_at\nproduct net_amount = qty_ordered * price\ncopy currency_code = quotes.currency_code"}
+{"id": "s275.menu_item", "output": "order created <= changed_at"}
+{"id": "s275.credit_notes", "output": "none"}
+{"id": "s275.credit_note_lines", "output": "none"}
+{"id": "s275.attachments", "output": "order created_at <= modified_at"}
+{"id": "s276.events", "output": "order creation_date <= updated_at\norder starts_at <= ends_at\nmin discount_percent 0\nmin price 0\nmin weight_kg 0\nmax discount_percent 100\nlen country 2\nlen currency 3\nvalues visibility public|private"}
+{"id": "s276.vehicle", "output": "order starts_at <= ends_at\nmin discount_percent 0\nmin stars 0\nmax discount_percent 100\nmax stars 5\nminlen slug 3\nlen code 6\nvalues size XS|S|M|L|XL"}
+{"id": "s276.client", "output": "order created_at <= modified_at"}
+{"id": "s276.variants", "output": "order creation_date <= modified_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s276.receipts", "output": "order created_at <= confirmed_at\nsum net_total = receipt_items.total"}
+{"id": "s276.receipt_items", "output": "copy unit_cost = variants.sale_price"}
+{"id": "s277.inventory_items", "output": "order date_created <= updated"}
+{"id": "s277.chargebacks", "output": "order requested_at <= refunded_at"}
+{"id": "s277.allocations", "output": "none"}
+{"id": "s277.receipts", "output": "order creation_date <= archived_at\norder creation_date <= updated_at\nsum lines_total = receipt_line.override_price\nsum num_items = receipt_line.count"}
+{"id": "s277.receipt_line", "output": "none"}
+{"id": "s277.listings", "output": "order creation_date <= modified_at\norder start_time <= end_time\nproduct total_cost = duration_hours * daily_rate"}
+{"id": "s277.variants", "output": "order created_at <= updated_at\norder min_order_quantity <= max_order_quantity"}
+{"id": "s277.orders", "output": "order created_at <= updated_at\nsum sub_total = order_items.line_price"}
+{"id": "s277.order_items", "output": "copy price_per_unit = variants.list_price"}
+{"id": "s278.MenuItem", "output": "order created <= lastModified\norder created <= removedAt\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s278.CreditNote", "output": "order created <= confirmedAt\norder created <= removedAt\norder creditDate <= dueDate\nsum unitsTotal = CreditNoteLines.orderQty"}
+{"id": "s278.CreditNoteLines", "output": "none"}
+{"id": "s278.TblItems", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s278.Payments", "output": "order created <= updatedAt"}
+{"id": "s278.work_orders", "output": "sum amountPaid = Payments.amountPaid\nsum subTotal = work_order_lines.netAmount"}
+{"id": "s278.work_order_lines", "output": "product netAmount = pieces * unitPrice\ncopy unitPrice = TblItems.priceAmount\nmin pieces 1\nmax pieces 999"}
+{"id": "s279.stock_adjustments", "output": "order date_created <= last_modified"}
+{"id": "s280.crm_customers", "output": "none"}
+{"id": "s280.catalog_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s280.credit_notes", "output": "order created <= changed_at\norder created <= confirmed_at\nsum sub_total = credit_note_lines.line_amount"}
+{"id": "s280.credit_note_lines", "output": "order date_created <= archived_at\ncopy unit_price = catalog_items.standard_cost"}
+{"id": "s280.good", "output": "none"}
+{"id": "s280.sales", "output": "order date_created <= updated_at\norder sold_at <= cancelled_at\nsum lines_total = sales_details.total_price"}
+{"id": "s280.sales_details", "output": "product total_price = quantity_ordered * custom_price\nmin quantity_ordered 1"}
+{"id": "s281.shop_coupons", "output": "order min_age <= max_age\nmin duration_minutes 15\nmin percentage 0\nmin price 0\nmin priority 1\nmax duration_minutes 1440\nmax percentage 100\nmax priority 10\nminlen display_name 1\nminlen slug 3\nmaxlen display_name 100\nmaxlen slug 100"}
+{"id": "s282.cost_center", "output": "sum allocated_total = budget_lines.amount"}
+{"id": "s282.budget_lines", "output": "none"}
+{"id": "s282.positions_held", "output": "order joined_at <= left_at\norder lower_bound <= upper_bound"}
+{"id": "s283.Part", "output": "order ReorderLevel <= MaxStock"}
+{"id": "s283.StockAdjustments", "output": "product TotalValue = Quantity * CostPerUnit\ncopy CostPerUnit = Part.StandardCost"}
+{"id": "s283.PackagesBatches", "output": "order FromDate <= ToDate\nsum WeightTotal = ShipmentItems.GrossWeight"}
+{"id": "s283.ShipmentItems", "output": "none"}
+{"id": "s283.Vacations", "output": "order CreationDate <= ModifiedAt\norder FromDate <= ToDate\norder RentalDate <= ReturnDate\nproduct Total = Nights * Rate"}
+{"id": "s284.Customers", "output": "order InsertedAt <= DateModified"}
+{"id": "s284.TblCatalogItems", "output": "order MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s284.WorkOrders", "output": "order InsertedAt <= Updated"}
+{"id": "s284.WorkOrderParts", "output": "copy PriceEach = TblCatalogItems.PriceAmount\nmin UnitCount 1\nmax UnitCount 100"}
+{"id": "s284.Booking", "output": "order ArrivalDate <= DepartureDate"}
+{"id": "s285.account", "output": "none"}
+{"id": "s285.work_orders", "output": "order created_at <= removed_at\nsum lines_total = work_order_lines.item_total"}
+{"id": "s285.work_order_lines", "output": "product item_total = count * price_each\nmin count 1\nmax count 10000"}
+{"id": "s286.TblReservations", "output": "order arrivalDate <= departureDate"}
+{"id": "s286.ErpCustomers", "output": "none"}
+{"id": "s286.inventory_items", "output": "none"}
+{"id": "s286.sales", "output": "none"}
+{"id": "s286.SaleLines", "output": "copy price = inventory_items.priceAmount"}
+{"id": "s286.Merchants", "output": "none"}
+{"id": "s286.DepositsBatch", "output": "order creationDate <= updatedAt\norder sentAt <= processedAt\norder startDate <= endDate\nsum amount = SettlementItems.grossAmount"}
+{"id": "s286.SettlementItems", "output": "none"}
+{"id": "s287.vehicle", "output": "order created_at <= last_modified"}
+{"id": "s287.crm_webinars", "output": "order begins_at <= finishes_at\nproduct amount = duration_hours * rate"}
+{"id": "s288.Timesheets", "output": "order CreatedAt <= ChangedAt\norder StartDate <= PeriodEnd\norder SubmittedAt <= ApprovedAt"}
+{"id": "s288.TimesheetLines", "output": "product Total = Hours * UnitRate"}
+{"id": "s288.Articles", "output": "order InsertedAt <= DateModified\norder OpensAt <= ClosesAt\nmin DiscountPercent 0\nmin Quantity 1\nmin Stars 0\nmax DiscountPercent 100\nmax Quantity 99\nmax Stars 5\nlen Code 10\nmaxlen Sku 16\nvalues Size XS|S|M|L|XL\nvalues Visibility everyone|friends|only_me"}
+{"id": "s288.Item", "output": "order CreationDate <= RemovedAt"}
+{"id": "s288.Transactions", "output": "none"}
+{"id": "s288.Carts", "output": "sum TotalAmount = CartLines.ItemTotal"}
+{"id": "s288.CartLines", "output": "product ItemTotal = Quantity * Rate\ncopy Rate = Item.SalePrice\nmin Quantity 1\nmax Quantity 10000"}
+{"id": "s289.project", "output": "order min_capacity <= max_capacity\norder planned_start <= planned_end\nproduct charge = hours * rate"}
+{"id": "s289.tbl_buyers", "output": "order created_at <= updated"}
+{"id": "s289.products", "output": "order date_created <= removed_at"}
+{"id": "s289.transactions", "output": "none"}
+{"id": "s289.tbl_credit_notes", "output": "order credit_date <= due_on\nsum subtotal = credit_note_lines.line_value"}
+{"id": "s289.credit_note_lines", "output": "product line_value = units * unit_rate\nmin units 1"}
+{"id": "s289.shifts", "output": "order start_at <= end_at\norder start_time <= end_time\nproduct amount = num_days * price_per_night"}
+{"id": "s290.Registrations", "output": "order TermStart <= TermEnd"}
+{"id": "s290.CrmServices", "output": "order CreationDate <= ArchivedAt\norder CreationDate <= UpdatedAt\norder MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s290.Reversal", "output": "order RequestedAt <= RefundedAt"}
+{"id": "s290.Payments", "output": "none"}
+{"id": "s290.Carts", "output": "order CreatedOn <= LastModified\nsum SumTotal = BasketItems.ItemTotal"}
+{"id": "s290.BasketItems", "output": "order CreatedAt <= ChangedAt\norder CreatedAt <= DeletedAt"}
+{"id": "s291.transactions", "output": "order creation_date <= updated_at"}
+{"id": "s291.sale", "output": "order shipped_on <= received_at\norder sold_at <= shipped_on\nsum items_total = sale_items.total"}
+{"id": "s291.sale_items", "output": "min quantity_ordered 1\nmax quantity_ordered 1000"}
+{"id": "s291.invoice", "output": "sum subtotal = invoice_item.amount_total"}
+{"id": "s291.invoice_item", "output": "product amount_total = quantity * unit_amount\ncopy currency_code = invoice.currency_code\nmin quantity 1\nmax quantity 999"}
+{"id": "s292.webhooks", "output": "order creation_date <= changed_at\norder creation_date <= removed_at"}
+{"id": "s293.ledger_batches", "output": "order submitted_at <= approved_at\nsum total_debit = app_journal_lines.debit"}
+{"id": "s293.app_journal_lines", "output": "none"}
+{"id": "s293.listing", "output": "order valid_from <= valid_until\nmin age 16\nmin capacity 1\nmin weight_kg 0\nmax age 150\nminlen code 4\nmaxlen code 20\nvalues status active|inactive|suspended"}
+{"id": "s293.users", "output": "order created <= modified_at\norder created <= removed_at"}
+{"id": "s293.variants", "output": "none"}
+{"id": "s293.allocations", "output": "none"}
+{"id": "s293.receipts", "output": "order inserted_at <= last_modified"}
+{"id": "s293.receipt_items", "output": "order created_on <= removed_at\ncopy unit_price = variants.sale_price"}
+{"id": "s294.ProductVariant", "output": "order dateCreated <= updatedAt"}
+{"id": "s294.invoices", "output": "order createdOn <= dateModified\norder createdOn <= removedAt\norder issuedAt <= dueAt\norder issuedAt <= settledAt\nsum numItems = invoice_lines.quantityOrdered\nsum subTotal = invoice_lines.totalPrice"}
+{"id": "s294.invoice_lines", "output": "copy price = ProductVariant.priceAmount"}
+{"id": "s295.accounts", "output": "order inserted_at <= last_modified"}
+{"id": "s295.menu_items", "output": "order created_at <= changed_at"}
+{"id": "s295.refunds", "output": "order requested_at <= completed_at"}
+{"id": "s295.transactions", "output": "order created_at <= changed_at"}
+{"id": "s295.receipts", "output": "order created_at <= archived_at\norder created_at <= changed_at\nsum net_total = receipt_line.net_amount"}
+{"id": "s295.receipt_line", "output": "order created_at <= updated_at\nproduct net_amount = quantity * item_price\ncopy item_price = menu_items.sale_price\nmin quantity 1\nmax quantity 999"}
+{"id": "s296.tbl_members", "output": "order created_at <= updated"}
+{"id": "s296.allocations", "output": "none"}
+{"id": "s296.orders", "output": "order created <= confirmed_at\norder created <= modified_at\norder placed_at <= shipped_on\norder shipped_on <= paid_at\nsum items_total = order_items.line_amount\nsum total_paid = allocations.amount"}
+{"id": "s296.order_items", "output": "none"}
+{"id": "s296.catalog_items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s296.purchase_orders", "output": "order inserted_at <= last_modified\norder ordered_on <= paid_at\nsum net_total = erp_po_item.amount"}
+{"id": "s296.erp_po_item", "output": "min qty 1\nmax qty 99"}
+{"id": "s296.files", "output": "none"}
+{"id": "s297.vehicles", "output": "order created_at <= updated_at"}
+{"id": "s297.memberships", "output": "order odometer_start <= odometer_end\norder start_date <= end_date"}
+{"id": "s298.services", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s298.reversals", "output": "order requested_at <= refunded_at"}
+{"id": "s298.allocation", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "s298.bills", "output": "order bill_date <= due_at\norder created_on <= updated\nsum paid_total = allocation.amount\nsum total_price = erp_bill_items.subtotal"}
+{"id": "s298.erp_bill_items", "output": "product subtotal = count * price_each\ncopy price_each = services.standard_cost"}
+{"id": "s298.pages", "output": "none"}
+{"id": "s298.categories", "output": "none"}
+{"id": "s299.menu_items", "output": "order createdAt <= dateModified\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s299.sales", "output": "order shipDate <= paymentDate\norder soldAt <= shipDate"}
+{"id": "s299.SalesDetails", "output": "order dateCreated <= archivedAt\nmin pieces 1\nmax pieces 999"}
+{"id": "s299.Rooms", "output": "none"}
+{"id": "s299.plans_user", "output": "order activatedAt <= expiresAt\norder trialStart <= trialEnd\norder startKm <= endKm"}
+{"id": "s299.items", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s299.Sales3", "output": "order createdOn <= confirmedAt"}
+{"id": "s299.SaleItem", "output": "copy unitPrice = items.standardCost"}
+{"id": "s300.sku", "output": "none"}
+{"id": "s300.chargebacks", "output": "order requested_at <= processed_at"}
+{"id": "s300.allocations", "output": "none"}
+{"id": "s300.quote", "output": "order created_at <= archived_at\nsum lines_total = quote_lines.amount\nsum paid_amount = allocations.paid_amount"}
+{"id": "s300.quote_lines", "output": "order creation_date <= last_modified\ncopy unit_price = sku.price"}
+{"id": "s300.inventory_transaction", "output": "order created <= updated_at"}
+{"id": "s301.sku", "output": "order reorder_point <= stock_capacity"}
+{"id": "s301.goods_receipts", "output": "order created <= changed_at\nproduct extended_cost = qty * unit_cost"}
+{"id": "s301.listings", "output": "order created_at <= updated\norder minimum_order <= maximum_order\norder opens_at <= closes_at\norder start_time <= end_time"}
+{"id": "s302.work_order", "output": "order inserted_at <= confirmed_at\nsum lines_total = work_order_parts.subtotal"}
+{"id": "s302.work_order_parts", "output": "product subtotal = order_qty * unit_rate\nmin order_qty 1"}
+{"id": "s302.players", "output": "order created_on <= changed_at\norder created_on <= removed_at\nmin price 0\nmin quantity 0\nmin stars 1\nmax quantity 100\nmax stars 5\nminlen slug 3\nmaxlen slug 60"}
+{"id": "s302.tag", "output": "order created <= modified_at"}
+{"id": "s303.audit_logs", "output": "none"}
+{"id": "s304.reviews", "output": "min discount_percent 0\nmin priority 1\nmax discount_percent 100\nmax priority 10\nminlen display_name 1\nmaxlen display_name 50\nvalues gender female|male|nonbinary|unspecified"}
+{"id": "s304.product", "output": "none"}
+{"id": "s304.transactions", "output": "order created_at <= updated_at"}
+{"id": "s304.order", "output": "order created_on <= confirmed_at\norder created_on <= removed_at\norder created_on <= updated\nsum paid_total = transactions.paid_amount\nsum subtotal = line_items.line_amount"}
+{"id": "s304.line_items", "output": "copy each_price = product.price_amount"}
+{"id": "s305.crm_price_lists", "output": "order min_quantity <= max_quantity\norder start_date <= end_date"}
+{"id": "s305.user", "output": "order created_at <= removed_at\norder created_at <= updated_at\nmin price 0\nmin rating 1\nmax price 1000000\nmax rating 5\nmaxlen email 320"}
+{"id": "s306.vehicle", "output": "min discount_percent 0\nmin priority 0\nmax discount_percent 100\nmax priority 3\nminlen postal_code 3\nmaxlen email 320\nmaxlen phone 15\nvalues gender male|female|other"}
+{"id": "s306.product_variants", "output": "none"}
+{"id": "s306.purchase_orders", "output": "order date_created <= updated_at\norder raised_at <= deliver_by\norder raised_at <= shipped_at\norder shipped_at <= received_at"}
+{"id": "s306.po_lines", "output": "copy price_per_unit = product_variants.list_price"}
+{"id": "s307.customers", "output": "none"}
+{"id": "s307.catalog_items", "output": "order created <= modified_at"}
+{"id": "s307.refunds", "output": "order requested_at <= refunded_at"}
+{"id": "s307.transactions", "output": "none"}
+{"id": "s307.purchase_order", "output": "order raised_at <= canceled_at\norder raised_at <= shipped_on\nsum subtotal = purchase_order_items.ext_price\nsum total_paid = transactions.amount_paid"}
+{"id": "s307.purchase_order_items", "output": "copy unit_cost = catalog_items.sale_price"}
+{"id": "s307.users", "output": "order created_at <= updated"}
+{"id": "s308.employees", "output": "none"}
+{"id": "s308.tbl_cost_center", "output": "order submitted_at <= approved_at\nsum total_budget = budget_item.budgeted_amount"}
+{"id": "s308.budget_item", "output": "none"}
+{"id": "s309.courses", "output": "order admission_date <= discharge_date\norder admitted_at <= discharged_at\norder lower_bound <= upper_bound"}
+{"id": "s309.product_variant", "output": "order inserted_at <= deleted_at\norder safety_stock <= maximum_stock\nmin safety_stock 0"}
+{"id": "s309.stock_adjustments", "output": "none"}
+{"id": "s310.leave_requests", "output": "order floor_price <= ceiling_price\norder start_date <= end_date"}
+{"id": "s311.app_goods", "output": "order inserted_at <= updated_at"}
+{"id": "s311.payments", "output": "order date_created <= archived_at"}
+{"id": "s311.work_orders", "output": "order creation_date <= changed_at\norder creation_date <= deleted_at\nsum total = work_order_parts.pieces * work_order_parts.rate\nsum total_paid = payments.paid_amount"}
+{"id": "s311.work_order_parts", "output": "copy rate = app_goods.price"}
+{"id": "s311.products", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s311.payments_3", "output": "none"}
+{"id": "s311.receipts", "output": "sum lines_total = receipt_items.line_amount"}
+{"id": "s311.receipt_items", "output": "none"}
+{"id": "s311.coupons", "output": "order created <= date_modified\nmin percentage 0\nmin priority 1\nmin stars 0\nmax percentage 100\nmax priority 5\nmax stars 5\nminlen display_name 1\nmaxlen bio 500\nmaxlen display_name 100\nlen currency 3"}
+{"id": "s312.RoomBookings", "output": "order CheckIn <= CheckOut\norder DateCreated <= ChangedAt"}
+{"id": "s312.Article", "output": "order DateCreated <= ChangedAt"}
+{"id": "s312.Refunds", "output": "order RequestedAt <= CompletedAt"}
+{"id": "s312.ReceiptsApplied", "output": "none"}
+{"id": "s312.Invoices", "output": "order Created <= ChangedAt\norder IssuedAt <= DueOn\nsum SumTotal = LineItems.AmountTotal"}
+{"id": "s312.LineItems", "output": "product AmountTotal = OrderQty * Price\ncopy CurrencyCode = Invoices.CurrencyCode\ncopy Price = Article.RetailPrice"}
+{"id": "s313.goods", "output": "order created_at <= date_modified"}
+{"id": "s313.refunds", "output": "order requested_at <= processed_at"}
+{"id": "s313.payments", "output": "order created_at <= last_modified"}
+{"id": "s313.app_orders", "output": "order created <= confirmed_at\norder created <= updated_at\norder placed_at <= required_date\nsum amount_paid = payments.amount_paid\nsum sub_total = order_item.net_amount"}
+{"id": "s313.order_item", "output": "copy unit_price = goods.price"}
+{"id": "s314.reviews", "output": "order created_on <= date_modified"}
+{"id": "s314.shop_rooms", "output": "order created <= modified_at"}
+{"id": "s314.classes", "output": "order begins_at <= finishes_at\norder created_at <= updated\norder min_temperature <= max_temperature\norder start_at <= end_at\nproduct total = nights * nightly_rate"}
+{"id": "s314.parts", "output": "order inserted_at <= updated_at"}
+{"id": "s314.shop_stock_movement", "output": "product amount = quantity * cost"}
+{"id": "s315.variant", "output": "none"}
+{"id": "s315.carts", "output": "order createdAt <= dateModified\nsum total = CartLines.lineTotal"}
+{"id": "s315.CartLines", "output": "product lineTotal = qty * unitPrice\ncopy unitPrice = variant.standardCost"}
+{"id": "s315.Members", "output": "order createdOn <= updatedAt"}
+{"id": "s315.Goods", "output": "none"}
+{"id": "s315.work_order", "output": "order createdAt <= confirmedAt\norder createdAt <= lastModified\nsum sumTotal = tbl_work_order_lines.lineValue"}
+{"id": "s315.tbl_work_order_lines", "output": "order createdAt <= lastModified\ncopy priceEach = Goods.price"}
+{"id": "s316.Products", "output": "none"}
+{"id": "s316.stock_moves", "output": "product totalCost = qty * receivedCost"}
+{"id": "s317.tickets", "output": "order inserted_at <= updated_at\norder min_price <= max_price\nmin capacity 1\nmax capacity 10000\nminlen password 8\nmaxlen email 255\nvalues gender M|F|X\nvalues level low|medium|high\nvalues role admin|member|viewer"}
+{"id": "s318.properties", "output": "order created_on <= updated_at"}
+{"id": "s318.support_requests", "output": "order min_price <= max_price\norder opened_on <= closed_on\nproduct total_price = duration_hours * hourly_rate"}
+{"id": "s318.member", "output": "none"}
+{"id": "s318.mixes", "output": "order created <= date_modified"}
+{"id": "s318.playlist_tracks", "output": "none"}
+{"id": "s319.articles", "output": "order createdAt <= changedAt"}
+{"id": "s319.goods_receipt", "output": "product value = units * cost\ncopy cost = articles.unitCost"}
+{"id": "s319.employee", "output": "none"}
+{"id": "s319.albums", "output": "order createdAt <= updatedAt\nsum totalDuration = tracks.duration"}
+{"id": "s319.tracks", "output": "none"}
+{"id": "s319.tbl_registrations", "output": "order admittedAt <= dischargedAt\norder enrolledOn <= completedOn"}
+{"id": "s320.Product", "output": "none"}
+{"id": "s320.Bills", "output": "order BilledAt <= DueDate\norder BilledAt <= PaidOn\norder DateCreated <= ConfirmedAt\norder DateCreated <= UpdatedAt\nsum ItemsTotal = BillLines.NetAmount"}
+{"id": "s320.BillLines", "output": "order CreatedAt <= DateModified\ncopy CurrencyCode = Bills.CurrencyCode\ncopy UnitPrice = Product.PriceAmount"}
+{"id": "s321.user", "output": "none"}
+{"id": "s321.journal_entry", "output": "order creation_date <= updated_at\norder from_date <= week_end\norder sent_at <= processed_at"}
+{"id": "s321.posting", "output": "none"}
+{"id": "s322.cart", "output": "order inserted_at <= modified_at\nsum total_items = basket_items.quantity\nsum total_price = basket_items.item_total"}
+{"id": "s322.basket_items", "output": "product item_total = quantity * rate"}
+{"id": "s322.product_variant", "output": "order created_at <= updated_at"}
+{"id": "s322.bills", "output": "order bill_date <= due_date"}
+{"id": "s322.bill_item", "output": "order date_created <= changed_at\ncopy price_per_unit = product_variant.price\nmin count 1\nmax count 10000"}
+{"id": "s322.app_trips", "output": "order inserted_at <= archived_at\norder min_stay_nights <= max_stay_nights\norder started_at <= ended_at"}
+{"id": "s323.vehicles", "output": "order minPrice <= maxPrice\nmin age 18\nmax age 150\nminlen username 2\nmaxlen username 30\nvalues size XS|S|M|L|XL\nvalues status active|inactive|suspended"}
+{"id": "s323.Items", "output": "none"}
+{"id": "s323.ShopReceipts", "output": "order dateCreated <= changedAt\norder dateCreated <= confirmedAt\nsum amountTotal = receipt_items.netAmount"}
+{"id": "s323.receipt_items", "output": "order createdAt <= modifiedAt\ncopy unitCost = Items.price"}
+{"id": "s323.coupons", "output": "order createdAt <= modifiedAt\nmin quantity 1\nmin weightKg 0\nmaxlen bio 2000\nmaxlen sku 32\nlen currency 3\nvalues gender M|F|X\nvalues visibility everyone|friends|only_me"}
+{"id": "s324.promotions", "output": "order active_from <= active_until\norder launch_date <= sunset_date\norder odometer_start <= odometer_end"}
+{"id": "s324.catalog_items", "output": "order created_at <= date_modified\norder min_stock <= stock_capacity"}
+{"id": "s324.crm_stock_adjustments", "output": "order created_at <= deleted_at"}
+{"id": "s325.Variants", "output": "none"}
+{"id": "s325.CreditNotes", "output": "order CreatedOn <= ConfirmedAt\norder CreatedOn <= UpdatedAt\norder IssuedAt <= DueAt\nsum TotalAmount = CreditNoteItems.LinePrice"}
+{"id": "s325.CreditNoteItems", "output": "order Created <= UpdatedAt\ncopy UnitAmount = Variants.PriceAmount"}
+{"id": "s325.Rides", "output": "order DepartsAt <= ArrivesAt\norder MinPrice <= MaxPrice"}
+{"id": "s326.members", "output": "order created <= modified_at"}
+{"id": "s326.crm_articles", "output": "order date_created <= changed_at"}
+{"id": "s326.carts", "output": "none"}
+{"id": "s326.basket_items", "output": "none"}
+{"id": "s327.CreditNotes", "output": "order CreatedAt <= ConfirmedAt\nsum SubTotal = CreditNoteLine.LinePrice"}
+{"id": "s327.CreditNoteLine", "output": "copy Currency = CreditNotes.Currency"}
+{"id": "s327.Articles", "output": "order ReorderLevel <= MaximumStock"}
+{"id": "s327.GoodsReceipts", "output": "none"}
+{"id": "s327.Employee", "output": "none"}
+{"id": "s327.Shipments", "output": "order StartDate <= WeekEnd\nsum TotalWeight = Packages.Weight"}
+{"id": "s327.Packages", "output": "none"}
+{"id": "s328.items", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s328.invoices", "output": "order created_at <= date_modified\norder invoice_date <= payment_due\norder invoice_date <= settled_at\nsum total_price = invoice_detail.item_total"}
+{"id": "s328.invoice_detail", "output": "product item_total = qty_ordered * price_per_unit\ncopy currency_code = invoices.currency_code\ncopy price_per_unit = items.default_price"}
+{"id": "s328.users", "output": "none"}
+{"id": "s328.tickets", "output": "order date_created <= last_modified\nmin discount_percent 0\nmin quantity 1\nmin year 1900\nmax discount_percent 100\nmax quantity 100\nmax year 2099\nmaxlen bio 280"}
+{"id": "s329.review", "output": "order inserted_at <= updated_at"}
+{"id": "s330.users", "output": "none"}
+{"id": "s330.Goods", "output": "none"}
+{"id": "s330.receipts_applied", "output": "order created <= changedAt"}
+{"id": "s330.credit_note", "output": "order issuedAt <= settledAt\nsum linesTotal = credit_note_lines.subtotal"}
+{"id": "s330.credit_note_lines", "output": "min orderQty 1"}
+{"id": "s330.recipe", "output": "min capacity 1\nmin percentage 0\nmin quantity 1\nmax capacity 10000\nmax percentage 100\nminlen slug 3"}
+{"id": "s330.variants", "output": "order createdOn <= removedAt\norder createdOn <= updatedAt"}
+{"id": "s330.stock_adjustments", "output": "none"}
+{"id": "s331.donations", "output": "min discount_percent 0\nmax discount_percent 100\nminlen phone 7\nmaxlen phone 15\nmaxlen title 80\nlen country 2\nvalues visibility public|private"}
+{"id": "s331.cases", "output": "order created_at <= changed_at\norder reported_at <= acknowledged_at\norder resolved_at <= closed_at"}
+{"id": "s332.jobs", "output": "order created_at <= updated_at\nmin seats 1\nmin year 1900\nmax seats 8\nmax year 2100\nlen code 10\nvalues size small|medium|large\nvalues status pending|paid|failed|refunded"}
+{"id": "s332.jobs_2", "output": "order min_price <= max_price\nmin capacity 1\nmin weight_kg 0\nmin year 2000\nmax capacity 1000\nmax year 2030\nminlen sku 8\nmaxlen bio 500\nmaxlen email 254\nmaxlen sku 32\nvalues level junior|mid|senior"}
+{"id": "s333.parts", "output": "none"}
+{"id": "s333.invoices", "output": "order created_on <= last_modified\norder issue_date <= due_on\nsum grand_total = invoice_lines.total_price"}
+{"id": "s333.invoice_lines", "output": "none"}
+{"id": "s333.product_variants", "output": "none"}
+{"id": "s333.stock_adjustment", "output": "product total_value = quantity * actual_cost"}
+{"id": "s333.variant", "output": "none"}
+{"id": "s333.erp_orders", "output": "order placed_at <= shipped_at\norder shipped_at <= delivery_date\norder placed_at <= due_date\norder shipped_at <= paid_at"}
+{"id": "s333.core_order_items", "output": "order created_at <= updated\ncopy unit_price = variant.base_price"}
+{"id": "s334.work_orders", "output": "order created <= confirmed_at\norder created <= last_modified\nsum total_amount = work_order_parts.net_amount"}
+{"id": "s334.work_order_parts", "output": "product net_amount = quantity * item_price"}
+{"id": "s335.elections", "output": "order listed_at <= expires_at\norder opens_at <= closes_at"}
+{"id": "s335.deployment", "output": "order low <= high\norder scheduled_for <= started_at"}
+{"id": "s335.ledger_batch", "output": "order created <= archived_at\norder created <= changed_at\nsum debit_total = ledger_lines.debit"}
+{"id": "s335.ledger_lines", "output": "none"}
+{"id": "s336.bookings", "output": "order check_in <= check_out"}
+{"id": "s337.journal_entry", "output": "none"}
+{"id": "s337.journal_lines", "output": "none"}
+{"id": "s337.buyer", "output": "order date_created <= modified_at"}
+{"id": "s337.product_variants", "output": "none"}
+{"id": "s337.tbl_orders", "output": "order inserted_at <= last_modified\norder ordered_at <= dispatched_at\nsum net_total = order_items.total\nsum total_quantity = order_items.quantity_ordered"}
+{"id": "s337.order_items", "output": "order created_at <= last_modified\ncopy unit_amount = product_variants.price_amount\nmin quantity_ordered 1"}
+{"id": "s338.shop_reviews", "output": "min age 18\nmin percentage 0\nmax age 150\nmax percentage 100\nmaxlen email 255\nvalues visibility public|private"}
+{"id": "s338.menu_items", "output": "order inserted_at <= removed_at\norder min_stock <= max_stock"}
+{"id": "s338.stock_movements", "output": "order created <= archived_at\norder created <= updated_at\nproduct total_value = quantity * cost"}
+{"id": "s338.properties", "output": "order creation_date <= modified_at"}
+{"id": "s338.staff", "output": "order start_date <= end_date\nproduct total_price = num_days * price_per_night"}
+{"id": "s339.playlists", "output": "order created_at <= changed_at"}
+{"id": "s339.tracks", "output": "order created <= updated"}
+{"id": "s339.product_variants", "output": "order created <= changed_at"}
+{"id": "s339.bills", "output": "order bill_date <= settled_at\norder inserted_at <= date_modified\nsum items_total = bill_lines.ext_price"}
+{"id": "s339.bill_lines", "output": "product ext_price = num_units * unit_cost\ncopy unit_cost = product_variants.price_amount"}
+{"id": "s339.receipts", "output": "order created_at <= confirmed_at"}
+{"id": "s339.receipt_item", "output": "order creation_date <= modified_at"}
+{"id": "s340.votes_windows", "output": "order creation_date <= modified_at\norder listed_at <= expires_at\nproduct total = duration_hours * price_per_night"}
+{"id": "s341.work_orders", "output": "sum subTotal = work_order_lines.total"}
+{"id": "s341.work_order_lines", "output": "order createdAt <= dateModified\norder createdAt <= removedAt\nproduct total = quantity * rate"}
+{"id": "s341.Buyers", "output": "order dateCreated <= updated"}
+{"id": "s341.services", "output": "none"}
+{"id": "s341.credit_note", "output": "order creationDate <= dateModified"}
+{"id": "s341.credit_note_lines", "output": "copy itemPrice = services.unitPrice"}
+{"id": "s342.catalog_items", "output": "order createdAt <= updatedAt\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s342.work_order", "output": "order created <= updatedAt"}
+{"id": "s342.WorkOrderLines", "output": "copy rate = catalog_items.price"}
+{"id": "s342.coupons", "output": "order createdAt <= updated\norder startDate <= endDate\norder validFrom <= validTo"}
+{"id": "s342.variants", "output": "order insertedAt <= removedAt\norder insertedAt <= updated\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s342.sale", "output": "order soldAt <= paidAt"}
+{"id": "s342.SaleLines", "output": "copy unitPrice = variants.standardCost\nmin unitCount 1\nmax unitCount 99"}
+{"id": "s343.CrmGoods", "output": "order createdAt <= updated"}
+{"id": "s343.Sales", "output": "order created <= confirmedAt\norder paidAt <= shipDate\norder soldAt <= paidAt\nsum netAmount = SaleItems.amountTotal"}
+{"id": "s343.SaleItems", "output": "order creationDate <= updatedAt\ncopy currencyCode = Sales.currencyCode"}
+{"id": "s343.product_variant", "output": "order createdAt <= dateModified\norder createdAt <= removedAt\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s343.Refunds", "output": "order requestedAt <= processedAt"}
+{"id": "s343.allocations", "output": "none"}
+{"id": "s343.purchase_orders", "output": "order dateCreated <= updated\norder orderDate <= expectedDelivery\norder orderDate <= shipDate\norder shipDate <= paymentDate\nsum itemsTotal = purchase_order_items.totalPrice\nsum paidAmount = allocations.value"}
+{"id": "s343.purchase_order_items", "output": "none"}
+{"id": "s344.members", "output": "order created_at <= changed_at"}
+{"id": "s344.licenses", "output": "order activated_at <= expires_at\norder creation_date <= updated_at"}
+{"id": "s344.ticket", "output": "min seats 1\nmax seats 50\nlen country 2\nvalues level beginner|intermediate|advanced"}
+{"id": "s344.employees", "output": "none"}
+{"id": "s344.expense_claims", "output": "order created_on <= deleted_at\norder created_on <= updated\nsum claimed_total = claim_items.amount"}
+{"id": "s344.claim_items", "output": "none"}
+{"id": "s345.applications", "output": "order creation_date <= updated\norder min_price <= max_price\nmin age 18\nmin capacity 1\nmin duration_minutes 5\nmax age 120\nmax duration_minutes 600\nminlen title 1\nmaxlen bio 2000\nmaxlen title 80"}
+{"id": "s345.menu_items", "output": "order creation_date <= modified_at"}
+{"id": "s345.credit_note", "output": "order credit_date <= payment_due\nsum total_items = credit_note_line.count"}
+{"id": "s345.credit_note_line", "output": "order created_at <= date_modified\nproduct total_price = count * unit_amount\ncopy unit_amount = menu_items.list_price\nmin count 1\nmax count 1000"}
+{"id": "s345.jobs", "output": "order created_on <= date_modified\nmin discount_percent 0\nmin duration_minutes 5\nmax discount_percent 100\nmax duration_minutes 1440\nvalues gender M|F|X\nvalues level junior|mid|senior"}
+{"id": "s346.Reversal", "output": "order RequestedAt <= ProcessedAt"}
+{"id": "s346.ReceiptsApplied", "output": "order CreationDate <= ModifiedAt"}
+{"id": "s346.Sales", "output": "order CreationDate <= ChangedAt\norder CreationDate <= ConfirmedAt\norder SaleDate <= ExpectedDelivery\norder SaleDate <= ShippedAt\norder ShippedAt <= PaidAt\nsum Subtotal = SalesDetails.ExtendedPrice\nsum TotalPaid = ReceiptsApplied.PaidAmount"}
+{"id": "s346.SalesDetails", "output": "product ExtendedPrice = Quantity * Price\nmin Quantity 1"}
+{"id": "s346.CoreProfiles", "output": "order InsertedAt <= DateModified"}
+{"id": "s347.Users", "output": "order CreationDate <= ChangedAt"}
+{"id": "s347.Goods", "output": "order InsertedAt <= UpdatedAt"}
+{"id": "s347.Refunds", "output": "order RequestedAt <= CompletedAt"}
+{"id": "s347.Allocations", "output": "none"}
+{"id": "s347.Bills", "output": "order BilledAt <= DueDate\norder BilledAt <= PaidAt\norder CreatedOn <= LastModified\nsum NetTotal = BillItems.LineAmount"}
+{"id": "s347.BillItems", "output": "copy PriceEach = Goods.ListPrice\nmin Count 1"}
+{"id": "s347.Users2", "output": "min Age 0\nmin Quantity 0\nmin Price 0\nmin Stars 0\nmin WeightKg 0\nmax Age 120\nmax Stars 5\nvalues Size XS|S|M|L|XL"}
+{"id": "s347.Members", "output": "order DateCreated <= UpdatedAt"}
+{"id": "s347.Parts", "output": "order CreationDate <= RemovedAt\norder CreationDate <= UpdatedAt\norder MinOrderQuantity <= MaxOrderQuantity"}
+{"id": "s347.Invoices", "output": "order CreatedAt <= ChangedAt\norder CreatedAt <= ConfirmedAt\norder CreatedAt <= DeletedAt\norder InvoiceDate <= DueOn\norder InvoiceDate <= SettledAt\nsum TotalDue = InvoiceDetails.ItemTotal"}
+{"id": "s347.InvoiceDetails", "output": "product ItemTotal = Quantity * PriceEach\ncopy CurrencyCode = Invoices.CurrencyCode\ncopy PriceEach = Parts.RetailPrice"}
+{"id": "s348.employees", "output": "none"}
+{"id": "s348.shipments", "output": "order creation_date <= date_modified\norder sent_at <= reviewed_at\nsum gross_weight = shipment_items.weight"}
+{"id": "s348.shipment_items", "output": "none"}
+{"id": "s348.menu_items", "output": "order date_created <= deleted_at"}
+{"id": "s348.purchase_order", "output": "order ordered_on <= paid_at\nsum sub_total = purchase_order_lines.subtotal"}
+{"id": "s348.purchase_order_lines", "output": "product subtotal = quantity * override_price"}
+{"id": "s348.clients", "output": "order inserted_at <= modified_at"}
+{"id": "s348.inventory_items", "output": "order inserted_at <= changed_at"}
+{"id": "s348.sales", "output": "order sale_date <= shipped_on\norder shipped_on <= received_at\nsum item_count = sale_items.count\nsum sub_total = sale_items.amount"}
+{"id": "s348.sale_items", "output": "order created_at <= updated_at\nproduct amount = count * unit_price\ncopy currency = sales.currency"}
+{"id": "s349.tag", "output": "order date_created <= deleted_at\norder date_created <= updated"}
+{"id": "s349.services", "output": "order date_created <= changed_at"}
+{"id": "s349.goods_receipts", "output": "product total_cost = qty * landed_cost"}
+{"id": "s350.events", "output": "order created_at <= changed_at\norder created_at <= removed_at\nmin duration_minutes 1\nmin year 1950\nmax duration_minutes 1440\nmax year 2099\nmaxlen postal_code 10"}
+{"id": "s351.assignments", "output": "order created_at <= last_modified\norder hired_on <= left_on\nproduct total = billable_hours * rate_per_day"}
+{"id": "s351.vehicle", "output": "minlen username 4\nmaxlen bio 2000\nmaxlen username 32\nlen country 2"}
+{"id": "s352.app_staff", "output": "none"}
+{"id": "s352.ExpenseClaims", "output": "order createdOn <= updatedAt\nsum totalAmount = ClaimItem.amount"}
+{"id": "s352.ClaimItem", "output": "none"}
+{"id": "s352.CatalogItems", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s352.Chargebacks", "output": "order requestedAt <= processedAt"}
+{"id": "s352.payments", "output": "order insertedAt <= updatedAt"}
+{"id": "s352.receipt", "output": "sum linesTotal = receipt_items.lineTotal\nsum totalPaid = payments.value"}
+{"id": "s352.receipt_items", "output": "copy currencyCode = receipt.currencyCode"}
+{"id": "s353.parts", "output": "none"}
+{"id": "s353.payment", "output": "none"}
+{"id": "s353.orders", "output": "order date_created <= confirmed_at\norder date_created <= updated\norder ordered_at <= cancelled_at\norder ordered_at <= payment_date\nsum num_items = order_products.unit_count"}
+{"id": "s353.order_products", "output": "copy unit_cost = parts.unit_price"}
+{"id": "s353.articles", "output": "order created_at <= modified_at\norder min_stock <= max_stock"}
+{"id": "s353.stock_move", "output": "product extended_cost = units * unit_cost\ncopy unit_cost = articles.standard_cost"}
+{"id": "s353.services", "output": "none"}
+{"id": "s353.carts", "output": "order creation_date <= updated_at\nsum lines_total = basket_item.total_amount\nsum num_items = basket_item.quantity_ordered"}
+{"id": "s353.basket_item", "output": "none"}
+{"id": "s354.crm_shipment", "output": "order week_start <= to_date\nsum total_weight = packages.gross_weight"}
+{"id": "s354.packages", "output": "order created_on <= updated_at"}
+{"id": "s355.erp_donations", "output": "order created <= updated_at\nmin duration_minutes 5\nmin price 0\nmin quantity 1\nmax duration_minutes 600\nmax quantity 100\nminlen password 8\nmaxlen phone 20\nvalues role student|teacher|admin\nvalues visibility public|private"}
+{"id": "s356.Users", "output": "none"}
+{"id": "s356.Receipts", "output": "order creationDate <= updatedAt\nsum amount = ReceiptLines.totalAmount"}
+{"id": "s356.ReceiptLines", "output": "order createdAt <= dateModified"}
+{"id": "s357.Absences", "output": "order Created <= Updated\norder RentalDate <= ReturnDate"}
+{"id": "s357.Tickets", "output": "order CreatedAt <= ArchivedAt\norder CreatedAt <= DateModified\norder StartsAt <= EndsAt\nmin DiscountPercent 0\nmin Quantity 0\nmin Year 1900\nmax DiscountPercent 100\nmax Year 2030\nvalues Role user|admin\nvalues Status active|inactive|suspended\nvalues Visibility public|private|unlisted"}
+{"id": "s358.products", "output": "min percentage 0\nmin year 1900\nmax percentage 100\nmax year 2099\nminlen postal_code 3\nminlen username 4\nmaxlen postal_code 10\nmaxlen username 30"}
+{"id": "s359.parts", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s359.reversals", "output": "order requested_at <= processed_at"}
+{"id": "s359.payments", "output": "none"}
+{"id": "s359.erp_receipts", "output": "sum items_total = receipt_items.amount_total"}
+{"id": "s359.receipt_items", "output": "order created_at <= updated_at\nproduct amount_total = units * unit_rate\ncopy unit_rate = parts.price_amount\nmin units 1\nmax units 10000"}
+{"id": "s360.recipes", "output": "min discountPercent 0\nmin stars 1\nmax discountPercent 100\nmax stars 5\nminlen sku 6\nmaxlen email 320\nmaxlen sku 32"}
+{"id": "s360.merchants", "output": "none"}
+{"id": "s360.tbl_mixes", "output": "order submittedAt <= approvedAt"}
+{"id": "s360.Tracks", "output": "none"}
+{"id": "s361.accounts", "output": "none"}
+{"id": "s361.reversal", "output": "order requested_at <= refunded_at"}
+{"id": "s361.shop_receipts_applied", "output": "order created_at <= last_modified"}
+{"id": "s361.work_orders", "output": "order date_created <= changed_at\norder date_created <= confirmed_at"}
+{"id": "s361.work_order_parts", "output": "none"}
+{"id": "s361.artists", "output": "order born_on <= died_on\norder min_price <= max_price"}
+{"id": "s362.Categories", "output": "order CreatedOn <= LastModified"}
+{"id": "s362.Users", "output": "none"}
+{"id": "s362.Bookings", "output": "order CheckInDate <= CheckOutDate"}
+{"id": "s362.Customer", "output": "order InsertedAt <= DateModified"}
+{"id": "s362.Items", "output": "none"}
+{"id": "s362.Receipt", "output": "order InsertedAt <= ChangedAt\norder InsertedAt <= ConfirmedAt\nsum LinesTotal = ReceiptItems.LineValue"}
+{"id": "s362.ReceiptItems", "output": "order InsertedAt <= DateModified\nproduct LineValue = Qty * UnitAmount\ncopy CurrencyCode = Receipt.CurrencyCode\ncopy UnitAmount = Items.PriceAmount"}
+{"id": "s363.builds", "output": "order queued_at <= started_at\norder started_at <= finished_at\nproduct total_cost = hours * rate_per_day"}
+{"id": "s364.Users", "output": "order createdAt <= dateModified"}
+{"id": "s364.Receipt", "output": "order createdAt <= changedAt\nsum itemsTotal = receipt_lines.amount"}
+{"id": "s364.receipt_lines", "output": "copy currency = Receipt.currency\nmin pieces 1\nmax pieces 99"}
+{"id": "s364.app_goods_receipt", "output": "none"}
+{"id": "s365.Variants", "output": "order MinStock <= MaximumStock"}
+{"id": "s365.StockMovements", "output": "product ExtendedCost = Quantity * UnitCost\ncopy UnitCost = Variants.AverageCost"}
+{"id": "s366.Meetings", "output": "order BeginsAt <= FinishesAt\norder CreatedAt <= DateModified\norder CreatedAt <= RemovedAt\norder StartsAt <= EndsAt"}
+{"id": "s366.Goods", "output": "order CreatedAt <= ChangedAt\norder ReorderLevel <= MaxStock"}
+{"id": "s366.InventoryTransactions", "output": "order CreatedAt <= ModifiedAt\norder CreatedAt <= RemovedAt\nproduct TotalValue = Qty * CostPerUnit"}
+{"id": "s367.menu_item", "output": "order dateCreated <= modifiedAt\norder minStock <= maximumStock\nmin minStock 0"}
+{"id": "s367.stock_move", "output": "product extendedCost = qty * actualCost"}
+{"id": "s367.posts", "output": "order created <= lastModified"}
+{"id": "s367.Members", "output": "order birthDate <= deathDate\norder creationDate <= lastModified\nproduct amount = numDays * pricePerNight"}
+{"id": "s368.AppClient", "output": "order CreatedAt <= ArchivedAt"}
+{"id": "s368.Skus", "output": "none"}
+{"id": "s368.Invoices", "output": "order IssuedOn <= SettledAt\nsum TotalItems = LineItem.QuantityOrdered"}
+{"id": "s368.LineItem", "output": "order CreatedOn <= ModifiedAt\ncopy Currency = Invoices.Currency\ncopy PriceEach = Skus.BasePrice"}
+{"id": "s369.allocations", "output": "none"}
+{"id": "s369.credit_note", "output": "order date_created <= archived_at\norder issued_at <= due_on\norder issued_at <= paid_at\nsum amount_paid = allocations.paid_amount\nsum invoice_total = shop_credit_note_lines.net_amount"}
+{"id": "s369.shop_credit_note_lines", "output": "none"}
+{"id": "s369.user", "output": "order created_on <= archived_at\norder created_on <= updated"}
+{"id": "s369.leases", "output": "order coverage_start <= coverage_end\norder created_on <= modified_at\norder min_price <= lease.min_price\norder start_date <= end_date"}
+{"id": "s370.inventory_items", "output": "order date_created <= archived_at\norder date_created <= updated_at"}
+{"id": "s370.invoices", "output": "order issued_at <= due_at\nsum lines_total = line_items.line_price"}
+{"id": "s370.line_items", "output": "copy price = inventory_items.default_price"}
+{"id": "s371.venue", "output": "none"}
+{"id": "s371.classes", "output": "order created_at <= updated_at\norder doors_open_at <= starts_at"}
+{"id": "s371.members", "output": "none"}
+{"id": "s371.budgets", "output": "sum total = budget_item.amount"}
+{"id": "s371.budget_item", "output": "order creation_date <= updated_at"}
+{"id": "s372.deposits_batch", "output": "order fromDate <= periodEnd\norder sentAt <= reviewedAt\nsum amount = SettlementItems.netAmount"}
+{"id": "s372.SettlementItems", "output": "none"}
+{"id": "s372.MenuItems", "output": "none"}
+{"id": "s372.credit_notes", "output": "order issuedAt <= dueAt"}
+{"id": "s372.CreditNoteLines", "output": "copy unitPrice = MenuItems.defaultPrice"}
+{"id": "s373.articles", "output": "order creationDate <= updatedAt"}
+{"id": "s373.stock_adjustments", "output": "order createdAt <= updatedAt\nproduct extendedCost = quantity * unitValue\ncopy unitValue = articles.averageCost"}
+{"id": "s374.erp_feature_flags", "output": "order created_at <= updated_at"}
+{"id": "s375.vacation", "output": "order date_from <= date_to"}
+{"id": "s375.courses", "output": "order inserted_at <= changed_at\nmin duration_minutes 1\nmax duration_minutes 480\nminlen postal_code 4\nminlen title 1\nmaxlen postal_code 10\nmaxlen title 80\nvalues gender male|female|other"}
+{"id": "s376.products", "output": "order reorder_level <= max_stock"}
+{"id": "s376.goods_receipt", "output": "none"}
+{"id": "s376.erp_venues", "output": "order created_at <= updated_at"}
+{"id": "s376.subscription", "output": "order current_period_start <= current_period_end\norder starts_at <= ends_at\nproduct total_cost = days * rate\ncopy rate = erp_venues.daily_rate"}
+{"id": "s376.venues", "output": "none"}
+{"id": "s376.crm_sprint", "output": "order begin_date <= finish_date"}
+{"id": "s377.reviews", "output": "order valid_from <= valid_until\nmin capacity 1\nmin quantity 0\nmax quantity 100\nminlen sku 6\nlen code 10\nvalues gender male|female|other\nvalues status pending|paid|failed|refunded"}
+{"id": "s377.surveys", "output": "order published_at <= unpublished_at\norder start_time <= end_time\norder start_km <= end_km"}
+{"id": "s377.articles", "output": "order created_at <= last_modified\norder start_date <= end_date\nmin quantity 0\nmin stars 1\nmax quantity 99\nmax stars 5\nminlen display_name 1\nmaxlen display_name 64\nvalues size small|medium|large\nvalues status pending|approved|rejected"}
+{"id": "s378.menu_items", "output": "order safety_stock <= maximum_stock"}
+{"id": "s378.stock_moves", "output": "none"}
+{"id": "s378.erp_orders", "output": "order created <= last_modified\norder purchased_at <= cancelled_at\nsum grand_total = order_items.line_total"}
+{"id": "s378.order_items", "output": "order created_at <= updated\nproduct line_total = units * unit_rate"}
+{"id": "s379.events", "output": "order start_date <= end_date\nmin percentage 0\nmin price 0\nmin weight_kg 0\nmax percentage 100\nminlen sku 4\nmaxlen sku 16\nvalues visibility public|private|unlisted"}
+{"id": "s380.product_variants", "output": "none"}
+{"id": "s380.allocation", "output": "none"}
+{"id": "s380.orders", "output": "order created <= modified_at\norder submitted_at <= canceled_at\norder submitted_at <= payment_date\nsum total_paid = allocation.amount_paid"}
+{"id": "s380.line_item", "output": "copy price = product_variants.standard_cost"}
+{"id": "s380.listings", "output": "order created_at <= modified_at\norder minimum_order <= maximum_order\norder published_at <= unpublished_at"}
+{"id": "s381.shop_part", "output": "order createdAt <= dateModified\norder minOrderQuantity <= maxOrderQuantity"}
+{"id": "s381.Chargebacks", "output": "order requestedAt <= refundedAt"}
+{"id": "s381.payments", "output": "none"}
+{"id": "s381.bills", "output": "order billDate <= paymentDue\nsum netTotal = BillItems.amount\nsum totalPaid = payments.amount"}
+{"id": "s381.BillItems", "output": "order createdAt <= updatedAt\ncopy unitCost = shop_part.unitPrice"}
+{"id": "s381.expense_reports", "output": "order submittedAt <= approvedAt\norder weekStart <= endDate\nsum claimedTotal = expense_item.value"}
+{"id": "s381.expense_item", "output": "none"}
+{"id": "s382.members", "output": "order creation_date <= removed_at\norder creation_date <= updated_at"}
+{"id": "s382.plans_users", "output": "order current_period_start <= current_period_end\norder starts_at <= ends_at"}
+{"id": "s383.good", "output": "order creation_date <= deleted_at\norder min_stock <= maximum_stock"}
+{"id": "s383.stock_moves", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "s383.accounts", "output": "none"}
+{"id": "s383.tbl_variant", "output": "order date_created <= removed_at\norder date_created <= updated_at"}
+{"id": "s383.payment", "output": "order created_at <= archived_at"}
+{"id": "s383.core_credit_notes", "output": "order creation_date <= last_modified\norder credit_date <= settled_at"}
+{"id": "s383.credit_note_items", "output": "product amount_total = qty * price"}
+{"id": "s384.inventory_item", "output": "order created_at <= removed_at\norder min_stock <= maximum_stock\nmin min_stock 0\nmax min_stock 1000000"}
+{"id": "s384.stock_adjustment", "output": "product extended_cost = qty * actual_cost"}
+{"id": "s384.donations", "output": "min duration_minutes 1\nmin price 0\nmin priority 1\nmax duration_minutes 1440\nmax priority 5\nminlen sku 8\nmaxlen sku 16\nvalues size small|medium|large\nvalues status active|inactive|suspended"}
+{"id": "s384.buyer", "output": "none"}
+{"id": "s384.crm_reversals", "output": "order requested_at <= processed_at"}
+{"id": "s384.payments", "output": "none"}
+{"id": "s384.carts", "output": "order created_at <= changed_at\nsum net_amount = basket_items.extended_price\nsum paid_amount = payments.value"}
+{"id": "s384.basket_items", "output": "order created_at <= removed_at\nproduct extended_price = unit_count * unit_cost\nmin unit_count 1"}
+{"id": "s385.ledger_batches", "output": "order sent_at <= approved_at\norder start_date <= end_date\nsum total_debit = journal_lines.debit_amount"}
+{"id": "s385.journal_lines", "output": "none"}
+{"id": "s385.core_billing_periods", "output": "order min_temperature <= max_temperature\norder opens_on <= closes_on\norder start_date <= end_date"}
+{"id": "s385.audit_logs", "output": "order created_at <= date_modified"}
+{"id": "s386.settings", "output": "order created_on <= archived_at\norder created_on <= last_modified"}
+{"id": "s387.rooms", "output": "order createdAt <= dateModified"}
+{"id": "s387.Enrollments", "output": "order admittedAt <= dischargedAt\norder enrolledOn <= completedOn"}
+{"id": "s387.stock_movements", "output": "order createdOn <= updatedAt"}
+{"id": "s387.Parts", "output": "none"}
+{"id": "s387.allocation", "output": "order insertedAt <= updated"}
+{"id": "s387.Sales", "output": "order insertedAt <= confirmedAt\norder soldAt <= dueDate\nsum total = sale_lines.extendedPrice"}
+{"id": "s387.sale_lines", "output": "order dateCreated <= updatedAt"}
+{"id": "s388.listings", "output": "order min_salary <= max_salary\norder start_time <= end_time\nproduct total_cost = days * daily_rate"}
+{"id": "s389.shop_jobs", "output": "order created_at <= modified_at\norder started_at <= completed_at"}
+{"id": "s389.user", "output": "none"}
+{"id": "s389.playlists", "output": "order submitted_at <= processed_at\nsum total_duration = playlist_tracks.seconds"}
+{"id": "s389.playlist_tracks", "output": "none"}
+{"id": "s389.audit_logs", "output": "none"}
+{"id": "s390.user", "output": "none"}
+{"id": "s390.CostCenters", "output": "order createdAt <= dateModified\nsum total = Allocations.budgetedAmount"}
+{"id": "s390.Allocations", "output": "none"}
+{"id": "s390.ProductVariants", "output": "order minOrderQuantity <= maxOrderQuantity"}
+{"id": "s390.work_orders", "output": "order createdAt <= changedAt"}
+{"id": "s390.WorkOrderLine", "output": "max quantityOrdered 1000"}
+{"id": "s390.leave_requests", "output": "order createdAt <= updated\norder dateFrom <= dateTo\norder minimumAmount <= maximumAmount\norder rentalDate <= returnDate"}
+{"id": "s391.users", "output": "order created_on <= updated_at"}
+{"id": "s391.policies", "output": "order signed_on <= effective_date"}
+{"id": "s391.review", "output": "none"}
+{"id": "s392.customer", "output": "order inserted_at <= date_modified"}
+{"id": "s392.rentals", "output": "order created_at <= updated\norder rental_date <= return_date"}
+{"id": "s392.employee", "output": "order created <= deleted_at\norder created <= last_modified\norder date_hired <= date_terminated\norder joined_at <= left_at\nproduct total_price = num_days * nightly_rate"}
+{"id": "s393.user", "output": "none"}
+{"id": "s393.timesheets", "output": "order submitted_at <= approved_at\nsum hours_total = entries.hours"}
+{"id": "s393.entries", "output": "product amount = hours * unit_rate"}
+{"id": "s394.Shipments", "output": "order createdOn <= updatedAt\nsum weightTotal = parcel.grossWeight"}
+{"id": "s394.parcel", "output": "none"}
+{"id": "s395.Accounts", "output": "order CreatedAt <= LastModified"}
+{"id": "s395.Receipts", "output": "none"}
+{"id": "s395.ReceiptLines", "output": "order CreatedOn <= UpdatedAt\nproduct ItemTotal = OrderQty * UnitCost\nmin OrderQty 1\nmax OrderQty 999"}
+{"id": "s396.bookings", "output": "order check_in <= check_out\norder creation_date <= updated_at\norder floor_price <= ceiling_price\norder start_date <= end_date"}
+{"id": "s397.menu_item", "output": "order created_at <= updated_at\norder reorder_level <= max_stock\nmin reorder_level 0\nmax reorder_level 1000000"}
+{"id": "s397.stock_move", "output": "order created_at <= modified_at\nproduct value = qty * received_cost"}
+{"id": "s397.app_review", "output": "order created_at <= changed_at\nmin discount_percent 0\nmin priority 0\nmax discount_percent 100\nmax priority 5\nmaxlen bio 160\nlen currency 3\nvalues role user|admin"}
+{"id": "s398.users", "output": "none"}
+{"id": "s398.item", "output": "order min_order_quantity <= max_order_quantity"}
+{"id": "s398.sales", "output": "order creation_date <= changed_at\norder creation_date <= removed_at\norder payment_date <= ship_date\norder sale_date <= canceled_at\norder sale_date <= payment_date\norder ship_date <= received_at\nsum subtotal = sale_line.amount"}
+{"id": "s398.sale_line", "output": "product amount = order_qty * unit_price\nmin order_qty 1"}
+{"id": "s399.employments", "output": "order date_created <= date_modified\norder date_hired <= date_terminated\norder joined_at <= left_at\norder low <= high\nproduct amount = duration_hours * rate"}

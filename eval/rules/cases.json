@@ -1,0 +1,211 @@
+{
+ "note": "Held-out cases for gr-rules-1. Schema files come from training/data/public (pinned commits and SHA-256 in training/sources.lock.json); code files from eval/rules/code (pinned in eval/rules/sources.lock.json). None of them is used to train the rule model, and its synthetic vocabulary was written before they were read.",
+ "cases": [
+  {
+   "id": "chinook",
+   "schema": "training/data/public/chinook",
+   "source": "lerocha/chinook-database",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "sakila",
+   "schema": "training/data/public/sakila",
+   "source": "jOOQ/sakila",
+   "license": "BSD-2-Clause",
+   "split": "dev"
+  },
+  {
+   "id": "northwind",
+   "schema": "training/data/public/mssql-samples/samples/databases/northwind-pubs/instnwnd.sql",
+   "source": "microsoft/sql-server-samples",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "pubs",
+   "schema": "training/data/public/mssql-samples/samples/databases/northwind-pubs/instpubs.sql",
+   "source": "microsoft/sql-server-samples",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "adventureworks",
+   "schema": "training/data/public/mssql-samples/samples/databases/adventure-works/oltp-install-script/instawdb.sql",
+   "source": "microsoft/sql-server-samples",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "saleor",
+   "schema": "training/data/public/saleor",
+   "source": "saleor/saleor",
+   "license": "BSD-3-Clause",
+   "split": "dev"
+  },
+  {
+   "id": "healthchecks",
+   "schema": "training/data/public/healthchecks",
+   "source": "healthchecks/healthchecks",
+   "license": "BSD-3-Clause",
+   "split": "dev"
+  },
+  {
+   "id": "umami",
+   "schema": "training/data/public/umami",
+   "source": "umami-software/umami",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "gitlab",
+   "schema": "training/data/public/gitlab",
+   "tables": [
+    "background_operation_workers",
+    "trial_usages",
+    "batched_background_migrations",
+    "billable_usage_export_logs",
+    "import_sync_repository_states",
+    "targeted_messages",
+    "work_item_custom_status_mappings"
+   ],
+   "source": "gitlabhq/gitlabhq",
+   "license": "MIT",
+   "split": "dev"
+  },
+  {
+   "id": "hoppscotch",
+   "schema": "training/data/public/hoppscotch",
+   "source": "hoppscotch/hoppscotch",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "airflow",
+   "schema": "training/data/public/airflow",
+   "source": "apache/airflow",
+   "license": "Apache-2.0",
+   "split": "test"
+  },
+  {
+   "id": "superset",
+   "schema": "training/data/public/superset",
+   "source": "apache/superset",
+   "license": "Apache-2.0",
+   "split": "test"
+  },
+  {
+   "id": "wagtail",
+   "schema": "training/data/public/wagtail",
+   "source": "wagtail/wagtail",
+   "license": "BSD-3-Clause",
+   "split": "test"
+  },
+  {
+   "id": "calcom",
+   "schema": "training/data/public/calcom",
+   "sample": 35,
+   "source": "calcom/cal.com",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "pterodactyl",
+   "schema": "eval/rules/code/pterodactyl/schema.sql",
+   "code": [
+    "eval/rules/code/pterodactyl/app/Models/Allocation.php",
+    "eval/rules/code/pterodactyl/app/Models/Node.php",
+    "eval/rules/code/pterodactyl/app/Models/Server.php",
+    "eval/rules/code/pterodactyl/app/Models/Schedule.php",
+    "eval/rules/code/pterodactyl/app/Models/Location.php",
+    "eval/rules/code/pterodactyl/app/Models/Database.php"
+   ],
+   "source": "pterodactyl/panel",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "netbox",
+   "schema": "eval/rules/code/netbox/netbox/dcim/models/power.py",
+   "code": [
+    "eval/rules/code/netbox/netbox/dcim/models/power.py"
+   ],
+   "source": "netbox-community/netbox",
+   "license": "Apache-2.0",
+   "split": "test"
+  },
+  {
+   "id": "netbox-vlans",
+   "schema": "eval/rules/code/netbox/netbox/ipam/models/vlans.py",
+   "code": [
+    "eval/rules/code/netbox/netbox/ipam/models/vlans.py"
+   ],
+   "source": "netbox-community/netbox",
+   "license": "Apache-2.0",
+   "split": "test"
+  },
+  {
+   "id": "fastapi-template",
+   "schema": "eval/rules/code/fastapi-template/schema.sql",
+   "code": [
+    "eval/rules/code/fastapi-template/backend/app/models.py"
+   ],
+   "source": "fastapi/full-stack-fastapi-template",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "jhipster",
+   "schema": "eval/rules/code/jhipster/schema.sql",
+   "code": [
+    "eval/rules/code/jhipster/src/main/java/io/github/jhipster/sample/domain/BankAccount.java",
+    "eval/rules/code/jhipster/src/main/java/io/github/jhipster/sample/domain/Label.java",
+    "eval/rules/code/jhipster/src/main/java/io/github/jhipster/sample/domain/Operation.java",
+    "eval/rules/code/jhipster/src/main/java/io/github/jhipster/sample/domain/User.java"
+   ],
+   "source": "jhipster/jhipster-sample-app",
+   "license": "Apache-2.0",
+   "split": "test"
+  },
+  {
+   "id": "cleanarch",
+   "schema": "eval/rules/code/cleanarch/schema.sql",
+   "code": [
+    "eval/rules/code/cleanarch/src/Application/TodoItems/Commands/CreateTodoItem/CreateTodoItemCommandValidator.cs",
+    "eval/rules/code/cleanarch/src/Application/TodoLists/Commands/CreateTodoList/CreateTodoListCommandValidator.cs",
+    "eval/rules/code/cleanarch/src/Domain/Entities/TodoItem.cs",
+    "eval/rules/code/cleanarch/src/Domain/Entities/TodoList.cs"
+   ],
+   "source": "jasontaylordev/CleanArchitecture",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "express-boilerplate",
+   "schema": "eval/rules/code/express-boilerplate/schema.sql",
+   "code": [
+    "eval/rules/code/express-boilerplate/src/validations/user.validation.js",
+    "eval/rules/code/express-boilerplate/src/models/user.model.js"
+   ],
+   "source": "hagopj13/node-express-boilerplate",
+   "license": "MIT",
+   "split": "test"
+  },
+  {
+   "id": "spree",
+   "schema": "eval/rules/code/spree/schema.sql",
+   "code": [
+    "eval/rules/code/spree/spree/core/app/models/spree/price.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/stock_item.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/line_item.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/gift_card.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/store_credit.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/tax_rate.rb",
+    "eval/rules/code/spree/spree/core/app/models/spree/refund.rb"
+   ],
+   "source": "spree/spree",
+   "license": "BSD-3-Clause",
+   "split": "test"
+  }
+ ]
+}

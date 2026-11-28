@@ -1,0 +1,276 @@
+{"id": "chinook.customer", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "chinook.employee", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "chinook.invoice", "gold": [], "also": [], "ignore": [], "note": "total = sum(invoice_line.unit_price * quantity): not expressible as one rule kind"}
+{"id": "chinook.invoice_line", "gold": ["copy unit_price = track.unit_price"], "also": [], "ignore": [], "note": ""}
+{"id": "chinook.track", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.film", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.film_actor", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.film_category", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.address", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.city", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.customer", "gold": ["order create_date <= last_update"], "also": [], "ignore": [], "note": "create_date / last_update are the row's created/updated pair"}
+{"id": "sakila.inventory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.payment", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.rental", "gold": ["order rental_date <= return_date"], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.staff", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "sakila.store", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "northwind.Employees", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "northwind.Orders", "gold": ["order OrderDate <= RequiredDate", "order OrderDate <= ShippedDate"], "also": [], "ignore": [], "note": ""}
+{"id": "northwind.Products", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "northwind.Order Details", "gold": ["copy UnitPrice = Products.UnitPrice"], "also": [], "ignore": [], "note": "line price taken from the product at the time of the order"}
+{"id": "pubs.titles", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "pubs.titleauthor", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "pubs.sales", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "pubs.roysched", "gold": ["order lorange <= hirange"], "also": [], "ignore": [], "note": "low and high end of a sales range"}
+{"id": "pubs.discounts", "gold": ["order lowqty <= highqty"], "also": [], "ignore": [], "note": ""}
+{"id": "pubs.jobs", "gold": ["order min_lvl <= max_lvl"], "also": [], "ignore": [], "note": ""}
+{"id": "pubs.employee", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.DatabaseLog", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ErrorLog", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Address", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.AddressType", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.AWBuildVersion", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.BillOfMaterials", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.BusinessEntity", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.BusinessEntityAddress", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.BusinessEntityContact", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ContactType", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.CountryRegionCurrency", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.CreditCard", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.CurrencyRate", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Customer", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Department", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Document", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.EmailAddress", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Employee", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.EmployeeDepartmentHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.EmployeePayHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Illustration", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.JobCandidate", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Location", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Password", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Person", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.PersonCreditCard", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.PersonPhone", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.PhoneNumberType", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Product", "gold": ["order SellStartDate <= DiscontinuedDate"], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductCategory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductCostHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductDescription", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductDocument", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductInventory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductListPriceHistory", "gold": [], "also": [], "ignore": [], "note": "a history row's price is not the product's current price: no copy"}
+{"id": "adventureworks.ProductModel", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductModelIllustration", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductModelProductDescriptionCulture", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductPhoto", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductProductPhoto", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductReview", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductSubcategory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ProductVendor", "gold": ["order MinOrderQty <= MaxOrderQty"], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.PurchaseOrderDetail", "gold": ["order RejectedQty <= ReceivedQty"], "also": [], "ignore": [], "note": "purchase price is the vendor's, not the product's list price: no copy; LineTotal is computed (parsed as text)"}
+{"id": "adventureworks.PurchaseOrderHeader", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesOrderDetail", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesOrderHeader", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesOrderHeaderSalesReason", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesPerson", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesPersonQuotaHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesReason", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesTaxRate", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesTerritory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SalesTerritoryHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ScrapReason", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Shift", "gold": [], "also": [], "ignore": [], "note": "the night shift runs 23:00-07:00: no StartTime <= EndTime"}
+{"id": "adventureworks.ShipMethod", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.ShoppingCartItem", "gold": ["order DateCreated <= ModifiedDate"], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SpecialOffer", "gold": ["order MinQty <= MaxQty"], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.SpecialOfferProduct", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.StateProvince", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Store", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.TransactionHistory", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.TransactionHistoryArchive", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.Vendor", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.WorkOrder", "gold": ["order StartDate <= DueDate", "order ScrappedQty <= OrderQty"], "also": [], "ignore": [], "note": ""}
+{"id": "adventureworks.WorkOrderRouting", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.app_appproblem", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.checkout_checkoutdelivery", "gold": ["order created_at <= updated_at", "copy currency = checkout_checkout.currency", "order minimum_delivery_days <= maximum_delivery_days"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.checkout_checkout", "gold": ["order created_at <= last_change"], "also": ["copy currency = checkout_checkoutdelivery.currency", "order subtotal_net_amount <= subtotal_gross_amount", "order total_net_amount <= total_gross_amount", "order created_at <= completing_started_at"], "ignore": [], "note": "the total is not the sum of delivery option prices"}
+{"id": "saleor.core_eventdelivery", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.core_eventdeliveryattempt", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.discount_vouchercode", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.discount_voucherchannellisting", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.discount_promotionrule", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.order_ordergrantedrefund", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.order_ordergrantedrefundline", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.payment_transactionevent", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.payment_transaction", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.plugins_emailtemplate", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.product_product", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.product_productchannellisting", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.product_productvariant", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.product_productvariantchannellisting", "gold": [], "also": ["order discounted_price_amount <= price_amount"], "ignore": [], "note": ""}
+{"id": "saleor.product_variantchannellistingpromotionrule", "gold": ["copy currency = product_productvariantchannellisting.currency"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.shipping_shippingmethodchannellisting", "gold": ["order minimum_order_price_amount <= maximum_order_price_amount"], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.warehouse_stock", "gold": ["sum quantity_allocated = warehouse_allocation.quantity_allocated"], "also": ["order quantity_allocated <= quantity"], "ignore": [], "note": "Stock.quantity_allocated is kept as the sum of its allocations"}
+{"id": "saleor.warehouse_allocation", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.warehouse_preorderreservation", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "saleor.warehouse_reservation", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.accounts_profile", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.api_check", "gold": [], "also": ["order created <= last_ping", "order created <= last_start"], "ignore": [], "note": ""}
+{"id": "healthchecks.api_ping", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.api_channel", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.api_notification", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.api_flip", "gold": ["order created <= processed"], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.api_tokenbucket", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.logs_record", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "healthchecks.payments_subscription", "gold": [], "also": ["order setup_date <= next_billing_date"], "ignore": [], "note": ""}
+{"id": "umami.user", "gold": ["order created_at <= updated_at", "order created_at <= deleted_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.api_key", "gold": ["order created_at <= last_used_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.website", "gold": ["order created_at <= updated_at", "order created_at <= deleted_at"], "also": ["order created_at <= reset_at"], "ignore": [], "note": ""}
+{"id": "umami.website_event", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.event_data", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.session_data", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.team", "gold": ["order created_at <= updated_at", "order created_at <= deleted_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.team_user", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.report", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.annotation", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.segment", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.revenue", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.link", "gold": ["order created_at <= updated_at", "order created_at <= deleted_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.pixel", "gold": ["order created_at <= updated_at", "order created_at <= deleted_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.board", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.share", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.session_replay", "gold": ["order started_at <= ended_at"], "also": ["order started_at <= created_at"], "ignore": [], "note": ""}
+{"id": "umami.session_replay_saved", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.heatmap_event", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.two_factor_auth", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.two_factor_backup_code", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.two_factor_rate_limit", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "umami.error_issue", "gold": ["order created_at <= resolved_at"], "also": [], "ignore": [], "note": ""}
+{"id": "umami.error_event", "gold": [], "also": ["order created_at <= received_at"], "ignore": [], "note": ""}
+{"id": "umami.error_rate_limit", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "gitlab.background_operation_workers", "gold": ["order started_at <= finished_at"], "also": ["order created_at <= started_at", "order sub_batch_size <= max_batch_size", "order batch_size <= max_batch_size"], "ignore": [], "note": ""}
+{"id": "gitlab.trial_usages", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "gitlab.batched_background_migrations", "gold": ["order started_at <= finished_at", "order created_at <= updated_at"], "also": ["order batch_size <= max_batch_size", "order sub_batch_size <= max_batch_size"], "ignore": [], "note": ""}
+{"id": "gitlab.billable_usage_export_logs", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "gitlab.import_sync_repository_states", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "gitlab.targeted_messages", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "gitlab.work_item_custom_status_mappings", "gold": ["order created_at <= updated_at"], "also": [], "ignore": ["order valid_from <= valid_until"], "note": "valid_from < valid_until is already a CHECK the parser kept"}
+{"id": "hoppscotch.TeamCollection", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.TeamRequest", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.TeamEnvironment", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.User", "gold": ["order createdOn <= lastLoggedOn", "order createdOn <= lastActiveOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.UserRequest", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.UserCollection", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.MockServer", "gold": ["order createdOn <= updatedOn", "order createdOn <= deletedAt"], "also": ["order createdOn <= lastHitAt"], "ignore": [], "note": ""}
+{"id": "hoppscotch.MockServerLog", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.Shortcode", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.InfraConfig", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.PersonalAccessToken", "gold": ["order createdOn <= updatedOn", "order createdOn <= expiresOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.InfraToken", "gold": ["order createdOn <= updatedOn", "order createdOn <= expiresOn"], "also": [], "ignore": [], "note": ""}
+{"id": "hoppscotch.PublishedDocs", "gold": ["order createdOn <= updatedOn"], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.asset_state_store", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.asset_event", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.partitioned_asset_key_log", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.backfill", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.backfill_dag_run", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.callback", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.connection", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.dag_version", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.dag", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.dag_code", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.dag_run", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.deadline_alert", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.deadline", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.dynamic_region", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.log", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.slot_pool", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.serialized_dag", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.task_state_store", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.task_instance", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.task_reschedule", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "airflow.trigger", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.annotation", "gold": ["order start_dttm <= end_dttm"], "also": [], "ignore": [], "note": ""}
+{"id": "superset.cache_keys", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.dbs", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.logs", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.favstar", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.embedded_dashboards", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.purge_audit_log", "gold": ["order created_on <= confirmed_on"], "also": [], "ignore": [], "note": ""}
+{"id": "superset.tab_state", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.table_schema", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "superset.tasks", "gold": ["order started_at <= ended_at"], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.search_promotions_querydailyhits", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.search_promotions_searchpromotion", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.embeds_embed", "gold": [], "also": ["order last_updated <= cache_until"], "ignore": [], "note": ""}
+{"id": "wagtail.models_apitoken", "gold": ["order created <= revoked_at", "order created <= last_used_at"], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_comment", "gold": ["order created_at <= updated_at", "order created_at <= resolved_at"], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_commentreply", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_revision", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_site", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_workflowstate", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "wagtail.models_taskstate", "gold": ["order started_at <= finished_at"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Host", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.CalVideoSettings", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.DestinationCalendar", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Team", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.CreditBalance", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.VerificationToken", "gold": ["order createdAt <= updatedAt", "order createdAt <= expires"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.BookingReference", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Availability", "gold": ["order startTime <= endTime"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.SelectedCalendar", "gold": ["order createdAt <= updatedAt"], "also": ["order watchAttempts <= maxAttempts"], "ignore": [], "note": ""}
+{"id": "calcom.Webhook", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.ApiKey", "gold": ["order createdAt <= expiresAt", "order createdAt <= lastUsedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.RateLimit", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.App", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.VerifiedEmail", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Feature", "gold": ["order createdAt <= updatedAt"], "also": ["order createdAt <= lastUsedAt"], "ignore": [], "note": ""}
+{"id": "calcom.UserFeatures", "gold": ["order assignedAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.TeamFeatures", "gold": ["order assignedAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.BookingDenormalized", "gold": ["order startTime <= endTime", "order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.PlatformOAuthClient", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.AccessToken", "gold": ["order createdAt <= expiresAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.RefreshToken", "gold": ["order createdAt <= expiresAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Task", "gold": ["order createdAt <= updatedAt"], "also": ["order createdAt <= scheduledAt", "order scheduledAt <= succeededAt", "order attempts <= maxAttempts"], "ignore": [], "note": ""}
+{"id": "calcom.ManagedOrganization", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.PlatformBilling", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Attribute", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.EventTypeTranslation", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.WatchlistEventAudit", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.BookingReport", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.OrganizationOnboarding", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.Role", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.RolePermission", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.AuditActor", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.BookingAudit", "gold": ["order createdAt <= updatedAt"], "also": ["order timestamp <= createdAt"], "ignore": [], "note": ""}
+{"id": "calcom.Agent", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "calcom.CalAiPhoneNumber", "gold": ["order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "pterodactyl.locations", "gold": ["order created_at <= updated_at", "minlen short 1", "maxlen short 60", "minlen long 1", "maxlen long 191"], "also": [], "ignore": [], "note": ""}
+{"id": "pterodactyl.nodes", "gold": ["order created_at <= updated_at", "min memory 1", "min memory_overallocate -1", "min disk 1", "min disk_overallocate -1", "min daemonSFTP 1", "max daemonSFTP 65535", "min daemonListen 1", "max daemonListen 65535", "min upload_size 1"], "also": ["maxlen name 100"], "ignore": [], "note": ""}
+{"id": "pterodactyl.servers", "gold": ["order created_at <= updated_at", "minlen external_id 1", "minlen name 1", "min memory 0", "min swap -1", "min io 10", "max io 1000", "min cpu 0", "min disk 0", "min database_limit 0", "min allocation_limit 0", "min backup_limit 0"], "also": ["order created_at <= installed_at"], "ignore": [], "note": ""}
+{"id": "pterodactyl.allocations", "gold": ["order created_at <= updated_at", "min port 1024", "max port 65535"], "also": [], "ignore": [], "note": ""}
+{"id": "pterodactyl.database_hosts", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "pterodactyl.databases", "gold": ["order created_at <= updated_at", "minlen database 3", "maxlen database 48", "minlen username 3", "maxlen username 100"], "also": [], "ignore": [], "note": ""}
+{"id": "pterodactyl.schedules", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "netbox.models_powerfeed", "gold": ["min amperage 1", "min max_utilization 1", "max max_utilization 100"], "also": ["min amperage 0", "min max_utilization 0", "min available_power 0"], "ignore": [], "note": ""}
+{"id": "netbox-vlans.models_vlangroup", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "netbox-vlans.models_vlan", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "netbox-vlans.models_vlantranslationrule", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "fastapi-template.user", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "fastapi-template.item", "gold": ["minlen title 1"], "also": [], "ignore": [], "note": ""}
+{"id": "jhipster.jhi_user", "gold": ["minlen login 1", "len password_hash 60", "minlen email 5", "minlen lang_key 2", "order created_date <= last_modified_date"], "also": ["minlen password_hash 60"], "ignore": [], "note": ""}
+{"id": "jhipster.bank_account", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "jhipster.label", "gold": ["minlen label 3"], "also": [], "ignore": [], "note": ""}
+{"id": "jhipster.operation", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "cleanarch.TodoLists", "gold": ["minlen Title 1", "maxlen Title 200", "order Created <= LastModified"], "also": [], "ignore": [], "note": ""}
+{"id": "cleanarch.TodoItems", "gold": ["minlen Title 1", "maxlen Title 200", "order Created <= LastModified"], "also": [], "ignore": [], "note": ""}
+{"id": "express-boilerplate.users", "gold": ["values role user|admin", "minlen password 8", "order createdAt <= updatedAt"], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_orders", "gold": ["order created_at <= updated_at", "order created_at <= completed_at"], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_variants", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_line_items", "gold": ["order created_at <= updated_at", "copy currency = spree_orders.currency", "copy cost_price = spree_variants.cost_price", "min quantity 0"], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_prices", "gold": ["order created_at <= updated_at", "min amount 0", "min compare_at_amount 0", "min min_quantity 1"], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_gift_cards", "gold": ["order created_at <= updated_at", "min amount_used 0", "min amount_authorized 0"], "also": ["min amount 0", "order amount_used <= amount", "order amount_authorized <= amount", "order created_at <= expires_at"], "ignore": [], "note": ""}
+{"id": "spree.spree_store_credits", "gold": ["order created_at <= updated_at", "min amount_used 0", "order amount_used <= amount"], "also": ["min amount 0", "order amount_authorized <= amount", "min amount_authorized 0"], "ignore": [], "note": ""}
+{"id": "spree.spree_payments", "gold": [], "also": [], "ignore": [], "note": ""}
+{"id": "spree.spree_refunds", "gold": ["order created_at <= updated_at"], "also": ["min amount 0"], "ignore": [], "note": ""}
+{"id": "spree.spree_tax_rates", "gold": ["order created_at <= updated_at"], "also": [], "ignore": [], "note": ""}

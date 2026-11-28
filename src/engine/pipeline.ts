@@ -11,7 +11,8 @@ import { byokConfig, refineWithByok } from "./byok.js";
 import { infer, type Plan } from "./infer.js";
 import { mergeRules, readRulesFile } from "./rulesfile.js";
 import { refineWithModel } from "../model/classify.js";
-import { installedModel } from "../model/store.js";
+import { installedModel, RULE_MODEL } from "../model/store.js";
+import { proposeRules } from "../rulemodel/propose.js";
 
 export interface Prepared {
   schema: SchemaModel;
@@ -21,6 +22,8 @@ export interface Prepared {
   byok: { provider: string; changed: number } | null;
   /** The schema model's part in this run, when one is installed and not turned off. */
   model: { name: string; changed: number; asked: number } | null;
+  /** The rule model's part: rules it proposed that passed the check and a trial run. */
+  ruleModel: { name: string; asked: number; proposed: number; accepted: number; rejected: number; dropped: number } | null;
 }
 
 const SAMPLE_ROWS = 50;
@@ -92,6 +95,22 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
     codeRules = applied.applied.length;
     note(ctx, `read code     ${found.length} validator rule(s) in ${ctx.codeDir}; ${applied.applied.length} applied${applied.unmatched ? `, ${applied.unmatched} didn't match a table` : ""}`);
   }
+  // The optional rule model proposes rules between columns (and from code with --code); the
+  // deterministic check and a trial run decide. Any failure leaves the heuristics' rules as they are.
+  let ruleModel: Prepared["ruleModel"] = null;
+  if (!ctx.noModel) {
+    const ri = installedModel(RULE_MODEL);
+    if (ri && !ri.runtime) note(ctx, `rule model    installed, but this release has no runtime for this platform; using the heuristics`);
+    else if (ri) {
+      try {
+        const r = await proposeRules(plan, schema, ri, { codeDir: ctx.codeDir });
+        ruleModel = { name: r.model, asked: r.asked, proposed: r.proposed, accepted: r.accepted, rejected: r.rejected.length, dropped: r.dropped.length };
+        note(ctx, `rule model    ${r.model} added ${r.accepted} rule(s) from ${r.asked} table(s) in ${(r.ms / 1000).toFixed(1)} s, on this machine; ${r.rejected.length} proposal(s) failed the check${r.dropped.length ? `, ${r.dropped.length} failed a trial run` : ""}`);
+      } catch (e) {
+        warn(`rule model    skipped: ${e instanceof Error ? e.message : String(e)}. Using the heuristics only.`);
+      }
+    }
+  }
   let byok: Prepared["byok"] = null;
   // A misconfigured provider (unknown name, missing key) never stops a run: warn and use the built-in engine.
   let cfg: ReturnType<typeof byokConfig> = null;
@@ -120,5 +139,5 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
     throw invalidInput(e instanceof Error ? e.message : String(e));
   }
   for (const n of merged.notes) note(ctx, `rules file    ${n}`);
-  return { schema, plan: merged.plan, connector, codeRules, byok, model };
+  return { schema, plan: merged.plan, connector, codeRules, byok, model, ruleModel };
 }

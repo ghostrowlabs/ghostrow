@@ -43,6 +43,8 @@ export async function pullModel(name = DEFAULT_MODEL, progress: (line: string) =
   if (!v.ok) throw new Error(`The model manifest from ${base} didn't verify (${v.reason.replace("_", " ")}). Nothing was installed.`);
   const m = v.manifest;
   if (m.name !== name) throw new Error(`The manifest is for ${m.name}, not ${name}. Nothing was installed.`);
+  const task = ({ "gr-col-1": "column-meaning", "gr-rules-1": "rule-proposal" } as Record<string, string>)[name];
+  if (task && m.task !== task) throw new Error(`The manifest for ${name} is for the task ${m.task}, not ${task}. Nothing was installed.`);
   const dir = modelDir(name);
   const rt = runtimeDir(name);
   mkdirSync(rt, { recursive: true });

@@ -1,5 +1,7 @@
 # gr-col-1: evaluation results
 
+(The rule model, gr-rules-1, has its own page: [`rules/RESULTS.md`](rules/RESULTS.md).)
+
 Measured 2026-11-27. Every figure on this page comes from the files in `eval/results/` and can be
 reproduced with the commands in `training/README.md`. Nothing here is an estimate.
 

@@ -47,7 +47,7 @@ export function buildProgram(): Command {
     .option("--code <dir>", "Also read application code for validation rules (Pro and Max)")
     .option("--rules <file>", "Rules file to read and update", "ghostrow.rules.yaml")
     .option("--seed <n>", "Random seed. The same seed gives the same output")
-    .option("--no-model", "Don't use the installed schema model for this run (rule engine only)")
+    .option("--no-model", "Don't use the installed on-device models for this run (rule engine only)")
     .option("-q, --quiet", "Less output")
     .option("--json", "Machine-readable output");
 
@@ -85,19 +85,19 @@ export function buildProgram(): Command {
     return twinHandler(resolveContext(globals), buildTwinOptions(globals));
   });
 
-  const model = program.command("model").description("Download and manage the on-device schema model (all plans)");
+  const model = program.command("model").description("Download and manage the on-device models (all plans)");
   model
-    .command("pull")
-    .description("Download the schema model and verify its signature")
-    .action((_o: object, cmd: Command) => runModelPull(resolveContext(cmd.optsWithGlobals())));
+    .command("pull [name]")
+    .description("Download a model and verify its signature: gr-col-1 (default, column meanings) or gr-rules-1 (rules between columns and from code)")
+    .action((name: string | undefined, _o: object, cmd: Command) => runModelPull(resolveContext(cmd.optsWithGlobals()), name));
   model
     .command("status")
-    .description("Show the installed model")
+    .description("Show the installed models")
     .action((_o: object, cmd: Command) => runModelStatus(resolveContext(cmd.optsWithGlobals())));
   model
-    .command("remove")
-    .description("Delete the installed model")
-    .action((_o: object, cmd: Command) => runModelRemove(resolveContext(cmd.optsWithGlobals())));
+    .command("remove [name]")
+    .description("Delete an installed model (default gr-col-1)")
+    .action((name: string | undefined, _o: object, cmd: Command) => runModelRemove(resolveContext(cmd.optsWithGlobals()), name));
 
   program
     .command("activate <key>")

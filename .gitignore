@@ -16,3 +16,10 @@ training/runs/
 training/artifacts/
 training/runs-*.log
 training/release/
+
+# rule model training (data is rebuilt by training/rules/tools/synth.ts)
+training/rules/.venv/
+training/rules/data/
+training/rules/runs/
+training/rules/artifacts/
+training/rules/runs-*.log

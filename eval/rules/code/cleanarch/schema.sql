@@ -1,0 +1,3 @@
+-- Written by hand for the held-out set from CleanArchitecture src/Domain/Entities (EF Core default names; lengths not known, so text).
+CREATE TABLE "TodoLists" ("Id" int PRIMARY KEY, "Title" text, "Colour" text NOT NULL, "Created" timestamp NOT NULL, "CreatedBy" text, "LastModified" timestamp NOT NULL, "LastModifiedBy" text);
+CREATE TABLE "TodoItems" ("Id" int PRIMARY KEY, "ListId" int NOT NULL REFERENCES "TodoLists"("Id"), "Title" text, "Note" text, "Priority" int NOT NULL, "Reminder" timestamp, "Done" boolean NOT NULL, "Created" timestamp NOT NULL, "CreatedBy" text, "LastModified" timestamp NOT NULL, "LastModifiedBy" text);

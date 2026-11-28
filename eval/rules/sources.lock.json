@@ -1,0 +1,210 @@
+[
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Allocation.php",
+  "license": "MIT",
+  "sha256": "a54b3eba2e17062c84cefd038d56ffcb76217e8b1bc762aad32dec8eb4e1cbba"
+ },
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Node.php",
+  "license": "MIT",
+  "sha256": "51b85e4d489da823e04971d933efa28ce771ae735d1714021d4947c91fb4047c"
+ },
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Server.php",
+  "license": "MIT",
+  "sha256": "09dd3206ec8c18970f12c4c4c3bcbb0c2e703848c955ee24eb074acb41410163"
+ },
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Schedule.php",
+  "license": "MIT",
+  "sha256": "ed3f94cfdd6960a9957c53595c9c82d2f7d8833010ba9875e1b77c2bb62aef5d"
+ },
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Location.php",
+  "license": "MIT",
+  "sha256": "6c64c44fb5ee3feae32aef7f6d6802f7632e141d143097e9e69a849ed067f847"
+ },
+ {
+  "case": "pterodactyl",
+  "repo": "pterodactyl/panel",
+  "commit": "60a10015815835decffe4f77d15b0e7419d793b9",
+  "path": "app/Models/Database.php",
+  "license": "MIT",
+  "sha256": "75559a681529eb13f6d0cdedc39909862c416d84e6c8f47b267d750de6787bf4"
+ },
+ {
+  "case": "netbox",
+  "repo": "netbox-community/netbox",
+  "commit": "04bdbf464c380d2b4d1dc8d4f9c96fcc26f04981",
+  "path": "netbox/ipam/models/vlans.py",
+  "license": "Apache-2.0",
+  "sha256": "ec034fe09faeef2ba5a7facf06c8bbbd3dda95c0b80964e945bd545502295af9"
+ },
+ {
+  "case": "netbox",
+  "repo": "netbox-community/netbox",
+  "commit": "04bdbf464c380d2b4d1dc8d4f9c96fcc26f04981",
+  "path": "netbox/dcim/models/power.py",
+  "license": "Apache-2.0",
+  "sha256": "5a29a1aa6171ead4e6c10af94994fde4500ac99703dace51432d98713aa136be"
+ },
+ {
+  "case": "fastapi-template",
+  "repo": "fastapi/full-stack-fastapi-template",
+  "commit": "f8c6c147b12bb1c4d3253cc1b06f8b5ef81b10dd",
+  "path": "backend/app/models.py",
+  "license": "MIT",
+  "sha256": "4696396c84832a50ca9d60337c2b6ba24e961f2ee5b5e660d8081fb929ebf459"
+ },
+ {
+  "case": "jhipster",
+  "repo": "jhipster/jhipster-sample-app",
+  "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+  "path": "src/main/java/io/github/jhipster/sample/domain/BankAccount.java",
+  "license": "Apache-2.0",
+  "sha256": "b6f35e67a4763b0a532f3c225f298af422f4f10ffe0b947832ebd87f0a12f248"
+ },
+ {
+  "case": "jhipster",
+  "repo": "jhipster/jhipster-sample-app",
+  "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+  "path": "src/main/java/io/github/jhipster/sample/domain/Label.java",
+  "license": "Apache-2.0",
+  "sha256": "4025d6475a4f7f600a25fe552009b85c7128d41dcb2afab5c14daeb85a7d4a57"
+ },
+ {
+  "case": "jhipster",
+  "repo": "jhipster/jhipster-sample-app",
+  "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+  "path": "src/main/java/io/github/jhipster/sample/domain/Operation.java",
+  "license": "Apache-2.0",
+  "sha256": "a793b5ec2b50b4c10cd6a1ad5311dc9c4d359ee9d7eb3a8f55f6015b8e1e707a"
+ },
+ {
+  "case": "jhipster",
+  "repo": "jhipster/jhipster-sample-app",
+  "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+  "path": "src/main/java/io/github/jhipster/sample/domain/User.java",
+  "license": "Apache-2.0",
+  "sha256": "938718832718945808e3610860be76cbf6e19a1f4a96cf804efe4c3ff6f0442e"
+ },
+ {
+  "case": "cleanarch",
+  "repo": "jasontaylordev/CleanArchitecture",
+  "commit": "f7f977156ccfbea21f5789863acb74bb79c01273",
+  "path": "src/Application/TodoItems/Commands/CreateTodoItem/CreateTodoItemCommandValidator.cs",
+  "license": "MIT",
+  "sha256": "bf20ecbb19ddf909f6fc401177d163bcc719d53527260a63359eb97af6e4fc9b"
+ },
+ {
+  "case": "cleanarch",
+  "repo": "jasontaylordev/CleanArchitecture",
+  "commit": "f7f977156ccfbea21f5789863acb74bb79c01273",
+  "path": "src/Application/TodoLists/Commands/CreateTodoList/CreateTodoListCommandValidator.cs",
+  "license": "MIT",
+  "sha256": "05660428247c4b96daa8fa5f1af10ff99d6d3d87c4d6373c86f87ee6eeb927c9"
+ },
+ {
+  "case": "cleanarch",
+  "repo": "jasontaylordev/CleanArchitecture",
+  "commit": "f7f977156ccfbea21f5789863acb74bb79c01273",
+  "path": "src/Domain/Entities/TodoItem.cs",
+  "license": "MIT",
+  "sha256": "90655b6cd79bcc53716b4eb5846188457a1730416ce39256810ef44bf2dc6a32"
+ },
+ {
+  "case": "cleanarch",
+  "repo": "jasontaylordev/CleanArchitecture",
+  "commit": "f7f977156ccfbea21f5789863acb74bb79c01273",
+  "path": "src/Domain/Entities/TodoList.cs",
+  "license": "MIT",
+  "sha256": "e67455f589993cffb2fb661ca2681133319d6676830fd29938a13baf7932c63d"
+ },
+ {
+  "case": "express-boilerplate",
+  "repo": "hagopj13/node-express-boilerplate",
+  "commit": "179ae84efec61b14206d0305d941daed6c6d07f9",
+  "path": "src/validations/user.validation.js",
+  "license": "MIT",
+  "sha256": "b1e38a8f9289953c64c02e036ceba3220416f6886b2f1da93398905997495b18"
+ },
+ {
+  "case": "express-boilerplate",
+  "repo": "hagopj13/node-express-boilerplate",
+  "commit": "179ae84efec61b14206d0305d941daed6c6d07f9",
+  "path": "src/models/user.model.js",
+  "license": "MIT",
+  "sha256": "f0f36b37a1160e3888d1933aa67266d2386fe5715dbda5c74c6de2893bfde9e8"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/price.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "cbc040dd97d02f2b2c9030e6ea16d8d6b60e45d3719dbea0594df19c210271f5"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/stock_item.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "29d50e78a53eabafe5b92e7dc2a7e3c681aa35f05e81321a81e8e20b6d685849"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/line_item.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "121183dab7b9d55a5174720fcec96a325134791302e55cc5433b1e82473fca12"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/gift_card.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "9584125f5286395e089ec55601ad9a2a43c9766edc7770f9f1d38ed71495773e"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/store_credit.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "8827624bfc60565919125f9af527f8bff476159758ab99f401729c3587d72d71"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/tax_rate.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "4ebcbab81eac43c987b17b746f4fb7f31fe9eb098a75aedd3cccd465f45748b6"
+ },
+ {
+  "case": "spree",
+  "repo": "spree/spree",
+  "commit": "627f0f6e8c8802664abe2d41e86c9c454a8c3dba",
+  "path": "spree/core/app/models/spree/refund.rb",
+  "license": "BSD-3-Clause",
+  "sha256": "2ffbce7b5bfaf5ff0e50f18bec64a971f670ea01eb9f156f926f7719ed93b3b1"
+ }
+]

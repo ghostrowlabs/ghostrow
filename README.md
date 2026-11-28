@@ -49,8 +49,8 @@ ghostrow seed --db postgres://localhost/app_test --seed 42 --rows 5000
 | `ghostrow activate <key>` | Activate this machine for your license. |
 | `ghostrow deactivate` | Free this machine so you can use the seat elsewhere. |
 | `ghostrow status` | Show the plan, seat, machines used and updates end date. |
-| `ghostrow model pull` | Download the on-device schema model (`gr-col-1`, all plans) and verify its signature. |
-| `ghostrow model status` / `model remove` | Show or delete the installed model. |
+| `ghostrow model pull [name]` | Download an on-device model (`gr-col-1` by default, or `gr-rules-1`) and verify its signature. |
+| `ghostrow model status` / `model remove [name]` | Show or delete the installed models. |
 
 ## The schema model
 
@@ -64,6 +64,21 @@ fits the column's declared type; otherwise the rule engine's meaning stands. Row
 the seeded generator and are validated against your constraints. `--no-model` turns it off for a
 run. Without a model, Ghostrow uses the rule engine exactly as before. Results, method and data:
 [`eval/RESULTS.md`](eval/RESULTS.md); training: [`training/README.md`](training/README.md).
+
+## The rule model (optional)
+
+`ghostrow model pull gr-rules-1` downloads `gr-rules-1`: a 0.5B instruct model (Qwen2.5,
+Apache-2.0) fine-tuned on synthetic schemas and code. It is a 330 MB int4 ONNX download and runs
+on the CPU. It reads one table at a time, with `--code` the application code that names its
+columns, and proposes rules: orderings, sums, products, copies from a parent, and limits and
+allowed values stated in validator code. **It only proposes.** A rule is used when every
+token was at least 90% likely and the deterministic check passes: columns and types fit, the
+foreign key exists, nothing loops, and limits appear only in code that was read. A seeded trial
+sample must also generate and validate with the rule in place. Accepted rules are written to
+`ghostrow.rules.yaml` like any other. Without it, or with `--no-model`, the built-in heuristics
+run as before. It adds about half a second per table on a desktop CPU. Results:
+[`eval/rules/RESULTS.md`](eval/rules/RESULTS.md); training:
+[`training/rules/README.md`](training/rules/README.md).
 
 ## Your own AI provider (Pro, Max)
 

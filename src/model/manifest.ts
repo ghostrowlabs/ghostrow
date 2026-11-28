@@ -20,13 +20,14 @@ export const manifestSchema = z.object({
   kid: z.string(),
   name: z.string().regex(/^[a-z0-9-]+$/),
   version: z.string(),
-  task: z.literal("column-meaning"),
+  /** column-meaning: gr-col-1 (src/model). rule-proposal: gr-rules-1 (src/rulemodel). */
+  task: z.enum(["column-meaning", "rule-proposal"]),
   feature_version: z.number().int(),
   released_at: z.iso.datetime({ offset: true }),
   files: z.array(
     z.object({
       name: z.string().regex(/^[A-Za-z0-9._-]+$/),
-      role: z.enum(["model", "tokenizer", "info", "runtime"]),
+      role: z.enum(["model", "weights", "tokenizer", "info", "runtime"]),
       /** `win32-x64`, `linux-x64`, …: runtime files only. */
       platform: z.string().optional(),
       /** Name to give the file on disk (runtime files keep their library names). */

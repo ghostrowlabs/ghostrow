@@ -1,0 +1,158 @@
+{"id": "chinook.customer", "output": "order first_name <= last_name"}
+{"id": "chinook.employee", "output": "order hire_date <= reports_to"}
+{"id": "chinook.invoice", "output": "none"}
+{"id": "chinook.invoice_line", "output": "copy unit_price = track.unit_price"}
+{"id": "chinook.track", "output": "none"}
+{"id": "sakila.film", "output": "order release_year <= rental_year\norder release_year <= length\nsum replacement_cost = inventory.replacement_cost"}
+{"id": "sakila.film_actor", "output": "order last_update <= film.actor_id"}
+{"id": "sakila.film_category", "output": "order last_update <= film.category_id"}
+{"id": "sakila.address", "output": "order last_update <= city\nsum len(address) = address2"}
+{"id": "sakila.city", "output": "order last_update <= country.last_update"}
+{"id": "sakila.customer", "output": "order create_date <= first_name\norder create_date <= last_update"}
+{"id": "sakila.inventory", "output": "order last_update <= store.id"}
+{"id": "sakila.payment", "output": "none"}
+{"id": "sakila.rental", "output": "order rental_date <= return_date\norder rental_date <= payment_p2007_01.payment_date\norder rental_date <= payment_p2007_02.payment_date\norder rental_date <= payment_p2007_03.payment_date"}
+{"id": "sakila.staff", "output": "order active <= true\norder created <= updated\norder created <= first_name\nsum length password = password"}
+{"id": "sakila.store", "output": "order last_update <= staff.first_name"}
+{"id": "northwind.Employees", "output": "order HireDate <= ReportsTo"}
+{"id": "northwind.Orders", "output": "order OrderDate <= RequiredDate\norder OrderDate <= ShipDate\norder ShipVia = Shippers"}
+{"id": "northwind.Products", "output": "order Check ReorderLevel <= Check UnitsOnOrder <= Check UnitsInStock\nsum QuantityPerUnit = Order Details.Quantity"}
+{"id": "northwind.Order Details", "output": "copy UnitPrice = Products.UnitPrice\nmin Quantity 0\nmax Discount 1\nvalues UnitPrice 0"}
+{"id": "pubs.titles", "output": "none"}
+{"id": "pubs.titleauthor", "output": "none"}
+{"id": "pubs.sales", "output": "none"}
+{"id": "pubs.roysched", "output": "order hirange <= lorange"}
+{"id": "pubs.discounts", "output": "order lowqty <= highqty"}
+{"id": "pubs.jobs", "output": "order min_lvl <= max_lvl"}
+{"id": "pubs.employee", "output": "none"}
+{"id": "adventureworks.DatabaseLog", "output": "none"}
+{"id": "adventureworks.ErrorLog", "output": "none"}
+{"id": "adventureworks.Address", "output": "order Rowid <= ModifiedDate"}
+{"id": "adventureworks.AddressType", "output": "order ModifiedDate <= originaldate"}
+{"id": "adventureworks.AWBuildVersion", "output": "order Database Version <= VersionDate\norder ModifiedDate"}
+{"id": "adventureworks.BillOfMaterials", "output": "order CheckModifiedDate <= CheckDate\norder StartDate <= EndDate\nmin PerAssemblyQty 1.00\nmax PerAssemblyQty 10.00"}
+{"id": "adventureworks.BusinessEntity", "output": "order ModifiedDate <= rowguid"}
+{"id": "adventureworks.BusinessEntityAddress", "output": "order ModifiedDate <= Address.ModifiedDate"}
+{"id": "adventureworks.BusinessEntityContact", "output": "order ModifiedDate <= originaldate"}
+{"id": "adventureworks.ContactType", "output": "order ModifiedDate <= originalDate"}
+{"id": "adventureworks.CountryRegionCurrency", "output": "order ModifiedDate <= CountryRegion.CurrencyCode"}
+{"id": "adventureworks.CreditCard", "output": "order CardType <= credit_card\norder ExpMonth <= ExpYear\norder ModifiedDate"}
+{"id": "adventureworks.CurrencyRate", "output": "order FromCurrencyCode <= ToCurrencyCode\norder ModifiedDate <= CurrencyRateDate\nproduct EndOfDayRate = AverageRate * DaysInPeriod"}
+{"id": "adventureworks.Customer", "output": "order ModifiedDate <= originaldate"}
+{"id": "adventureworks.Department", "output": "order ModifiedDate <= DepartmentID"}
+{"id": "adventureworks.Document", "output": "order Check <= Revision\norder Created <= Changed\norder Created <= ModifiedDate"}
+{"id": "adventureworks.EmailAddress", "output": "order rowguid <= ModifiedDate"}
+{"id": "adventureworks.Employee", "output": "order Check <= ModifiedDate\norder HireDate <= VacationHours\norder HireDate <= SickLeaveHours\nmin VacationHours 40\nmin SickLeaveHours 0\nmax VacationHours 240\nmax SickLeaveHours 120"}
+{"id": "adventureworks.EmployeeDepartmentHistory", "output": "order StartDate <= EndDate\norder UpdatedDate <= ModifiedDate"}
+{"id": "adventureworks.EmployeePayHistory", "output": "order Check = PayFrequency\norder Check <= RateChangeDate\ncopy Rate = Employee.Rate"}
+{"id": "adventureworks.Illustration", "output": "order ModifiedDate <= originalDate"}
+{"id": "adventureworks.JobCandidate", "output": "order ModifiedDate <= Employee.ModifiedDate"}
+{"id": "adventureworks.Location", "output": "order Check Availability <= Check CostRate\norder ModifiedDate <= Availability"}
+{"id": "adventureworks.Password", "output": "order ModifiedDate <= originalDate"}
+{"id": "adventureworks.Person", "output": "order Check EmailPromotion 0\norder Check PersonType SC|VC|IN|EM|SP|GC"}
+{"id": "adventureworks.PersonCreditCard", "output": "order ModifiedDate <= Person.ModifiedDate"}
+{"id": "adventureworks.PersonPhone", "output": "order ModifiedDate <= Person.BusinessEntityID"}
+{"id": "adventureworks.PhoneNumberType", "output": "order ModifiedDate <= table PhoneNumberType"}
+{"id": "adventureworks.Product", "output": "order Check SafetyStockLevel <= Check ReorderPoint\norder Check StandardCost <= ProductCostHistory.ListPrice\norder SellStartDate <= SellEndDate\norder RowGuid <= ModifiedDate"}
+{"id": "adventureworks.ProductCategory", "output": "order ModifiedDate <= rowguid"}
+{"id": "adventureworks.ProductCostHistory", "output": "order CheckModifiedDate <= ModifiedDate\norder StartDate <= EndDate\ncopy StandardCost = Product.StandardCost"}
+{"id": "adventureworks.ProductDescription", "output": "order ModifiedDate <= rowguid"}
+{"id": "adventureworks.ProductDocument", "output": "order ModifiedDate <= Product.DocumentNode"}
+{"id": "adventureworks.ProductInventory", "output": "order Check <= Shelf\norder ModifiedDate <= Check\nmin Quantity 0\nmax Quantity 100"}
+{"id": "adventureworks.ProductListPriceHistory", "output": "order CheckModified <= ModifiedDate\norder StartDate <= EndDate\ncopy ListPrice = Product.ListPrice"}
+{"id": "adventureworks.ProductModel", "output": "order ModifiedDate <= rowguid"}
+{"id": "adventureworks.ProductModelIllustration", "output": "order ModifiedDate <= ProductModelIllustration.ModifiedDate"}
+{"id": "adventureworks.ProductModelProductDescriptionCulture", "output": "order ModifiedDate <= ProductModelProductDescriptionCulture.CultureID"}
+{"id": "adventureworks.ProductPhoto", "output": "order ModifiedDate <= ThumbNailPhoto\norder ThumbNailPhoto = LargePhoto"}
+{"id": "adventureworks.ProductProductPhoto", "output": "order ModifiedDate <= Product;"}
+{"id": "adventureworks.ProductReview", "output": "order Check <= ModifiedDate\nmin Rating 1\nmax Rating 5"}
+{"id": "adventureworks.ProductSubcategory", "output": "order ModifiedDate <= ProductCategory.ModifiedDate"}
+{"id": "adventureworks.ProductVendor", "output": "order Check LastReceiptCost <= Check StandardPrice\norder Check MinOrderQty <= Check MaxOrderQty\norder Check OnOrderQty <= OnSaleQuantity"}
+{"id": "adventureworks.PurchaseOrderDetail", "output": "order Check Date <= Check Time\norder Created <= ModifiedDate\norder OrderQty <= RejectedQty\norder OrderQty <= StockedQty\nproduct LineTotal = OrderQty * UnitPrice\ncopy UnitPrice = Product.ListPrice\nmin OrderQty 0\nmax OrderQty 100"}
+{"id": "adventureworks.PurchaseOrderHeader", "output": "order CheckinDate <= CheckoutDate\norder CheckinDate <= ShipDate\norder CheckinDate <= UpdateCheckinDate\norder CheckinDate <= UpdateShipDate\nsum SubTotal = PurchaseOrderHeader.SubTotal"}
+{"id": "adventureworks.SalesOrderDetail", "output": "order Check ModifiedDate\nproduct LineTotal = OrderQty * UnitPrice\ncopy UnitPrice = SalesOrderHeader.UnitPrice"}
+{"id": "adventureworks.SalesOrderHeader", "output": "order Checksum = Address.Checksum\norder Checksum = CreditCardApprovalCode\norder Checksum = CreditCardID\norder Created <= ModifiedDate\norder OrderDate <= DueDate\norder OrderDate <= ShipDate\nsum SubTotal = SalesOrderDetail.LineTotal"}
+{"id": "adventureworks.SalesOrderHeaderSalesReason", "output": "order ModifiedDate <= SalesOrderHeaderSalesReason.ModifiedDate"}
+{"id": "adventureworks.SalesPerson", "output": "order Check SalesQuota <= SalesYTD\norder Check Bonus <= 0.00\norder Check CommissionPct <= 0.00\norder SalesLastYear <= SalesYTD"}
+{"id": "adventureworks.SalesPersonQuotaHistory", "output": "order Check <= ModifiedDate\nmin SalesQuota 0.00"}
+{"id": "adventureworks.SalesReason", "output": "order ModifiedDate <= SalesOrderHeaderSalesReason.ModifiedDate"}
+{"id": "adventureworks.SalesTaxRate", "output": "order Check <= TaxType\norder ModifiedDate <= Check"}
+{"id": "adventureworks.SalesTerritory", "output": "order Check SalesYTD <= SalesLastYear\norder Check CostYTD <= CostLastYear\norder ModifiedDate <= Check SalesYTD"}
+{"id": "adventureworks.SalesTerritoryHistory", "output": "order StartDate <= EndDate\norder UpdatedDate <= ModifiedDate"}
+{"id": "adventureworks.ScrapReason", "output": "order ModifiedDate <= originalTable.dateCreated"}
+{"id": "adventureworks.Shift", "output": "order ModifiedDate <= StartTime\norder StartTime <= EndTime"}
+{"id": "adventureworks.ShipMethod", "output": "order Check ShipBase <= ShipRate\norder ModifiedDate <= Check"}
+{"id": "adventureworks.ShoppingCartItem", "output": "order DateCreated <= ModifiedDate\nmin Quantity 1"}
+{"id": "adventureworks.SpecialOffer", "output": "order Check.MinQty <= Check.MaxQty\norder StartDate <= EndDate\norder ModifiedDate <= Check.ModifiedDate"}
+{"id": "adventureworks.SpecialOfferProduct", "output": "order ModifiedDate <= Product"}
+{"id": "adventureworks.StateProvince", "output": "order rowguid <= ModifiedDate"}
+{"id": "adventureworks.Store", "output": "order rowguid <= ModifiedDate"}
+{"id": "adventureworks.TransactionHistory", "output": "order TransactionDate <= ModifiedDate"}
+{"id": "adventureworks.TransactionHistoryArchive", "output": "order TransactionDate <= ModifiedDate"}
+{"id": "adventureworks.Vendor", "output": "order ActiveFlag <= ModifiedDate\nmin CreditRating 1\nmax CreditRating 5"}
+{"id": "adventureworks.WorkOrder", "output": "order CheckinDate <= CheckoutDate\norder CreatedDate <= ModifiedDate\norder OrderQty <= ScrappedQty\norder StartDate <= DueDate"}
+{"id": "adventureworks.WorkOrderRouting", "output": "order Check ActualResourceHrs <= ActualEnds\norder Check ScheduledStartDate <= ScheduledEndDate\norder Check PlannedCost <= ActualCost\norder Created <= ModifiedDate"}
+{"id": "saleor.app_appproblem", "output": "order created_at <= updated_at\norder dismissed <= dismissed_by_user_id\nmin count 0"}
+{"id": "saleor.checkout_checkoutdelivery", "output": "order created_at <= updated_at\norder minimum_delivery_days <= maximum_delivery_days"}
+{"id": "saleor.checkout_checkout", "output": "order created_at <= last_change\norder created_at <= last_automatic_completion_attempt\norder created_at <= saving_billing_address\norder created_at <= saving_shipping_address\norder created_at <= deliveries_stale_at\norder created_at <= assign_delivery_id\norder created_at <= complete_completing_started_at\nsum base_subtotal_amount = checkout_checkout.delivery.total\nsum subtotal_net_amount = checkout_checkout.subtotal"}
+{"id": "saleor.core_eventdelivery", "output": "none"}
+{"id": "saleor.core_eventdeliveryattempt", "output": "none"}
+{"id": "saleor.discount_vouchercode", "output": "none"}
+{"id": "saleor.discount_voucherchannellisting", "output": "copy currency = discount_voucher.currency"}
+{"id": "saleor.discount_promotionrule", "output": "order old_channel_listing_id <= new_channel_listing_id"}
+{"id": "saleor.order_ordergrantedrefund", "output": "order created_at <= updated_at"}
+{"id": "saleor.order_ordergrantedrefundline", "output": "min quantity 0"}
+{"id": "saleor.payment_transactionevent", "output": "none"}
+{"id": "saleor.payment_transaction", "output": "order created_at <= already_processed"}
+{"id": "saleor.plugins_emailtemplate", "output": "none"}
+{"id": "saleor.product_product", "output": "order created_at <= updated_at"}
+{"id": "saleor.product_productchannellisting", "output": "order available_for_purchase_at <= discounted_price_amount"}
+{"id": "saleor.product_productvariant", "output": "order created_at <= updated_at\norder preorder_global_threshold <= preorder_end_date\nmin quantity_limit_per_customer 1"}
+{"id": "saleor.product_productvariantchannellisting", "output": "order prior_price_amount <= discounted_price_amount\ncopy currency = product_productvariant.currency"}
+{"id": "saleor.product_variantchannellistingpromotionrule", "output": "copy currency = product_productvariantchannellisting.currency"}
+{"id": "saleor.shipping_shippingmethodchannellisting", "output": "order minimum_order_price_amount <= maximum_order_price_amount"}
+{"id": "saleor.warehouse_stock", "output": "sum quantity_allocated = warehouse_allocation.quantity_allocated"}
+{"id": "saleor.warehouse_allocation", "output": "none"}
+{"id": "saleor.warehouse_preorderreservation", "output": "order checkout_line_id <= warehouse_checkoutline\norder reserved_until <= quantity_reserved"}
+{"id": "saleor.warehouse_reservation", "output": "order checkout_line_id <= warehouse_checkoutline\norder reserved_until <= quantity_reserved"}
+{"id": "healthchecks.accounts_profile", "output": "order deletion_scheduled_date <= deletion_notice_date\norder next_report_date <= next_nag_date\norder last_active_date <= last_sms_date\norder last_call_date <= call_limit\norder sms_limit <= sms_sent\norder totp_created <= totp_last_timecode\norder totp <= totp_created"}
+{"id": "healthchecks.api_check", "output": "order created <= last_start\norder created <= manual_resume\norder start_kw <= success_kw\norder start_kw <= failure_kw\nsum n_pings = api_ping.n\nsum last_duration = api_ping.duration"}
+{"id": "healthchecks.api_ping", "output": "none"}
+{"id": "healthchecks.api_channel", "output": "none"}
+{"id": "healthchecks.api_notification", "output": "none"}
+{"id": "healthchecks.api_flip", "output": "order created <= processed\norder old_status <= new_status"}
+{"id": "healthchecks.api_tokenbucket", "output": "order updated <= table.api_tokenbucket"}
+{"id": "healthchecks.logs_record", "output": "none"}
+{"id": "healthchecks.payments_subscription", "output": "order setup_date <= next_billing_date"}
+{"id": "umami.user", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "umami.api_key", "output": "none"}
+{"id": "umami.website", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "umami.website_event", "output": "none"}
+{"id": "umami.event_data", "output": "none"}
+{"id": "umami.session_data", "output": "none"}
+{"id": "umami.team", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "umami.team_user", "output": "order created_at <= updated_at"}
+{"id": "umami.report", "output": "order created_at <= updated_at"}
+{"id": "umami.annotation", "output": "order created_at <= updated_at"}
+{"id": "umami.segment", "output": "order created_at <= updated_at"}
+{"id": "umami.revenue", "output": "copy currency = website.currency"}
+{"id": "umami.link", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "umami.pixel", "output": "order created_at <= deleted_at\norder created_at <= updated_at"}
+{"id": "umami.board", "output": "order created_at <= updated_at"}
+{"id": "umami.share", "output": "order created_at <= updated_at"}
+{"id": "umami.session_replay", "output": "order start_time <= end_time\nsum event_count = events.count"}
+{"id": "umami.session_replay_saved", "output": "order created_at <= updated_at"}
+{"id": "umami.heatmap_event", "output": "order page_x <= page_w\norder page_y <= page_h\nscroll_pct = 0.0\nviewport_h <= viewport_w"}
+{"id": "umami.two_factor_auth", "output": "order created_at <= updated_at"}
+{"id": "umami.two_factor_backup_code", "output": "none"}
+{"id": "umami.two_factor_rate_limit", "output": "order locked_until <= updated_at"}
+{"id": "umami.error_issue", "output": "none"}
+{"id": "umami.error_event", "output": "none"}
+{"id": "umami.error_rate_limit", "output": "none"}
+{"id": "gitlab.background_operation_workers", "output": "order created_at <= check\norder min_cursor <= max_cursor\norder on_hold_until <= started_at\norder start_time <= finish_time\nmin batch_size 0\nmax batch_size 100\nmaxlen job_arguments 100\nmaxlen table_name 63\nmaxlen gitlab_schema 255\nvalues job_class_name 1..100"}
+{"id": "gitlab.trial_usages", "output": "order created_at <= updated_at\norder trial_starts_on <= trial_ends_on\nmin compute_minutes_used 0\nmin credits_used 0\nmin max_seats_used 0\nmax compute_minutes_month 360"}
+{"id": "gitlab.batched_background_migrations", "output": "order created_at <= updated_at\norder min_value <= max_value\norder queued_migration_version <= started_at\norder paused_ms <= resume_ms\norder min_cursor <= max_cursor\norder table_name <= sub_batch_size\norder started_at <= finished_at"}
+{"id": "gitlab.billable_usage_export_logs", "output": "order created_at <= updated_at\norder period_start <= period_end\nmin record_count 0\nmaxlen check 64"}
+{"id": "gitlab.import_sync_repository_states", "output": "order created_at <= updated_at\norder imported_at <= sync_started_at\norder last_event_at <= check\norder last_successful_sync_at <= desired_generation\norder synced_generation <= last_successful_sync_at\nmin state 0\nmax state 6\nminlen domain 0\nmaxlen check 2048\nmaxlen check 255\nvalues state 0..6"}
+{"id": "gitlab.targeted_messages", "output": "order created_at <= updated_at\norder starts_at <= ends_at"}
+{"id": "gitlab.work_item_custom_status_mappings", "output": "order created_at <= updated_at\norder valid_from <= valid_until"}
