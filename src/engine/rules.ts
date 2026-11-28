@@ -14,7 +14,7 @@ import { words } from "./meanings.js";
  *   copy     a value comes from the referenced row (a line's unit price is the product's price)
  */
 
-export type RuleSource = "schema" | "inferred" | "code" | "rules file";
+export type RuleSource = "schema" | "inferred" | "code" | "rules file" | "rule pack";
 
 interface RuleBase {
   id: string;

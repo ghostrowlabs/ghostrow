@@ -10,6 +10,7 @@ import { requireCodeAware, requireDatabase, type Entitlements } from "../entitle
 import { byokConfig, refineWithByok } from "./byok.js";
 import { infer, type Plan } from "./infer.js";
 import { mergeRules, readRulesFile } from "./rulesfile.js";
+import { extendsOf, loadPacks, packLabel } from "./rulepacks.js";
 import { refineWithModel } from "../model/classify.js";
 import { installedModel, RULE_MODEL } from "../model/store.js";
 import { proposeRules } from "../rulemodel/propose.js";
@@ -133,7 +134,17 @@ export async function prepare(ctx: RunContext, ent: Entitlements, source: { db?:
   }
   let merged;
   try {
-    merged = mergeRules(plan, schema, readRulesFile(resolve(ctx.rules)));
+    const rulesPath = resolve(ctx.rules);
+    const file = readRulesFile(rulesPath);
+    let packs: Parameters<typeof mergeRules>[3] = [];
+    if (extendsOf(file).length) {
+      if (!ent.rulePacks) note(ctx, `rules file    "extends" uses shared rule packs, which need a Max license (this machine runs ${ent.label}). The packs were not applied.`);
+      else {
+        packs = (await loadPacks(file, rulesPath)).map((pack) => ({ pack, label: packLabel(pack.ref, rulesPath) }));
+        note(ctx, `rule packs    ${packs.map((p) => p.label).join(", ")}`);
+      }
+    }
+    merged = mergeRules(plan, schema, file, packs);
   } catch (e) {
     await connector?.close();
     throw invalidInput(e instanceof Error ? e.message : String(e));

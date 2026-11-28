@@ -27,6 +27,8 @@ export interface Plan {
   rules: Rule[];
   /** Per-table row counts from the rules file. */
   rows: Record<string, number>;
+  /** Tables whose row count came from a rule pack (not written back to your rules file). */
+  packRows?: Record<string, string>;
 }
 
 /**

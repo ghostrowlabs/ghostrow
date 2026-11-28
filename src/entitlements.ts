@@ -19,6 +19,8 @@ export interface Entitlements {
   codeAware: boolean;
   byok: boolean;
   ci: boolean;
+  /** Shared rule packs (`extends:` in the rules file): Max. */
+  rulePacks: boolean;
   /** Messages to show once, e.g. "offline for 40 days: running at Free limits". */
   notices: string[];
 }
@@ -27,7 +29,7 @@ export const PLAN_NAMES: Record<PlanId, string> = { free: "Free", plus: "Plus", 
 const ALL_DBS: DbKind[] = ["postgres", "mysql", "sqlite", "sqlserver"];
 
 export function freeEntitlements(notices: string[] = []): Entitlements {
-  return { plan: "free", label: "Free", source: "free", seedLimit: { tables: 5, rows: 10_000 }, databases: ["postgres", "sqlite"], modes: ["seed"], codeAware: false, byok: false, ci: false, notices };
+  return { plan: "free", label: "Free", source: "free", seedLimit: { tables: 5, rows: 10_000 }, databases: ["postgres", "sqlite"], modes: ["seed"], codeAware: false, byok: false, ci: false, rulePacks: false, notices };
 }
 
 export function paidEntitlements(p: { plan: PlanId; modes: Mode[]; code_aware: boolean; byok: boolean; ci: boolean; licensee?: { name: string; company?: string } }, source: "license" | "ci", notices: string[] = []): Entitlements {
@@ -43,6 +45,7 @@ export function paidEntitlements(p: { plan: PlanId; modes: Mode[]; code_aware: b
     codeAware: p.code_aware,
     byok: p.byok,
     ci: p.ci,
+    rulePacks: p.plan === "max",
     notices,
   };
 }

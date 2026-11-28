@@ -100,6 +100,26 @@ marks every change in `ghostrow.rules.yaml`. A misconfigured provider only print
 aren't resolved by Ghostrow itself: run `eval "$(aws configure export-credentials --format env)"`
 first, or point the profile at a `credential_process`.
 
+## Shared rule packs (Max)
+
+A team can keep its rules in one place and use them in every project. List shared rules files
+under `extends:` at the top of `ghostrow.rules.yaml`, by path (relative to that file) or by
+https URL:
+
+```yaml
+extends:
+  - ../shared/ghostrow-pack.yaml
+  - https://example.com/ghostrow/company-pack.yaml
+```
+
+A pack has the same format as a rules file: column meanings and `values`, `rows` per table, and
+check rules. Its tables that a project doesn't have are skipped. Packs apply in order, each after
+the packs it extends, and your own file applies last, so your edits win. What a pack set is
+written back marked `evidence: rule pack …` (or `source: rule pack` for rules) and refreshed from
+the pack on every run; to override one, change it and delete that evidence line. A pack that
+can't be read stops the run, so the same rules always give the same rows. Fetching a pack only
+downloads it; nothing is sent. On other plans `extends` is kept and a note says it was skipped.
+
 ## Plans
 
 Free works without a key: up to 5 tables and 10,000 rows, on Postgres and SQLite. Plus, Pro and

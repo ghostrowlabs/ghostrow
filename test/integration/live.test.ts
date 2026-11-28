@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createRequire } from "node:module";
@@ -158,6 +158,27 @@ describe("SQLite files", () => {
     d.close();
     expect(n).toBe(1600);
     expect(orphans).toBe(0);
+  }, 120_000);
+
+  it("Max applies a shared rule pack from extends; the rows keep its rule", async () => {
+    activate("max");
+    const db = join(work, "pack.db");
+    await makeDb(db);
+    mkdirSync(join(work, "packs"), { recursive: true });
+    writeFileSync(join(work, "packs", "team.yaml"), 'rules:\n  - { id: team:qty, kind: check, table: order_lines, expr: "quantity <= 3" }\n');
+    const rules = join(work, "pack.rules.yaml");
+    writeFileSync(rules, "extends: packs/team.yaml\n");
+    const r = await cli("seed", "--db", db, "--rows", "200", "--seed", "5", "--rules", rules);
+    expect(r.code, r.err).toBe(0);
+    expect(r.err).toContain("rule packs    packs/team.yaml");
+    const SQL = await loadSqlJs();
+    const d = new SQL.Database(readFileSync(db));
+    const small = Number(d.exec("SELECT count(*) FROM order_lines WHERE quantity > 3")[0]!.values[0]![0]);
+    const all = Number(d.exec("SELECT count(*) FROM order_lines")[0]!.values[0]![0]);
+    d.close();
+    expect(all).toBeGreaterThan(0);
+    expect(small).toBe(0);
+    expect(readFileSync(rules, "utf8")).toMatch(/^extends: packs\/team.yaml$/m);
   }, 120_000);
 
   it("Free refuses MySQL and twin with exit 4", async () => {

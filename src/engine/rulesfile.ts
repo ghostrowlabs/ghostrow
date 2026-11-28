@@ -5,6 +5,7 @@ import { findColumn, type SchemaModel } from "../connect/types.js";
 import { ENGINE, ENGINE_VERSION, type Plan } from "./infer.js";
 import { MEANINGS, type MeaningId } from "./meanings.js";
 import { ruleColumnsExist, type Rule } from "./rules.js";
+import type { LoadedPack } from "./rulepacks.js";
 
 /**
  * ghostrow.rules.yaml: the reviewable plan. Ghostrow writes what it inferred; you edit it
@@ -15,6 +16,11 @@ import { ruleColumnsExist, type Rule } from "./rules.js";
  *   - `rows:` on a table sets its row count
  * New tables and columns are added; rules for columns that no longer exist are dropped.
  * Comments you add are kept when the file is rewritten (matched by table, column and rule id).
+ *
+ * Rule packs (Max): `extends:` names shared rules files (see rulepacks.ts). They apply first, in
+ * order; your file applies last. What a pack set is written back marked `evidence: rule pack …`
+ * (columns) or `source: rule pack` (rules) and is refreshed from the pack on every run. To
+ * override a pack's meaning, change it and remove that evidence line.
  */
 
 interface FileColumn {
@@ -32,9 +38,10 @@ interface FileRule {
   evidence?: string;
   source?: string;
 }
-interface RulesFile {
+export interface RulesFile {
   engine?: string;
   source?: string;
+  extends?: unknown;
   tables?: Record<string, { rows?: number; columns?: Record<string, FileColumn> }>;
   rules?: FileRule[];
 }
@@ -59,69 +66,124 @@ export function readRulesFile(path: string): RulesFile | null {
   }
 }
 
-/** Apply a rules file's edits onto a freshly inferred plan. */
-export function mergeRules(plan: Plan, schema: SchemaModel, file: RulesFile | null): { plan: Plan; notes: string[] } {
+const PACK_EVIDENCE = "rule pack ";
+const fromPack = (evidence: unknown) => typeof evidence === "string" && evidence.startsWith(PACK_EVIDENCE);
+
+type Origin = { kind: "local" } | { kind: "pack"; label: string };
+
+/** Apply a rules file's edits onto a freshly inferred plan: each pack in order, then your file. */
+export function mergeRules(plan: Plan, schema: SchemaModel, file: RulesFile | null, packs: { pack: LoadedPack; label: string }[] = []): { plan: Plan; notes: string[] } {
   const notes: string[] = [];
-  if (!file) return { plan, notes };
-  const tables = file.tables ?? {};
-  for (const [tname, t] of Object.entries(tables)) {
-    const table = schema.tables.find((x) => x.name === tname);
-    if (!table) continue;
-    if (typeof t?.rows === "number" && t.rows >= 0) plan.rows[table.name] = Math.floor(t.rows);
-    for (const [cname, c] of Object.entries(t?.columns ?? {})) {
-      const inferred = plan.columns.find((x) => x.table === table.name && x.column === cname);
-      if (!inferred || !findColumn(table, cname)) continue;
-      if (c?.meaning && c.meaning !== inferred.meaning) {
-        if ((MEANINGS as readonly string[]).includes(c.meaning)) {
-          inferred.meaning = c.meaning as MeaningId;
-          inferred.pinned = true;
-          inferred.evidence = "set in rules file";
-          inferred.confidence = 1;
-        } else notes.push(`${tname}.${cname}: unknown meaning "${c.meaning}" ignored. Known meanings: ${MEANINGS.join(", ")}.`);
-      }
-      if (Array.isArray(c?.values) && c.values.length) {
-        inferred.values = c.values;
-        inferred.pinned = true;
-      }
-    }
-  }
-  const byId = new Map((file.rules ?? []).filter((r) => r?.id).map((r) => [r.id!, r]));
-  for (const r of plan.rules) {
-    const f = byId.get(r.id);
-    if (f && f.enabled === false) r.enabled = false;
-  }
-  for (const f of file.rules ?? []) {
-    if (!f || typeof f !== "object" || plan.rules.some((r) => r.id === f.id)) continue;
-    // A rule Ghostrow inferred earlier (schema, sampled, code) that no longer applies is stale: drop it.
-    // Anything else is yours, whatever its id: keep it.
-    const handAdded = f.source === undefined || f.source === "rules file" || !f.id || String(f.id).startsWith("user:");
-    if (!handAdded) continue;
-    const label = `Rule ${f.id ?? "(no id)"}`;
-    if (f.kind !== undefined && f.kind !== "check") {
-      notes.push(`${label}: only "check" rules can be added by hand; ignored.`);
-    } else if (!f.table || !f.expr) {
-      notes.push(`${label}: a hand-added rule needs "table" and "expr"; ignored.`);
-    } else if (!schema.tables.some((t) => t.name === f.table)) {
-      notes.push(`${label}: no table "${f.table}" in ${schema.source}; ignored.`);
-    } else {
-      plan.rules.push({ id: f.id !== undefined ? String(f.id) : `user:${f.table}.${plan.rules.length}`, kind: "check", table: f.table, check: f.expr, expr: `CHECK (${f.expr})`, evidence: "added in rules file", source: "rules file", enabled: f.enabled !== false });
-    }
-  }
+  for (const { pack, label } of packs) applyFile(plan, schema, pack.file, { kind: "pack", label }, notes);
+  if (file) applyFile(plan, schema, file, { kind: "local" }, notes);
+  if (!file && !packs.length) return { plan, notes };
   plan.rules = plan.rules.filter((r) => ruleColumnsExist(schema, r));
   notes.push(...valuesAgainstChecks(plan));
   return { plan, notes };
 }
 
+function applyFile(plan: Plan, schema: SchemaModel, file: RulesFile, origin: Origin, notes: string[]): void {
+  const where = origin.kind === "pack" ? `rule pack ${origin.label}: ` : "";
+  const tables = file.tables ?? {};
+  for (const [tname, t] of Object.entries(tables)) {
+    const table = schema.tables.find((x) => x.name === tname);
+    // A pack covers many schemas: its tables that aren't in this one are simply not used.
+    if (!table) continue;
+    if (typeof t?.rows === "number" && t.rows >= 0) {
+      const packSet = plan.packRows?.[table.name];
+      // Your file holds a copy of a pack's row count only if you set it; a copy equal to the pack's is not an edit.
+      if (origin.kind === "pack") {
+        plan.rows[table.name] = Math.floor(t.rows);
+        (plan.packRows ??= {})[table.name] = origin.label;
+      } else if (!(packSet && plan.rows[table.name] === Math.floor(t.rows))) {
+        plan.rows[table.name] = Math.floor(t.rows);
+        if (plan.packRows) delete plan.packRows[table.name];
+      }
+    }
+    for (const [cname, c] of Object.entries(t?.columns ?? {})) {
+      const inferred = plan.columns.find((x) => x.table === table.name && x.column === cname);
+      if (!inferred || !findColumn(table, cname)) continue;
+      // A copy of a pack's value written back to your file: the pack decides it, not the copy.
+      if (origin.kind === "local" && fromPack(c?.evidence)) continue;
+      const evidence = origin.kind === "pack" ? `${PACK_EVIDENCE}${origin.label}` : "set in rules file";
+      if (c?.meaning && c.meaning !== inferred.meaning) {
+        if ((MEANINGS as readonly string[]).includes(c.meaning)) {
+          inferred.meaning = c.meaning as MeaningId;
+          inferred.pinned = true;
+          inferred.evidence = evidence;
+          inferred.confidence = 1;
+        } else notes.push(`${where}${tname}.${cname}: unknown meaning "${c.meaning}" ignored. Known meanings: ${MEANINGS.join(", ")}.`);
+      } else if (c?.meaning && origin.kind === "pack") {
+        inferred.pinned = true;
+        inferred.evidence = evidence;
+        inferred.confidence = 1;
+      }
+      if (Array.isArray(c?.values) && c.values.length) {
+        inferred.values = c.values;
+        inferred.pinned = true;
+        if (origin.kind === "pack") inferred.evidence = evidence;
+      }
+    }
+  }
+  const byId = new Map((file.rules ?? []).filter((r) => r?.id).map((r) => [String(r.id), r]));
+  for (const r of plan.rules) {
+    const f = byId.get(r.id);
+    if (f && f.enabled === false) r.enabled = false;
+  }
+  for (const f of file.rules ?? []) {
+    if (!f || typeof f !== "object") continue;
+    const existing = f.id !== undefined ? plan.rules.find((r) => r.id === String(f.id)) : undefined;
+    // A later pack may replace an earlier pack's rule with the same id; otherwise the first one stays.
+    if (existing && !(origin.kind === "pack" && existing.source === "rule pack")) continue;
+    // A rule Ghostrow inferred earlier (schema, sampled, code), or a pack rule copied into your file,
+    // that no longer applies is stale: drop it. Anything else is yours, whatever its id: keep it.
+    const handAdded = origin.kind === "pack" || f.source === undefined || f.source === "rules file" || !f.id || String(f.id).startsWith("user:");
+    if (!handAdded) continue;
+    const label = `${where}Rule ${f.id ?? "(no id)"}`;
+    if (f.kind !== undefined && f.kind !== "check") {
+      notes.push(`${label}: only "check" rules can be added by hand; ignored.`);
+    } else if (!f.table || !f.expr) {
+      notes.push(`${label}: a hand-added rule needs "table" and "expr"; ignored.`);
+    } else if (!schema.tables.some((t) => t.name === f.table)) {
+      // A pack's rule for a table this schema doesn't have is not a mistake: packs are shared.
+      if (origin.kind === "local") notes.push(`${label}: no table "${f.table}" in ${schema.source}; ignored.`);
+    } else {
+      const id = f.id !== undefined ? String(f.id) : `${origin.kind === "pack" ? "pack" : "user"}:${f.table}.${plan.rules.length}`;
+      const rule: Rule = {
+        id,
+        kind: "check",
+        table: f.table,
+        check: f.expr,
+        expr: `CHECK (${f.expr})`,
+        evidence: origin.kind === "pack" ? `${PACK_EVIDENCE}${origin.label}` : "added in rules file",
+        source: origin.kind === "pack" ? "rule pack" : "rules file",
+        enabled: f.enabled !== false,
+      };
+      if (existing) plan.rules[plan.rules.indexOf(existing)] = rule;
+      else plan.rules.push(rule);
+    }
+  }
+}
+
 /** Write the merged plan back. Keeps your edits; adds what's new. */
 export function writeRulesFile(path: string, plan: Plan, schema: SchemaModel): void {
+  let keepExtends: unknown;
+  if (existsSync(path)) {
+    try {
+      keepExtends = (parse(readFileSync(path, "utf8")) as RulesFile | null)?.extends;
+    } catch {
+      keepExtends = undefined;
+    }
+  }
   const data: RulesFile = {
     engine: `${ENGINE}/${ENGINE_VERSION}`,
     source: schema.source,
+    ...(keepExtends !== undefined && keepExtends !== null ? { extends: keepExtends } : {}),
     tables: Object.fromEntries(
       schema.tables.map((t) => [
         t.name,
         {
-          ...(plan.rows[t.name] !== undefined ? { rows: plan.rows[t.name] } : {}),
+          ...(plan.rows[t.name] !== undefined && !plan.packRows?.[t.name] ? { rows: plan.rows[t.name] } : {}),
           columns: Object.fromEntries(
             plan.columns
               .filter((c) => c.table === t.name)
@@ -236,7 +298,7 @@ function toFileRule(r: Rule): FileRule {
     id: r.id,
     kind: r.kind,
     table: r.table,
-    expr: r.kind === "check" && r.source === "rules file" ? (r as Extract<Rule, { kind: "check" }>).check : r.expr,
+    expr: r.kind === "check" && (r.source === "rules file" || r.source === "rule pack") ? (r as Extract<Rule, { kind: "check" }>).check : r.expr,
     enabled: r.enabled,
     evidence: r.evidence,
     source: r.source,
